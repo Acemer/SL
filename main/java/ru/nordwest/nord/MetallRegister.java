@@ -10,8 +10,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MetallRegister {
 	static public void init(){
-		Nord.alluminumBlock = new BaseMetallBlock(Material.iron).setBlockName("alluminum_block").setCreativeTab(Nord.tabMetall).setBlockTextureName("alluminium_block");
-		GameRegistry.registerBlock(Nord.alluminumBlock, ItemMetallBlock.class,"alluminum_block");
+		Nord.alluminum_block = new BaseMetallBlock(Material.iron).setBlockName("alluminum_block").setCreativeTab(Nord.tabBase).setBlockTextureName("alluminium_block");
+		GameRegistry.registerBlock(Nord.alluminum_block, ItemMetallBlock.class,"alluminum_block");
 		
 		Nord.chrome_block = new BaseMetallBlock(Material.iron).setBlockName("chrome_block").setCreativeTab(Nord.tabMetall).setBlockTextureName("chrome_block");
 		GameRegistry.registerBlock(Nord.chrome_block, ItemMetallBlock.class,"chrome_block");
@@ -51,10 +51,38 @@ public class MetallRegister {
 		
 		Nord.chrome_ingot= new ItemMetallIngot().setUnlocalizedName("chrome_ingot").setTextureName("chrome_ingot");
 		GameRegistry.registerItem(Nord.chrome_ingot,"chrome_ingot");
+		
+		Nord.iron_ingot= new ItemMetallIngot().setUnlocalizedName("iron_ingot").setTextureName("iron_ingot");
+		GameRegistry.registerItem(Nord.iron_ingot,"iron_ingot");
 
+		Nord.titan_ingot= new ItemMetallIngot().setUnlocalizedName("titan_ingot").setTextureName("titan_ingot");
+		GameRegistry.registerItem(Nord.titan_ingot,"titan_ingot");
+		
+		Nord.tungsten_ingot= new ItemMetallIngot().setUnlocalizedName("tungsten_ingot").setTextureName("tungsten_ingot");
+		GameRegistry.registerItem(Nord.tungsten_ingot,"tungsten_ingot");
+		
+		Nord.zing_ingot= new ItemMetallIngot().setUnlocalizedName("zing_ingot").setTextureName("zing_ingot");
+		GameRegistry.registerItem(Nord.zing_ingot,"zing_ingot");
+		
+		Nord.alluminum_ingot= new ItemMetallIngot().setUnlocalizedName("alluminum_ingot").setTextureName("alluminum_ingot");
+		GameRegistry.registerItem(Nord.alluminum_ingot,"alluminum_ingot");
+		
 		for (int i = 0; i < 16; i++) {
 			GameRegistry.addRecipe(new ItemStack(Nord.chrome_block,1,i), "xxx", "xxx", "xxx",
 			        'x', new ItemStack(Nord.chrome_ingot,1,i));
+			GameRegistry.addRecipe(new ItemStack(Nord.ingot_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.ingot_ingot,1,i));
+			GameRegistry.addRecipe(new ItemStack(Nord.titan_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.titan_ingot,1,i));
+			GameRegistry.addRecipe(new ItemStack(Nord.tungsten_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.tungsten_ingot,1,i));
+			GameRegistry.addRecipe(new ItemStack(Nord.zing_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.zing_ingot,1,i));
+			GameRegistry.addRecipe(new ItemStack(Nord.alluminum_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.alluminium_ingot,1,i));
+		
+
+		
 		}
 		
 		
