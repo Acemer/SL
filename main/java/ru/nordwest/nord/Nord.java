@@ -41,6 +41,13 @@ public class Nord {
 	public static Block titan_block;
 	public static Block tungsten_block;
 	public static Block zing_block;
+	public static Block gold_block;
+	public static Block cobalt_block;
+	public static Block copper_block;
+	public static Block nickel_block;
+	public static Block tin_block;
+	public static Block platinum_block;
+	public static Block plumbum_block;
 	private Item itemTest;
 
 	@EventHandler
