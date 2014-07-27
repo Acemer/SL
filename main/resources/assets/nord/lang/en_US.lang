@@ -64,3 +64,39 @@ item.chrome_ingot.dirty.name=Dirty Chrome Ingot
 item.chrome_ingot.poor.name=Poor Chrome Ingot
 item.chrome_ingot.normal.name=Chrome Ingot
 item.chrome_ingot.clear.name=Clear Chrome Ingot
+
+item.iron_ingot.dirty.name=Dirty Iron Ingot
+item.iron_ingot.poor.name=Poor Iron Ingot
+item.iron_ingot.normal.name=Iron Ingot
+item.iron_ingot.clear.name=Clear Iron Ingot
+
+item.titan_ingot.dirty.name=Dirty Titan Ingot
+item.titan_ingot.poor.name=Poor Titan Ingot
+item.titan_ingot.normal.name=Titan Ingot
+item.titan_ingot.clear.name=Clear Titan Ingot
+
+item.tungsten_ingot.dirty.name=Dirty Tungsten Ingot
+item.tungsten_ingot.poor.name=Poor Tungsten Ingot
+item.tungsten_ingot.normal.name=Tungsten Ingot
+item.tungsten_ingot.clear.name=Clear Tungsten Ingot
+
+item.zing_ingot.dirty.name=Dirty Zing Ingot
+item.zing_ingot.poor.name=Poor Zing Ingot
+item.zing_ingot.normal.name=Zing Ingot
+item.zing_ingot.clear.name=Clear Zing Ingot
+
+item.alluminum_ingot.dirty.name=Dirty Alluminum Ingot
+item.alluminum_ingot.poor.name=Poor Alluminum Ingot
+item.alluminum_ingot.normal.name=Alluminum Ingot
+item.alluminum_ingot.clear.name=Clear Alluminum Ingot
+
+item.gold_ingot.dirty.name=Dirty Gold Ingot
+item.gold_ingot.poor.name=Poor Gold Ingot
+item.gold_ingot.normal.name=Gold Ingot
+item.gold_ingot.clear.name=Clear Gold Ingot
+
+item.cobalt_ingot.dirty.name=Dirty Cobalt Ingot
+item.cobalt_ingot.poor.name=Poor Cobalt Ingot
+item.cobalt_ingot.normal.name=Cobalt Ingot
+item.cobalt_ingot.clear.name=Clear Cobalt Ingot
+
