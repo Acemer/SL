@@ -67,6 +67,9 @@ public class MetallRegister {
 		Nord.alluminum_ingot= new ItemMetallIngot().setUnlocalizedName("alluminum_ingot").setTextureName("alluminum_ingot");
 		GameRegistry.registerItem(Nord.alluminum_ingot,"alluminum_ingot");
 		
+		Nord.gold_ingot= new ItemMetallIngot().setUnlocalizedName("gold_ingot").setTextureName("gold_ingot");
+		GameRegistry.registerItem(Nord.gold_ingot,"gold_ingot");
+		
 		for (int i = 0; i < 16; i++) {
 			GameRegistry.addRecipe(new ItemStack(Nord.chrome_block,1,i), "xxx", "xxx", "xxx",
 			        'x', new ItemStack(Nord.chrome_ingot,1,i));
@@ -80,6 +83,8 @@ public class MetallRegister {
 			        'x', new ItemStack(Nord.zing_ingot,1,i));
 			GameRegistry.addRecipe(new ItemStack(Nord.alluminum_block,1,i), "xxx", "xxx", "xxx",
 			        'x', new ItemStack(Nord.alluminium_ingot,1,i));
+			GameRegistry.addRecipe(new ItemStack(Nord.gold_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.gold_ingot,1,i));
 		
 
 		

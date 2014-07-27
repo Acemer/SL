@@ -57,6 +57,7 @@ public class Nord {
 	public static Item zing_ingot;
 	public static Item alluminium_ingot;
 	public static Item alluminum_ingot;
+	public static Item gold_ingot;
 	private Item itemTest;
 
 	@EventHandler
