@@ -48,6 +48,7 @@ public class Nord {
 	public static Block tin_block;
 	public static Block platinum_block;
 	public static Block plumbum_block;
+	public static Item chrome_ingot;
 	private Item itemTest;
 
 	@EventHandler
@@ -56,8 +57,8 @@ public class Nord {
 			//itemTest = new ItemBase().setUnlocalizedName("itemTest").setTextureName(MODID + ":" + "itemTest");
 			//GameRegistry.registerItem(itemTest,"itemTest");
 			
-			itemTest = new ItemMetallIngot().setUnlocalizedName("chrome_ingot").setTextureName("chrome_ingot");
-			GameRegistry.registerItem(itemTest,"chrome_ingot");
+			//itemTest = new ItemMetallIngot().setUnlocalizedName("chrome_ingot").setTextureName("chrome_ingot");
+			//GameRegistry.registerItem(itemTest,"chrome_ingot");
 	}
 
 	@EventHandler

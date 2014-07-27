@@ -30,44 +30,7 @@ tile.zing_block.poor.name=Poor Zing Block
 tile.zing_block.normal.name=Zing Block
 tile.zing_block.clear.name=Clear Zing Block
 
-tile.gold_block.dirty.name=Dirty Gold Block
-tile.gold_block.poor.name=Poor Gold Block
-tile.gold_block.normal.name=Gold Block
-tile.gold_block.clear.name=Clear Gold Block
-
-tile.cobalt_block.dirty.name=Dirty Cobalt Block
-tile.cobalt_block.poor.name=Poor Cobalt Block
-tile.cobalt_block.normal.name=Cobalt Block
-tile.cobalt_block.clear.name=Clear Cobalt Block
-
-tile.copper_block.dirty.name=Dirty Copper Block
-tile.copper_block.poor.name=Poor Copper Block
-tile.copper_block.normal.name=Copper Block
-tile.copper_block.clear.name=Clear Copper Block
-
-tile.nickel_block.dirty.name=Dirty Nickel Block
-tile.nickel_block.poor.name=Poor Nickel Block
-tile.nickel_block.normal.name=Nickel Block
-tile.nickel_block.clear.name=Clear Nickel Block
-
-tile.tin_block.dirty.name=Dirty Tin Block
-tile.tin_block.poor.name=Poor Tin Block
-tile.tin_block.normal.name=Tin Block
-tile.tin_block.clear.name=Clear Tin Block
-
-tile.platinum_block.dirty.name=Dirty Platinum Block
-tile.platinum_block.poor.name=Poor Platinum Block
-tile.platinum_block.normal.name=Platinum Block
-tile.platinum_block.clear.name=Clear Platinum Block
-
-tile.plumbum_block.dirty.name=Dirty Plumbum Block
-tile.plumbum_block.poor.name=Poor Plumbum Block
-tile.plumbum_block.normal.name=Plumbum Block
-tile.plumbum_block.clear.name=Clear Plumbum Block
-
-
-
-
-
-
-
+item.chrome_ingot.dirty.name=Dirty Chrome Ingot
+item.chrome_ingot.poor.name=Poor Chrome Ingot
+item.chrome_ingot.normal.name=Chrome Ingot
+item.chrome_ingot.clear.name=Clear Chrome Ingot

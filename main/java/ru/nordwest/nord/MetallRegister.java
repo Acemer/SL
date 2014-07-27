@@ -2,8 +2,10 @@ package ru.nordwest.nord;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
 import ru.nordwest.nord.block.BaseMetallBlock;
 import ru.nordwest.nord.item.ItemMetallBlock;
+import ru.nordwest.nord.item.ItemMetallIngot;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MetallRegister {
@@ -47,6 +49,13 @@ public class MetallRegister {
 		Nord.plumbum_block = new BaseMetallBlock(Material.iron).setBlockName("plumbum_block").setCreativeTab(Nord.tabBase).setBlockTextureName("plumbum_block");
 		GameRegistry.registerBlock(Nord.plumbum_block, ItemMetallBlock.class,"plumbum_block");
 		
+		Nord.chrome_ingot= new ItemMetallIngot().setUnlocalizedName("chrome_ingot").setTextureName("chrome_ingot");
+		GameRegistry.registerItem(Nord.chrome_ingot,"chrome_ingot");
+
+		for (int i = 0; i < 16; i++) {
+			GameRegistry.addRecipe(new ItemStack(Nord.chrome_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.chrome_ingot,1,i));
+		}
 		
 		
 	}

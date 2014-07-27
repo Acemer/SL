@@ -29,3 +29,8 @@ tile.zing_block.dirty.name=Dirty Zing Block
 tile.zing_block.poor.name=Poor Zing Block
 tile.zing_block.normal.name=Zing Block
 tile.zing_block.clear.name=Clear Zing Block
+
+item.chrome_ingot.dirty.name =Dirty Chrome Ingot
+item.chrome_ingot.poor.name =Poor Chrome Ingot
+item.chrome_ingot.normal.name =Chrome Ingot
+item.chrome_ingot.clear.name = Clear Chrome Ingot
