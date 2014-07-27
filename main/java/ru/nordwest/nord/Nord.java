@@ -70,6 +70,11 @@ public class Nord {
 	public static Item alluminum_ingot;
 	public static Item gold_ingot;
 	public static Item cobalt_ingot;
+	public static Item copper_ingot;
+	public static Item nickel_ingot;
+	public static Item platinum_ingot;
+	public static Item plumbum_ingot;
+	public static Item tin_ingot;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

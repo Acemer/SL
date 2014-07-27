@@ -73,6 +73,21 @@ public class MetallRegister {
 		Nord.cobalt_ingot= new ItemMetallIngot().setUnlocalizedName("cobalt_ingot").setTextureName("cobalt_ingot");
 		GameRegistry.registerItem(Nord.cobalt_ingot,"cobalt_ingot");
 		
+		Nord.copper_ingot= new ItemMetallIngot().setUnlocalizedName("copper_ingot").setTextureName("copper_ingot");
+		GameRegistry.registerItem(Nord.copper_ingot,"copper_ingot");
+		
+		Nord.nickel_ingot= new ItemMetallIngot().setUnlocalizedName("nickel_ingot").setTextureName("nickel_ingot");
+		GameRegistry.registerItem(Nord.nickel_ingot,"nickel_ingot");
+		
+		Nord.platinum_ingot= new ItemMetallIngot().setUnlocalizedName("platinum_ingot").setTextureName("platinum_ingot");
+		GameRegistry.registerItem(Nord.platinum_ingot,"platinum_ingot");
+		
+		Nord.plumbum_ingot= new ItemMetallIngot().setUnlocalizedName("plumbum_ingot").setTextureName("plumbum_ingot");
+		GameRegistry.registerItem(Nord.plumbum_ingot,"plumbum_ingot");
+		
+		Nord.tin_ingot= new ItemMetallIngot().setUnlocalizedName("tin_ingot").setTextureName("tin_ingot");
+		GameRegistry.registerItem(Nord.tin_ingot,"tin_ingot");
+		
 		for (int i = 0; i < 16; i++) {
 			GameRegistry.addRecipe(new ItemStack(Nord.chrome_block,1,i), "xxx", "xxx", "xxx",
 			        'x', new ItemStack(Nord.chrome_ingot,1,i));
@@ -90,6 +105,17 @@ public class MetallRegister {
 			        'x', new ItemStack(Nord.gold_ingot,1,i));
 			GameRegistry.addRecipe(new ItemStack(Nord.cobalt_block,1,i), "xxx", "xxx", "xxx",
 			        'x', new ItemStack(Nord.cobalt_ingot,1,i));
+			GameRegistry.addRecipe(new ItemStack(Nord.copper_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.copper_ingot,1,i));
+			GameRegistry.addRecipe(new ItemStack(Nord.nickel_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.nickel_ingot,1,i));
+			GameRegistry.addRecipe(new ItemStack(Nord.platinum_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.platinum_ingot,1,i));
+			GameRegistry.addRecipe(new ItemStack(Nord.plumbum_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.plumbum_ingot,1,i));
+			GameRegistry.addRecipe(new ItemStack(Nord.tin_block,1,i), "xxx", "xxx", "xxx",
+			        'x', new ItemStack(Nord.tin_ingot,1,i));
+			
 		
 
 		

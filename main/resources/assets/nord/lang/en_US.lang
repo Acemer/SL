@@ -100,3 +100,27 @@ item.cobalt_ingot.poor.name=Poor Cobalt Ingot
 item.cobalt_ingot.normal.name=Cobalt Ingot
 item.cobalt_ingot.clear.name=Clear Cobalt Ingot
 
+item.copper_ingot.dirty.name=Dirty Copper Ingot
+item.copper_ingot.poor.name=Poor Copper Ingot
+item.copper_ingot.normal.name=Copper Ingot
+item.copper_ingot.clear.name=Clear Copper Ingot
+
+item.nickel_ingot.dirty.name=Dirty Nickel Ingot
+item.nickel_ingot.poor.name=Poor Nickel Ingot
+item.nickel_ingot.normal.name=Nickel Ingot
+item.nickel_ingot.clear.name=Clear Nickel Ingot
+
+item.platinum_ingot.dirty.name=Dirty Platinum Ingot
+item.platinum_ingot.poor.name=Poor Platinum Ingot
+item.platinum_ingot.normal.name=Platinum Ingot
+item.platinum_ingot.clear.name=Clear Platinum Ingot
+
+item.plumbum_ingot.dirty.name=Dirty Plumbum Ingot
+item.plumbum_ingot.poor.name=Poor Plumbum Ingot
+item.plumbum_ingot.normal.name=Plumbum Ingot
+item.plumbum_ingot.clear.name=Clear Plumbum Ingot
+
+item.tin_ingot.dirty.name=Dirty Tin Ingot
+item.tin_ingot.poor.name=Poor Tin Ingot
+item.tin_ingot.normal.name=Tin Ingot
+item.tin_ingot.clear.name=Clear Tin Ingot
