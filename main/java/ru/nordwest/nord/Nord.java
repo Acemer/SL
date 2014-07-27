@@ -35,7 +35,7 @@ public class Nord {
 
 	@SidedProxy(clientSide = "ru.nordwest.nord.client.ClientProxy", serverSide = "ru.nordwest.nord.CommonProxy")
 	public static CommonProxy proxy;
-	public static Block alluminumBlock;
+	public static Block alluminum_block;
 	public static Block chrome_block;
 	public static Block iron_block;
 	public static Block titan_block;
@@ -49,6 +49,14 @@ public class Nord {
 	public static Block platinum_block;
 	public static Block plumbum_block;
 	public static Item chrome_ingot;
+	public static Item iron_ingot;
+	public static Block ingot_block;
+	public static Block ingot_ingot;
+	public static Item titan_ingot;
+	public static Item tungsten_ingot;
+	public static Item zing_ingot;
+	public static Item alluminium_ingot;
+	public static Item alluminum_ingot;
 	private Item itemTest;
 
 	@EventHandler
