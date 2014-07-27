@@ -1,10 +1,7 @@
 package ru.nordwest.nord;
 
-import ru.nordwest.nord.block.BaseBlock;
-import ru.nordwest.nord.block.BaseMetallBlock;
-import ru.nordwest.nord.block.MetadataBlock;
-import ru.nordwest.nord.item.ItemBlockMetadata;
-import ru.nordwest.nord.item.ItemMetallBlock;
+import ru.nordwest.nord.block.*;
+import ru.nordwest.nord.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,7 +9,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlockWithMetadata;
-import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -31,7 +27,7 @@ public class Nord {
 	public static final String NAME = "0.0.1";
 	@Instance(value = "GenericModID")
 	public static Nord instance;
-	public static CreativeTabs tabBase = new CreativeTabs("tabExample") {
+	public static CreativeTabs tabBase = new CreativeTabs("tabBase") {
 		public Item getTabIconItem() {
 			return Items.bed;
 		}
@@ -39,13 +35,19 @@ public class Nord {
 
 	@SidedProxy(clientSide = "ru.nordwest.nord.client.ClientProxy", serverSide = "ru.nordwest.nord.CommonProxy")
 	public static CommonProxy proxy;
-	private Block alluminumBlock;
+	public static Block alluminumBlock;
+	public static Block chrome_block;
+	public static Block iron_block;
+	public static Block titan_block;
+	public static Block tungsten_block;
+	public static Block zing_block;
+	private Item itemTest;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		alluminumBlock = new BaseMetallBlock(Material.iron).setBlockName("alluminumBlock").setCreativeTab(tabBase).setBlockTextureName("alluminium_block");
-		GameRegistry.registerBlock(alluminumBlock, ItemMetallBlock.class,"alluminumBlock");
-	
+			MetallRegister.init();
+			itemTest = new ItemBase().setUnlocalizedName("itemTest").setTextureName(MODID + ":" + "itemTest");
+			GameRegistry.registerItem(itemTest,"itemTest");
 	}
 
 	@EventHandler

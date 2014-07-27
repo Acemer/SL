@@ -1,0 +1,33 @@
+itemGroup.tabBase=Base creative tab
+
+tile.alluminum_block.dirty.name=Dirty Alluminum Block
+tile.alluminum_block.poor.name=Poor Alluminum Block
+tile.alluminum_block.normal.name=Alluminum Block
+tile.alluminum_block.clear.name=Clear Alluminum Block
+
+tile.chrome_block.dirty.name=Dirty Chrome Block
+tile.chrome_block.poor.name=Poor Chrome Block
+tile.chrome_block.normal.name=Chrome Block
+tile.chrome_block.clear.name=Clear Chrome Block
+
+tile.iron_block.dirty.name=Dirty Iron Block
+tile.iron_block.poor.name=Poor Iron Block
+tile.iron_block.normal.name=Iron Block
+tile.iron_block.clear.name=Clear Iron Block
+
+tile.titan_block.dirty.name=Dirty Titan Block
+tile.titan_block.poor.name=Poor Titan Block
+tile.titan_block.normal.name=Titan Block
+tile.titan_block.clear.name=Clear Titan Block
+
+tile.tungsten_block.dirty.name=Dirty Tungsten Block
+tile.tungsten_block.poor.name=Poor Tungsten Block
+tile.tungsten_block.normal.name=Tungsten Block
+tile.tungsten_block.clear.name=Clear Tungsten Block
+
+tile.zing_block.dirty.name=Dirty Zing Block
+tile.zing_block.poor.name=Poor Zing Block
+tile.zing_block.normal.name=Zing Block
+tile.zing_block.clear.name=Clear Zing Block
+
+
