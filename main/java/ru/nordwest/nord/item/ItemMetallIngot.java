@@ -20,6 +20,7 @@ public class ItemMetallIngot extends ItemBase {
 	public ItemMetallIngot() {
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
+		this.setCreativeTab(Nord.tabMetall);
 	}
 
 	@SideOnly(Side.CLIENT)

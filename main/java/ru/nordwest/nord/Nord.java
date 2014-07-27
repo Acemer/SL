@@ -32,8 +32,18 @@ public class Nord {
 			return Items.bed;
 		}
 	};
-
+	public static CreativeTabs tabMetall = new CreativeTabs("tabMetall") {
+		public Item getTabIconItem() {
+			return Items.iron_ingot;
+		}
+	};
+	public static CreativeTabs tabDeco = new CreativeTabs("tabDeco") {
+		public Item getTabIconItem() {
+			return Items.apple;
+		}
+	};
 	@SidedProxy(clientSide = "ru.nordwest.nord.client.ClientProxy", serverSide = "ru.nordwest.nord.CommonProxy")
+
 	public static CommonProxy proxy;
 	public static Block alluminum_block;
 	public static Block chrome_block;
@@ -49,6 +59,7 @@ public class Nord {
 	public static Block platinum_block;
 	public static Block plumbum_block;
 	public static Item chrome_ingot;
+	public static Block[] deco1= new Block[16];
 	public static Item iron_ingot;
 	public static Block ingot_block;
 	public static Block ingot_ingot;
@@ -58,16 +69,16 @@ public class Nord {
 	public static Item alluminium_ingot;
 	public static Item alluminum_ingot;
 	public static Item gold_ingot;
-	private Item itemTest;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 			MetallRegister.init();
-			//itemTest = new ItemBase().setUnlocalizedName("itemTest").setTextureName(MODID + ":" + "itemTest");
-			//GameRegistry.registerItem(itemTest,"itemTest");
+			for (int i = 0; i < 16; i++) {
+				Nord.deco1[i] = new BaseDecoStoneBlock(Material.rock,i).setBlockName("stone_"+i).setCreativeTab(Nord.tabDeco).setBlockTextureName("stone");
+				GameRegistry.registerBlock(Nord.deco1[i], ItemDecoStoneBlock.class,"stone_"+i);
+			}
 			
-			//itemTest = new ItemMetallIngot().setUnlocalizedName("chrome_ingot").setTextureName("chrome_ingot");
-			//GameRegistry.registerItem(itemTest,"chrome_ingot");
+			
 	}
 
 	@EventHandler
