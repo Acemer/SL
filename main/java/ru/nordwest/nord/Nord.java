@@ -46,8 +46,11 @@ public class Nord {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 			MetallRegister.init();
-			itemTest = new ItemBase().setUnlocalizedName("itemTest").setTextureName(MODID + ":" + "itemTest");
-			GameRegistry.registerItem(itemTest,"itemTest");
+			//itemTest = new ItemBase().setUnlocalizedName("itemTest").setTextureName(MODID + ":" + "itemTest");
+			//GameRegistry.registerItem(itemTest,"itemTest");
+			
+			itemTest = new ItemMetallIngot().setUnlocalizedName("chrome_ingot").setTextureName("chrome_ingot");
+			GameRegistry.registerItem(itemTest,"chrome_ingot");
 	}
 
 	@EventHandler
