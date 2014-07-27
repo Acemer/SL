@@ -26,6 +26,28 @@ public class MetallRegister {
 		Nord.zing_block = new BaseMetallBlock(Material.iron).setBlockName("zing_block").setCreativeTab(Nord.tabBase).setBlockTextureName("zing_block");
 		GameRegistry.registerBlock(Nord.zing_block, ItemMetallBlock.class,"zing_block");
 	
+		Nord.gold_block = new BaseMetallBlock(Material.iron).setBlockName("gold_block").setCreativeTab(Nord.tabBase).setBlockTextureName("gold_block");
+		GameRegistry.registerBlock(Nord.gold_block, ItemMetallBlock.class,"gold_block");
+		
+		Nord.cobalt_block = new BaseMetallBlock(Material.iron).setBlockName("cobalt_block").setCreativeTab(Nord.tabBase).setBlockTextureName("cobalt_block");
+		GameRegistry.registerBlock(Nord.cobalt_block, ItemMetallBlock.class,"cobalt_block");
+		
+		Nord.copper_block = new BaseMetallBlock(Material.iron).setBlockName("copper_block").setCreativeTab(Nord.tabBase).setBlockTextureName("copper_block");
+		GameRegistry.registerBlock(Nord.copper_block, ItemMetallBlock.class,"copper_block");
+		
+		Nord.nickel_block = new BaseMetallBlock(Material.iron).setBlockName("nickel_block").setCreativeTab(Nord.tabBase).setBlockTextureName("nickel_block");
+		GameRegistry.registerBlock(Nord.nickel_block, ItemMetallBlock.class,"nickel_block");
+		
+		Nord.tin_block = new BaseMetallBlock(Material.iron).setBlockName("tin_block").setCreativeTab(Nord.tabBase).setBlockTextureName("tin_block");
+		GameRegistry.registerBlock(Nord.tin_block, ItemMetallBlock.class,"tin_block");
+		
+		Nord.platinum_block = new BaseMetallBlock(Material.iron).setBlockName("platinum_block").setCreativeTab(Nord.tabBase).setBlockTextureName("platinum_block");
+		GameRegistry.registerBlock(Nord.platinum_block, ItemMetallBlock.class,"platinum_block");
+		
+		Nord.plumbum_block = new BaseMetallBlock(Material.iron).setBlockName("plumbum_block").setCreativeTab(Nord.tabBase).setBlockTextureName("plumbum_block");
+		GameRegistry.registerBlock(Nord.plumbum_block, ItemMetallBlock.class,"plumbum_block");
+		
+		
 		
 	}
 }
