@@ -9,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlockWithMetadata;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -41,6 +42,12 @@ public class Nord {
 		public Item getTabIconItem() {
 			return Items.apple;
 		}
+		
+	};
+	public static CreativeTabs tabDeco2 = new CreativeTabs("tabDeco2") {
+		public Item getTabIconItem() {
+			return Items.bed;
+		}
 	};
 	@SidedProxy(clientSide = "ru.nordwest.nord.client.ClientProxy", serverSide = "ru.nordwest.nord.CommonProxy")
 
@@ -60,6 +67,7 @@ public class Nord {
 	public static Block plumbum_block;
 	public static Item chrome_ingot;
 	public static Block[] deco1= new Block[16];
+	public static Block[] deco2= new Block[3];
 	public static Item iron_ingot;
 	public static Block ingot_block;
 	public static Block ingot_ingot;
@@ -83,10 +91,14 @@ public class Nord {
 				Nord.deco1[i] = new BaseDecoStoneBlock(Material.rock,i).setBlockName("stone_"+i).setCreativeTab(Nord.tabDeco).setBlockTextureName("stone");
 				GameRegistry.registerBlock(Nord.deco1[i], ItemDecoStoneBlock.class,"stone_"+i);
 			}
+			for (int i = 0; i < 3; i++) {
+				Nord.deco2[i] = new BaseEmpDecoBlock(Material.grass,i).setBlockName("flashlight_"+i).setCreativeTab(Nord.tabDeco2).setBlockTextureName("flashlight").setStepSound(Block.soundTypeGrass);
+				GameRegistry.registerBlock(Nord.deco2[i], ItemDecoStoneBlock.class,"flashlight_"+i).setLightLevel(0.9375F); 
 			
+			    }
+					}
 			
-	}
-
+	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.registerRenderers();
