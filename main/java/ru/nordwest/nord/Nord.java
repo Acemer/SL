@@ -83,6 +83,7 @@ public class Nord {
 	public static Item platinum_ingot;
 	public static Item plumbum_ingot;
 	public static Item tin_ingot;
+	public static Block emp_bamboo_block;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

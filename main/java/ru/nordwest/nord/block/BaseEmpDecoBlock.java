@@ -3,6 +3,9 @@ package ru.nordwest.nord.block;
 import java.util.List;
 
 import ru.nordwest.nord.Nord;
+import ru.nordwest.nord.item.ItemEmpDecoBlock;
+import ru.nordwest.nord.item.ItemMetallBlock;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
@@ -99,6 +102,6 @@ public class BaseEmpDecoBlock extends MetadataBlock {
     {
         return null;
     }
-    
+      
 }
 
