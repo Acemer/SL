@@ -30,7 +30,7 @@ public class BaseEmpDecoBlock extends MetadataBlock {
 		super(par2Material, 16);
 		this.index = index;
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List subItems) {
@@ -38,6 +38,7 @@ public class BaseEmpDecoBlock extends MetadataBlock {
 			subItems.add(new ItemStack(item, 1, i));
 		}
 	}
+	
 
 	@Override
 	@SideOnly(Side.CLIENT)

@@ -42,12 +42,17 @@ public class Nord {
 		public Item getTabIconItem() {
 			return Items.apple;
 		}
-		
 	};
-	public static CreativeTabs tabDeco2 = new CreativeTabs("tabDeco2") {
+	public static CreativeTabs food = new CreativeTabs("food") {
+		public Item getTabIconItem() {
+			return Items.apple;	
+		}
+	};
+	public static CreativeTabs flashlights = new CreativeTabs("flashlights") {
 		public Item getTabIconItem() {
 			return Items.bed;
 		}
+		
 	};
 	@SidedProxy(clientSide = "ru.nordwest.nord.client.ClientProxy", serverSide = "ru.nordwest.nord.CommonProxy")
 
@@ -83,7 +88,11 @@ public class Nord {
 	public static Item platinum_ingot;
 	public static Item plumbum_ingot;
 	public static Item tin_ingot;
+	public static Item bun;
+	public static Item bun_jam;
+	public static Item bun_jam2;
 	public static Block emp_bamboo_block;
+	public static Block oil_lamp;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -93,13 +102,14 @@ public class Nord {
 				GameRegistry.registerBlock(Nord.deco1[i], ItemDecoStoneBlock.class,"stone_"+i);
 			}
 			for (int i = 0; i < 3; i++) {
-				Nord.deco2[i] = new BaseEmpDecoBlock(Material.grass,i).setBlockName("flashlight_"+i).setCreativeTab(Nord.tabDeco2).setBlockTextureName("flashlight").setStepSound(Block.soundTypeGrass);
+				Nord.deco2[i] = new BaseEmpDecoBlock(Material.grass,i).setBlockName("flashlight_"+i).setCreativeTab(Nord.flashlights).setBlockTextureName("flashlight").setStepSound(Block.soundTypeSnow);
 				GameRegistry.registerBlock(Nord.deco2[i], ItemDecoStoneBlock.class,"flashlight_"+i).setLightLevel(0.9375F); 
+			}
+		     	Nord.oil_lamp = new BaseEmpDecoBlock(Material.glass, 0).setBlockName("oil_lamp_").setCreativeTab(Nord.flashlights).setBlockTextureName("oil_lamp").setStepSound(Block.soundTypeGlass);
+				GameRegistry.registerBlock(Nord.oil_lamp, ItemDecoStoneBlock.class,"oil_lamp_").setLightLevel(0.9375F); 
+			}
+					
 			
-			    }
-					}
-			
-	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.registerRenderers();
