@@ -21,8 +21,8 @@ public class BaseMetallOre extends MetadataBlock {
 	public BaseMetallOre(Material par2Material, int shift) {
 		super(par2Material, 16);
 		this.shift = shift;
-		type = (MetallRegister.ore_list.length - shift) % 16;
-		type = type == 0 && MetallRegister.ore_list.length !=0 ? 16 : type;
+		type = MetallRegister.ore_list.length > shift + 16 ? 16 : MetallRegister.ore_list.length % 16;
+
 	}
 
 	public int getShift() {

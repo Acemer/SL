@@ -40,7 +40,7 @@ public class Nord {
 	};
 	public static CreativeTabs tabDeco = new CreativeTabs("tabDeco") {
 		public Item getTabIconItem() {
-			return Items.apple;
+			return Items.stone_pickaxe;
 		}
 	};
 	public static CreativeTabs food = new CreativeTabs("food") {
@@ -50,7 +50,7 @@ public class Nord {
 	};
 	public static CreativeTabs flashlights = new CreativeTabs("flashlights") {
 		public Item getTabIconItem() {
-			return Items.bed;
+			return Items.gold_ingot;
 		}
 
 	};

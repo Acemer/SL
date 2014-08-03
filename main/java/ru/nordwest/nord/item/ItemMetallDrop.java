@@ -26,19 +26,19 @@ public class ItemMetallDrop extends ItemBase {
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int index) {
-		int j = MathHelper.clamp_int(index, 0, 5);
+		int j = MathHelper.clamp_int(index, 0,  MetallRegister.ore_list.length);
 		return this.texture[j];
 	}
 
 	public String getUnlocalizedName(ItemStack item) {
-		int i = MathHelper.clamp_int(item.getItemDamage(), 0, 5);
+		int i = MathHelper.clamp_int(item.getItemDamage(), 0, MetallRegister.ore_list.length);
 		return super.getUnlocalizedName() + "." + MetallRegister.ore_list[i]
 				+ "_" + suffix;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
-		for (int i = 0; i < 5; ++i) {
+		for (int i = 0; i < MetallRegister.ore_list.length; ++i) {
 			list.add(new ItemStack(item, 1, i));
 		}
 	}

@@ -19,7 +19,10 @@ public class MetallRegister {
 			"iron", "titan", "tungsten", "zing", "gold", "cobalt", "copper",
 			"nickel", "tin", "platinum", "plumbum" };
 	public static String[] ore_list = new String[] { "bauxite", "chromite",
-			"crocoite", "uvarovite", "cobaltite", "skutterudite" };
+			"crocoite", "uvarovite", "cobaltite", "skutterudite", "azurite", "brochantite", "copper", 
+			"almandine", "hematite", "limonite", "magnetite", "pyrite", "olivine", "gold_quartz",
+			"millerite", "pentlandite", "proustite", "cerussite", "dundas", "vanadinite", "tin", "ilmenite",
+			"titanite", "wolframite", "blende", "zincite", };
 	private static HashMap<String, Block> metall_block = new HashMap<String, Block>();
 	private static HashMap<String, Item> metall_ingot = new HashMap<String, Item>();
 
@@ -69,6 +72,7 @@ public class MetallRegister {
 		for (int i = 0; i < ore_list.length; i++) {
 			String name = ore_list[i];
 			if (i % 16 == 0) {
+				System.err.println("test shift " + i);
 				block = new BaseMetallOre(Material.rock, i)
 						.setCreativeTab(Nord.tabMetall).setHardness(3.0F)
 						.setResistance(5.0F).setBlockName("ore_" + i);
