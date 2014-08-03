@@ -60,6 +60,11 @@ tile.plumbum_block.poor.name=Poor Plumbum Block
 tile.plumbum_block.normal.name=Plumbum Block
 tile.plumbum_block.clear.name=Clear Plumbum Block
 
+tile.nickel_block.dirty.name=Dirty Nickel Block
+tile.nickel_block.poor.name=Poor Nickel Block
+tile.anickel_block.normal.name=Nickel Block
+tile.nickel_block.clear.name=Clear Nickel Block
+
 item.chrome_ingot.dirty.name=Dirty Chrome Ingot
 item.chrome_ingot.poor.name=Poor Chrome Ingot
 item.chrome_ingot.normal.name=Chrome Ingot

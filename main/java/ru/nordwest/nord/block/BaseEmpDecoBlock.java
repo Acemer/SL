@@ -20,9 +20,7 @@ import net.minecraft.world.World;
 
 public class BaseEmpDecoBlock extends MetadataBlock {
 	private IIcon[] texture;
-	private int colors[] = new int[] { 1973019, 11743532, 3887386, 5320730,
-			2437522, 8073150, 2651799, 11250603, 4408131, 14188952, 4312372,
-			14602026, 6719955, 12801229, 15435844, 15790320 };
+	private int colors[] = Nord.clolors;;
 	private int type = 16;
 	private int index = 0;
 
@@ -85,12 +83,9 @@ public class BaseEmpDecoBlock extends MetadataBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderColor(int meta) {
-		/*это комментарий< его можно убрать
-		*/
 		return colors[15-meta];
-	
-
 	}
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess p_149720_1_, int p_149720_2_,
