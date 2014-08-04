@@ -17,12 +17,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class MetallRegister {
 	public static String[] metall_list = new String[] { "alluminum", "chrome",
 			"iron", "titan", "tungsten", "zing", "gold", "cobalt", "copper",
-			"nickel", "tin", "platinum", "plumbum" };
+			"nickel", "tin", "platinum", "plumbum", "silver" };
 	public static String[] ore_list = new String[] { "bauxite", "chromite",
 			"crocoite", "uvarovite", "cobaltite", "skutterudite", "azurite", "brochantite", "copper", 
 			"almandine", "hematite", "limonite", "magnetite", "pyrite", "olivine", "gold_quartz",
 			"millerite", "pentlandite", "proustite", "cerussite", "dundas", "vanadinite", "tin", "ilmenite",
-			"titanite", "wolframite", "blende", "zincite", };
+			"titanite", "wolframite", "blende", "zincite", "argentite", "galena", "silver"};
 	private static HashMap<String, Block> metall_block = new HashMap<String, Block>();
 	private static HashMap<String, Item> metall_ingot = new HashMap<String, Item>();
 

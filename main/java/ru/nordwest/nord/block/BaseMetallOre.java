@@ -22,7 +22,7 @@ public class BaseMetallOre extends MetadataBlock {
 		super(par2Material, 16);
 		this.shift = shift;
 		type = MetallRegister.ore_list.length > shift + 16 ? 16 : MetallRegister.ore_list.length % 16;
-
+		System.err.println(type);
 	}
 
 	public int getShift() {
@@ -50,6 +50,8 @@ public class BaseMetallOre extends MetadataBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
+		System.err.println("icon " + type);
+		System.err.println("meta " + meta);
 		return texture[meta];
 	}
 
