@@ -1,34 +1,32 @@
 package ru.nordwest.nord.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBlockMetadata extends ItemBlock {
+public class ItemColorMetaDataBlock extends ItemBlockMetadata {
 	private final Block block;
-	public ItemBlockMetadata(final Block block) {
+	public ItemColorMetaDataBlock(final Block block) {
 		super(block);
 		this.block = block;
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
+
 	}
 
 	@Override
 	public String getUnlocalizedName(final ItemStack itemStack) {
 		return super.getUnlocalizedName() + "." + itemStack.getItemDamage();
 	}
-
 	@Override
-	public int getMetadata(final int meta) {
-		return meta;
+	@SideOnly(Side.CLIENT)
+	public int getColorFromItemStack(final ItemStack item, final int par2) {
+		return this.block.getRenderColor(item.getItemDamage());
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(final int meta) {
-		return this.block.getIcon(0, meta);
+	public boolean requiresMultipleRenderPasses() {
+		return true;
 	}
+
 }

@@ -1,15 +1,13 @@
 package ru.nordwest.nord.block;
 
-import cpw.mods.fml.relauncher.SideOnly;
-import ru.nordwest.nord.Nord;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import ru.nordwest.nord.Nord;
 
 public class BaseBlock extends Block {
 
-	public BaseBlock(Material par2Material) {
+	public BaseBlock(final Material par2Material) {
 		super(par2Material);
-		setCreativeTab(Nord.tabBase);
+		this.setCreativeTab(Nord.tabBase);
 	}
 }
