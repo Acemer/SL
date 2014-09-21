@@ -94,9 +94,9 @@ public class MetallRegister {
 
 	}
 
-	public static ItemStack getMetallBlock(final String name, final int quality) {
+	public static ItemStack getMetallBlock(final String name, final int quality, final int quantaty) {
 		if (MetallRegister.metall_block.containsKey(name)) {
-			return new ItemStack(MetallRegister.metall_block.get(name), 1,
+			return new ItemStack(MetallRegister.metall_block.get(name), quantaty,
 					quality % 4);
 		} else {
 			System.err.println("Unknow metall: " + name);
@@ -105,9 +105,9 @@ public class MetallRegister {
 		}
 	}
 
-	public static ItemStack getMetallIngot(final String name, final int quality) {
+	public static ItemStack getMetallIngot(final String name, final int quality, final int quantaty) {
 		if (MetallRegister.metall_ingot.containsKey(name)) {
-			return new ItemStack(MetallRegister.metall_ingot.get(name), 1,
+			return new ItemStack(MetallRegister.metall_ingot.get(name), quantaty,
 					quality % 4);
 		} else {
 			System.err.println("Unknow metall: " + name);
@@ -116,9 +116,9 @@ public class MetallRegister {
 		}
 	}
 
-	public static ItemStack getMetallPowder(final String name) {
+	public static ItemStack getMetallPowder(final String name, final int quantaty) {
 		if (MetallRegister.metall_ingot.containsKey(name)) {
-			return new ItemStack(MetallRegister.metall_block.get(name), 1, 5);
+			return new ItemStack(MetallRegister.metall_block.get(name), quantaty, 5);
 		} else {
 			System.err.println("Unknow metall: " + name);
 			System.err.println("Game has crashed:)");
@@ -126,9 +126,11 @@ public class MetallRegister {
 		}
 	}
 
-	public static ItemStack getOre(final String name) {
+	public static ItemStack getOre(final String name, final int quantaty) {
 		if (MetallRegister.metall_ore.containsKey(name)) {
-			return MetallRegister.metall_ore.get(name);
+			ItemStack item = MetallRegister.metall_ore.get(name);
+			item.stackSize=quantaty;
+			return item;
 		} else {
 			System.err.println("Unknow Ore: " + name);
 			System.err.println("Game has crashed:)");
@@ -136,9 +138,11 @@ public class MetallRegister {
 		}
 	}
 
-	public static ItemStack getOreDrop(final String name) {
+	public static ItemStack getOreDrop(final String name, final int quantaty) {
 		if (MetallRegister.metall_drop.containsKey(name)) {
-			return MetallRegister.metall_drop.get(name);
+			ItemStack item = MetallRegister.metall_drop.get(name);
+			item.stackSize=quantaty;
+			return item;
 		} else {
 			System.err.println("Unknow Ore: " + name);
 			System.err.println("Game has crashed:)");
@@ -146,9 +150,11 @@ public class MetallRegister {
 		}
 	}
 
-	public static ItemStack getOrePowder(final String name) {
+	public static ItemStack getOrePowder(final String name, final int quantaty) {
 		if (MetallRegister.metall_powder.containsKey(name)) {
-			return MetallRegister.metall_powder.get(name);
+			ItemStack item = MetallRegister.metall_powder.get(name);
+			item.stackSize=quantaty;
+			return item;
 		} else {
 			System.err.println("Unknow Ore: " + name);
 			System.err.println("Game has crashed:)");
@@ -156,9 +162,11 @@ public class MetallRegister {
 		}
 	}
 
-	public static ItemStack getOreClearPowder(final String name) {
+	public static ItemStack getOreClearPowder(final String name, final int quantaty) {
 		if (MetallRegister.metall_clear_powder.containsKey(name)) {
-			return MetallRegister.metall_clear_powder.get(name);
+			ItemStack item = MetallRegister.metall_clear_powder.get(name);
+			item.stackSize=quantaty;
+			return item;
 		} else {
 			System.err.println("Unknow Ore: " + name);
 			System.err.println("Game has crashed:)");

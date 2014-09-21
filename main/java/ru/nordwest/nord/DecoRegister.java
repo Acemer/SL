@@ -24,7 +24,7 @@ public class DecoRegister {
 
 		// Фонари
 		for (int i = 0; i < Nord.deco2.length; i++) {
-			Nord.deco2[i] = new LightLampBlock(Material.cloth, i)
+			Nord.deco2[i] = new LightLampBlock(Material.glass, i)
 					.setBlockName("flashlight_" + i)
 					.setCreativeTab(Nord.flashlights)
 					.setBlockTextureName("flashlight")
@@ -44,7 +44,7 @@ public class DecoRegister {
 		// Свечи
 		Nord.candle = new CandleBlock().setBlockName("candle")
 				.setCreativeTab(Nord.flashlights).setBlockTextureName("candle")
-				.setStepSound(Block.soundTypeGlass).setLightLevel(0.9375F);
+				.setStepSound(Block.soundTypeSnow).setLightLevel(0.9375F);
 		GameRegistry.registerBlock(Nord.candle, ItemColorMetaDataBlock.class,
 				"candle");
 
