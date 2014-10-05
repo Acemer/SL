@@ -26,12 +26,12 @@ public class SmelterRecipes {
 		smeltItemStack(MetallRegister.getMetallIngot("gold", 1, 1),
 				MetallRegister.getMetallIngot("silver", 1, 1),
 				MetallRegister.getMetallIngot("zing", 1, 1),
-				MetallRegister.getMetallIngot("zing", 2, 1), 75f, 10f);
+				MetallRegister.getMetallIngot("zing", 2, 1), 0.75f, 10f);
 
 		smeltItemStack(MetallRegister.getMetallIngot("zing", 1, 2),
 				MetallRegister.getMetallIngot("silver", 1, 1),
 				MetallRegister.getMetallIngot("gold", 1, 1),
-				MetallRegister.getMetallIngot("gold", 2, 5), 75f, 10f);
+				MetallRegister.getMetallIngot("gold", 2, 5), 0.75f, 10f);
 	}
 
 	public void smeltItemStack(ItemStack input1, ItemStack input2,
@@ -134,7 +134,7 @@ public class SmelterRecipes {
 	}
 
 	public float getSmeltResultSecondPercent(int index) {
-		return index != -1 ? second_output_percent.get(index) : null;
+		return index != -1 ? second_output_percent.get(index) : 0;
 	}
 
 	public boolean canSmelt(ItemStack input, ItemStack output) {

@@ -2,6 +2,7 @@ package ru.nordwest.nord.common.tileentity;
 
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.block.SmelterBlock;
+import ru.nordwest.nord.common.BrickFurnaceRecipes;
 import ru.nordwest.nord.common.SmelterRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -16,20 +17,23 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntitySmelter extends TileEntity implements ISidedInventory {
+public class TileEntityBrickFurnace extends TileEntity
+		implements
+			ISidedInventory {
 	private static final int[] slotsTop = new int[]{0, 1};
 	private static final int[] slotsBottom = new int[]{3, 4};
 	private static final int[] slotsSide = new int[]{2};
 	private int input1 = 0;
-	private int input2 = 1;
-	private int fuel = 2;
-	private int output1 = 3;
-	private int output2 = 4;
-	private ItemStack[] smelterItemStacks = new ItemStack[5];
+	private int fuel = 1;
+	private int output1 = 2;
+	private int output2 = 3;
+	private ItemStack[] smelterItemStacks = new ItemStack[4];
 
-	public int smelterSmeltTime;
-	public int smelterCurSmeltTime;
-	public int smelterWorkedTime;
+	public int burnTime;
+	public int energe;
+	public final int maxEnerge = 20 * 1000;
+	public int furnaceFuelBurnTime;
+	public int furnaceWorkedTime;
 	private String name;
 
 	// public void getName(String displayName) {
@@ -84,7 +88,7 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 
 	@Override
 	public String getInventoryName() {
-		return this.hasCustomInventoryName() ? this.name : "Smelter";
+		return this.hasCustomInventoryName() ? this.name : "BrickFurnace";
 	}
 
 	@Override
@@ -112,9 +116,10 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 			}
 		}
 
-		this.smelterSmeltTime = par1.getShort("SmeltTime");
-		this.smelterWorkedTime = par1.getShort("WorkedTime");
-		this.smelterCurSmeltTime = getItemCrushTime(this.smelterItemStacks[1]);
+		this.burnTime = par1.getShort("burnTime");
+		this.furnaceWorkedTime = par1.getShort("WorkedTime");
+		this.energe = par1.getInteger("energe");
+		this.furnaceFuelBurnTime = getItemCrushTime(this.smelterItemStacks[fuel]);
 
 		if (par1.hasKey("CustomName", 8)) {
 			this.name = par1.getString("CustomName");
@@ -123,8 +128,9 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 
 	public void writeToNBT(NBTTagCompound par1) {
 		super.writeToNBT(par1);
-		par1.setShort("SmeltTime", (short) this.smelterSmeltTime);
-		par1.setShort("WorkedTime", (short) this.smelterWorkedTime);
+		par1.setShort("burnTime", (short) this.burnTime);
+		par1.setShort("WorkedTime", (short) this.furnaceWorkedTime);
+		par1.setShort("energe", (short) this.energe);
 		NBTTagList nbtTagList = new NBTTagList();
 
 		for (int i = 0; i < this.smelterItemStacks.length; ++i) {
@@ -144,39 +150,37 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 	}
 
 	public int getWorkedProgressScaled(int par1) {
-		return this.smelterWorkedTime * par1 / 400;
+		return this.furnaceWorkedTime * par1 / 400;
 	}
 
 	public int getCrushTimeRemainingScaled(int par1) {
-		if (this.smelterCurSmeltTime == 0) {
-			this.smelterCurSmeltTime = 400;
+		if (this.furnaceFuelBurnTime == 0) {
+			this.furnaceFuelBurnTime = 400;
 		}
 
-		return this.smelterSmeltTime * par1 / this.smelterCurSmeltTime;
+		return this.burnTime * par1 / this.furnaceFuelBurnTime;
 	}
 
 	public boolean isActive() {
-		return this.smelterSmeltTime > 0;
+		return this.burnTime > 0;
 	}
 
 	public void updateEntity() {
-		boolean flag = this.smelterSmeltTime > 0;
+		boolean flag = this.burnTime > 0;
 		boolean flag1 = false;
 
-		if (this.smelterSmeltTime > 0) {
-			--this.smelterSmeltTime;
+		if (this.burnTime > 0 && this.maxEnerge < this.energe) {
+			--this.burnTime;
+			this.energe++;
 		}
 
 		if (!this.worldObj.isRemote) {
-			if (this.smelterSmeltTime != 0
-					|| this.smelterItemStacks[1] != null
-					&& (this.smelterItemStacks[input1] != null || this.smelterItemStacks[input2] != null)) {
-				if (this.smelterSmeltTime == 0 && this.canSmelt()) {
-					this.smelterCurSmeltTime = this.smelterSmeltTime = getItemCrushTime(this.smelterItemStacks[fuel]);
+			if (this.energe > 0 && this.smelterItemStacks[input1] != null) {
 
-					if (this.smelterSmeltTime > 0) {
+				if (this.burnTime == 0 && this.canSmelt()) {
+					this.furnaceFuelBurnTime = this.burnTime = getItemCrushTime(this.smelterItemStacks[fuel]);
+					if (this.burnTime > 0) {
 						flag1 = true;
-
 						if (this.smelterItemStacks[fuel] != null) {
 							--this.smelterItemStacks[fuel].stackSize;
 							if (this.smelterItemStacks[fuel].stackSize == 0) {
@@ -189,22 +193,22 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 				}
 
 				if (this.isActive() && this.canSmelt()) {
-					++this.smelterWorkedTime;
+					++this.furnaceWorkedTime;
 
-					if (this.smelterWorkedTime == 400) {
-						this.smelterWorkedTime = 0;
+					if (this.furnaceWorkedTime == 400) {
+						this.furnaceWorkedTime = 0;
 						this.crushItem();
 						flag1 = true;
 					}
 				} else {
-					this.smelterWorkedTime = 0;
+					this.furnaceWorkedTime = 0;
 				}
 			}
 
-			if (flag != this.smelterSmeltTime > 0) {
+			if (flag != this.burnTime > 0) {
 				flag1 = true;
-				SmelterBlock.updateBlockState(this.smelterSmeltTime > 0,
-						this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+				SmelterBlock.updateBlockState(this.burnTime > 0, this.worldObj,
+						this.xCoord, this.yCoord, this.zCoord);
 			}
 		}
 
@@ -214,20 +218,16 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 	}
 
 	private boolean canSmelt() {
-		if (this.smelterItemStacks[input1] == null
-				&& this.smelterItemStacks[input2] == null)
+		if (this.smelterItemStacks[input1] == null)
 			return false;
 		else {
-			ItemStack iStack = SmelterRecipes.crushing().getSmeltResult(
-					this.smelterItemStacks[input1],
-					this.smelterItemStacks[input2]);
-			boolean second = Nord.instance.rand.nextFloat() > SmelterRecipes
+			ItemStack iStack = BrickFurnaceRecipes.crushing().getSmeltResult(
+					this.smelterItemStacks[input1]);
+			boolean second = Nord.instance.rand.nextFloat() > BrickFurnaceRecipes
 					.crushing().getSmeltResultSecondPercent(
-							this.smelterItemStacks[input1],
-							this.smelterItemStacks[input2]);
-			ItemStack iStack2 = SmelterRecipes.crushing()
-					.getSmeltResultSecond(this.smelterItemStacks[input1],
-							this.smelterItemStacks[input2]);
+							this.smelterItemStacks[input1]);
+			ItemStack iStack2 = BrickFurnaceRecipes.crushing()
+					.getSmeltResultSecond(this.smelterItemStacks[input1]);
 
 			if (iStack == null)
 				return false;
@@ -247,7 +247,8 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 					: -1;;
 
 			int result2 = this.smelterItemStacks[output2] != null
-					? smelterItemStacks[output2].stackSize +(second ? iStack2.stackSize : 0)
+					? smelterItemStacks[output2].stackSize
+							+ (second ? iStack2.stackSize : 0)
 					: -1;
 
 			boolean size1 = result <= getInventoryStackLimit()
@@ -263,11 +264,10 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 	}
 	public void crushItem() {
 		if (this.canSmelt()) {
-			int index = SmelterRecipes.crushing().getIndexResult(
-					this.smelterItemStacks[input1],
-					this.smelterItemStacks[input2]);
-			ItemStack iStack1 = SmelterRecipes.crushing().getSmeltResult(index);
-			ItemStack iStack2 = SmelterRecipes.crushing().getSmeltResultSecond(
+			int index = BrickFurnaceRecipes.crushing().getIndexResult(
+					this.smelterItemStacks[input1]);
+			ItemStack iStack1 = BrickFurnaceRecipes.crushing().getSmeltResult(index);
+			ItemStack iStack2 = BrickFurnaceRecipes.crushing().getSmeltResultSecond(
 					index);
 
 			if (this.smelterItemStacks[output1] == null)
@@ -290,11 +290,6 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 				this.smelterItemStacks[input1].stackSize -= quant1;
 				if (this.smelterItemStacks[input1].stackSize <= 0)
 					this.smelterItemStacks[input1] = null;
-			}
-			if (this.smelterItemStacks[input2] != null) {
-				this.smelterItemStacks[input2].stackSize -= quant2;
-				if (this.smelterItemStacks[input2].stackSize <= 0)
-					this.smelterItemStacks[input2] = null;
 			}
 		}
 	}

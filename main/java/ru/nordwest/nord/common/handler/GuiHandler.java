@@ -1,8 +1,11 @@
 package ru.nordwest.nord.common.handler;
 
 import ru.nordwest.nord.Nord;
+import ru.nordwest.nord.client.gui.GuiBrickFurnace;
 import ru.nordwest.nord.client.gui.GuiCrusher;
+import ru.nordwest.nord.common.container.ContainerBrickFurnace;
 import ru.nordwest.nord.common.container.ContainerCrusher;
+import ru.nordwest.nord.common.tileentity.TileEntityBrickFurnace;
 import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,6 +30,9 @@ public class GuiHandler implements IGuiHandler {
 			case Nord.guiIDSmelter :
 				return new ContainerCrusher(player.inventory,
 						(TileEntitySmelter) tileEntity);
+			case Nord.guiIDBrickFurnace :
+				return new ContainerBrickFurnace(player.inventory,
+						(TileEntityBrickFurnace) tileEntity);	
 		}
 		return null;
 	}
@@ -45,6 +51,9 @@ public class GuiHandler implements IGuiHandler {
 			case Nord.guiIDSmelter :
 				return new GuiCrusher(player.inventory,
 						(TileEntitySmelter) tileEntity, player);
+			case Nord.guiIDBrickFurnace :
+				return new GuiBrickFurnace(player.inventory,
+						(TileEntityBrickFurnace) tileEntity, player);
 		}
 		return null;
 	}
