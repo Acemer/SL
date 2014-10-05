@@ -1,4 +1,4 @@
-package tile_entity;
+package ru.nordwest.nord.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -36,12 +36,21 @@ public class SmelterRecipes {
 
 	public void smeltItemStack(ItemStack input1, ItemStack input2,
 			ItemStack output1, ItemStack output2, float percent, float exp) {
-		firstSlot.add(input1);
-		secondSlot.add(input2);
-		output.add(output1);
-		second_output.add(output2);
-		second_output_percent.add(percent);
-		experience_output.add(exp);
+		int index = getIndexResult(input1, input2);
+		if (index == -1) {
+			firstSlot.add(input1);
+			secondSlot.add(input2);
+			output.add(output1);
+			second_output.add(output2);
+			second_output_percent.add(percent);
+			experience_output.add(exp);
+		}else{
+			System.out.println("Smelter recipe #"+index + " owerwrite");
+			output.set(index,output1);
+			second_output.set(index,output2);
+			second_output_percent.set(index,percent);
+			experience_output.set(index,exp);
+		}
 	}
 
 	public int getIndexResult(ItemStack iStack1, ItemStack iStack2) {
@@ -60,8 +69,10 @@ public class SmelterRecipes {
 			}
 		}
 		for (int i = 0; i < firstSlot.size(); i++) {
-			boolean match = compareSizeble(item1, firstSlot.get(i))
-					&& compareSizeble(item2, secondSlot.get(i));
+			boolean match = (compareSizeble(item1, firstSlot.get(i)) && compareSizeble(
+					item2, secondSlot.get(i)))
+					|| (compareSizeble(item2, firstSlot.get(i)) && compareSizeble(
+							item1, secondSlot.get(i)));
 			if (match)
 				return i;
 
@@ -70,10 +81,10 @@ public class SmelterRecipes {
 	}
 	public int getIndexPartResult(ItemStack iStack) {
 		for (int i = 0; i < firstSlot.size(); i++) {
-			System.out.println("--------->");
-			System.out.println(iStack);
-			System.out.println(firstSlot.get(i));
-			System.out.println("<---------");
+			// System.out.println("--------->");
+			// System.out.println(iStack);
+			// System.out.println(firstSlot.get(i));
+			// System.out.println("<---------");
 			boolean match = compare(iStack, firstSlot.get(i))
 					|| compare(iStack, secondSlot.get(i));
 			if (match)

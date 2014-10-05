@@ -1,6 +1,8 @@
-package tile_entity;
+package ru.nordwest.nord.common.tileentity;
 
+import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.block.SmelterBlock;
+import ru.nordwest.nord.common.SmelterRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -219,9 +221,13 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 			ItemStack iStack = SmelterRecipes.crushing().getSmeltResult(
 					this.smelterItemStacks[input1],
 					this.smelterItemStacks[input2]);
-			ItemStack iStack2 = SmelterRecipes.crushing().getSmeltResultSecond(
-					this.smelterItemStacks[input1],
-					this.smelterItemStacks[input2]);
+			boolean second = Nord.instance.rand.nextFloat() > SmelterRecipes
+					.crushing().getSmeltResultSecondPercent(
+							this.smelterItemStacks[input1],
+							this.smelterItemStacks[input2]);
+			ItemStack iStack2 = second ? SmelterRecipes.crushing()
+					.getSmeltResultSecond(this.smelterItemStacks[input1],
+							this.smelterItemStacks[input2]) : null;
 
 			if (iStack == null)
 				return false;

@@ -3,7 +3,7 @@ package ru.nordwest.nord.block;
 import java.util.Random;
 
 import ru.nordwest.nord.Nord;
-import tile_entity.TileEntitySmelter;
+import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

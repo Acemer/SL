@@ -1,8 +1,9 @@
-package tile_entity;
+package ru.nordwest.nord.common.handler;
 
-import ru.nordwest.nord.ContainerCrusher;
-import ru.nordwest.nord.GuiCrusher;
 import ru.nordwest.nord.Nord;
+import ru.nordwest.nord.client.gui.GuiCrusher;
+import ru.nordwest.nord.common.container.ContainerCrusher;
+import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

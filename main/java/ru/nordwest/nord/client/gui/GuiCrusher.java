@@ -1,4 +1,4 @@
-package ru.nordwest.nord;
+package ru.nordwest.nord.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -8,7 +8,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import tile_entity.TileEntitySmelter;
+import ru.nordwest.nord.Nord;
+import ru.nordwest.nord.common.container.ContainerCrusher;
+import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 
 public class GuiCrusher extends GuiContainer {
 	private static final ResourceLocation crusherGuiTextures = new ResourceLocation(

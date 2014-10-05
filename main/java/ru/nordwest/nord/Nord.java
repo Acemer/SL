@@ -1,11 +1,16 @@
 package ru.nordwest.nord;
 
+import java.util.Random;
+
 import ru.nordwest.nord.block.BaseMetallBlock;
 import ru.nordwest.nord.block.SmelterBlock;
+import ru.nordwest.nord.common.CommonProxy;
+import ru.nordwest.nord.common.CreativeTabNord;
+import ru.nordwest.nord.common.PacketPipeline;
+import ru.nordwest.nord.common.SmelterRecipes;
+import ru.nordwest.nord.common.handler.GuiHandler;
+import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 import ru.nordwest.nord.item.ItemMetallBlock;
-import tile_entity.GuiHandler;
-import tile_entity.SmelterRecipes;
-import tile_entity.TileEntitySmelter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -40,13 +45,14 @@ public class Nord {
 	public static CreativeTabs food = new CreativeTabNord("food");
 	public static CreativeTabs flashlights = new CreativeTabNord("flashlights");
 	// ================================================================
-	@SidedProxy(clientSide = "ru.nordwest.nord.client.ClientProxy", serverSide = "ru.nordwest.nord.CommonProxy")
+	@SidedProxy(clientSide = "ru.nordwest.nord.client.ClientProxy", serverSide = "ru.nordwest.nord.common.CommonProxy")
 	public static CommonProxy proxy;
 	public static Block[] deco1 = new Block[16];
 	public static Block[] deco2 = new Block[3];
 	public static Block oil_lamp;
 	public static Block candle;
 	public static Block smelter;
+	public Random rand = new Random();
 	public static int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
 			0x51301A, 0x253192, 0x7B2FBE, 0x287697, 0xABABAB, 0x434343,
 			0xD88198, 0x41CD34, 0xDECF2A, 0x6689D3, 0xC354CD, 0xEB8844,

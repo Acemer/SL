@@ -1,4 +1,4 @@
-package ru.nordwest.nord;
+package ru.nordwest.nord.common;
 
 public class CommonProxy {
 

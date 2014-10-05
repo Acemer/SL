@@ -1,7 +1,7 @@
-package ru.nordwest.nord;
+package ru.nordwest.nord.common.container;
 
-import tile_entity.SmelterRecipes;
-import tile_entity.TileEntitySmelter;
+import ru.nordwest.nord.common.SmelterRecipes;
+import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
