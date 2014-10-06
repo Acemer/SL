@@ -202,7 +202,7 @@ public class BrickFurnaceBlock extends BlockContainer {
 	public void breakBlock(World world, int x, int y, int z, Block oldblock,
 			int oldMetadata) {
 		if (!keepInventory) {
-			TileEntitySmelter tileentity = (TileEntitySmelter) world
+			TileEntityBrickFurnace tileentity = (TileEntityBrickFurnace) world
 					.getTileEntity(x, y, z);
 
 			if (tileentity != null) {

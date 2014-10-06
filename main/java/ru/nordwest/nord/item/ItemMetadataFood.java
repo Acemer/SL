@@ -85,7 +85,7 @@ public class ItemMetadataFood extends ItemBaseFood {
 	}
 	public static ItemStack getFood(final String name) {
 		if (ItemMetadataFood.names.contains(name)) {
-			return new ItemStack(Nord.food, 1,
+			return new ItemStack(Nord.ifood, 1,
 					ItemMetadataFood.names.indexOf(name));
 		} else {
 			System.err.println("Unknow food: " + name);
