@@ -50,6 +50,7 @@ public class Nord {
 	public static Block candle;
 	public static Block smelter;
 	public static Block brickFurnace;
+	public static Item food;
 	public static int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
 			0x51301A, 0x253192, 0x7B2FBE, 0x287697, 0xABABAB, 0x434343,
 			0xD88198, 0x41CD34, 0xDECF2A, 0x6689D3, 0xC354CD, 0xEB8844,
@@ -95,6 +96,12 @@ public class Nord {
 				"TileEntityBrickFurnace");
 		GameRegistry.addRecipe(new ItemStack(smelter, 1), "xxx", "x0x", "xxx",
 				'x', new ItemStack(Blocks.brick_block, 1));
+				
+		ItemMetadataFood.addFood(0, 3.0F, "fish_pie", "fish_pie");
+		ItemMetadataFood.addFood(0, 2.0F, "jam_pie", "jam_pie");
+		
+		food = new ItemMetadataFood().setUnlocalizedName("food").setCreativeTab(Nord.tabfood);
+        	GameRegistry.registerItem(food,"food");
 
 	}
 
@@ -102,6 +109,9 @@ public class Nord {
 	public void postInit(final FMLPostInitializationEvent event) {
 		packetPipeline.postInitialise();
 		tabPostInit();
+		
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("jam_pie"), "_x_",
+				"_y_", "___", 'x', new ItemStack(Items.apple, 1),'y',new ItemStack(Items.bread,1));
 	}
 
 	private void tabPostInit() {
