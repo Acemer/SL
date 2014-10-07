@@ -100,6 +100,7 @@ public class Nord {
 		ItemMetadataFood.addFood(0, 4.0F, "fish_pie", "fish_pie");
 		ItemMetadataFood.addFood(0, 2.0F, "jam_pie", "jam_pie");
 		ItemMetadataFood.addFood(0, 5.0F, "meat_pie", "meat_pie");
+		ItemMetadataFood.addFood(0, 5.0F, "sorrel_pie", "sorrel_pie");
 		
 		ifood = new ItemMetadataFood().setUnlocalizedName("food").setCreativeTab(Nord.food);
         	GameRegistry.registerItem(ifood,"food");
