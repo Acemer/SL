@@ -97,8 +97,9 @@ public class Nord {
 		GameRegistry.addRecipe(new ItemStack(smelter, 1), "xxx", "x0x", "xxx",
 				'x', new ItemStack(Blocks.brick_block, 1));
 				
-		ItemMetadataFood.addFood(0, 3.0F, "fish_pie", "fish_pie");
+		ItemMetadataFood.addFood(0, 4.0F, "fish_pie", "fish_pie");
 		ItemMetadataFood.addFood(0, 2.0F, "jam_pie", "jam_pie");
+		ItemMetadataFood.addFood(0, 5.0F, "meat_pie", "meat_pie");
 		
 		ifood = new ItemMetadataFood().setUnlocalizedName("food").setCreativeTab(Nord.food);
         	GameRegistry.registerItem(ifood,"food");
@@ -110,8 +111,12 @@ public class Nord {
 		packetPipeline.postInitialise();
 		tabPostInit();
 		
-		GameRegistry.addRecipe(ItemMetadataFood.getFood("jam_pie"), "_x_",
-				"_y_", "___", 'x', new ItemStack(Items.apple, 1),'y',new ItemStack(Items.bread,1));
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("jam_pie"), "___",
+				"xxx", "zyz", 'x', new ItemStack(Items.apple, 1),'y',new ItemStack(Items.milk_bucket,1), 'z',new ItemStack(Items.egg,1));
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("fish_pie"), "___",
+				"xxx", "zyz", 'x', new ItemStack(Items.cooked_fished, 1),'y',new ItemStack(Items.milk_bucket,1),'z',new ItemStack(Items.egg,1));
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("meat_pie"), "___",
+				"xxx", "zyz", 'x', new ItemStack(Items.cooked_beef, 1),'y',new ItemStack(Items.milk_bucket,1), 'z',new ItemStack(Items.egg,1));
 	}
 
 	private void tabPostInit() {
