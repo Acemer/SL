@@ -44,6 +44,7 @@ public class Nord {
 	@SidedProxy(clientSide = "ru.nordwest.nord.client.ClientProxy", serverSide = "ru.nordwest.nord.common.CommonProxy")
 	public static CommonProxy proxy;
 	public Random rand = new Random();
+	public static Item item;
 	public static Block[] deco1 = new Block[16];
 	public static Block[] deco2 = new Block[3];
 	public static Block oil_lamp;
@@ -107,6 +108,11 @@ public class Nord {
 		
 		ifood = new ItemMetadataFood().setUnlocalizedName("food").setCreativeTab(Nord.food);
         	GameRegistry.registerItem(ifood,"food");
+        	
+        	
+        ItemMetaDataSimple.addItem("item", "item");	
+        item = new ItemMetaDataSimple().setUnlocalizedName("item").setCreativeTab(Nord.tabBase);
+        	GameRegistry.registerItem(item,"item");
 
 	}
 
@@ -137,6 +143,8 @@ public class Nord {
 		   GameRegistry.addRecipe(ItemMetadataFood.getFood("dough"),
 				"___", "xyx", "___", 'x', new ItemStack(Items.egg, 1),'y',new ItemStack(Items.milk_bucket,1));
 	}
+	
+	
 
 	private void tabPostInit() {
 		((CreativeTabNord) tabBase).setItem(new ItemStack(Items.bed));
