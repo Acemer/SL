@@ -17,7 +17,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class MetallRegister {
 	public static String[] metall_list = new String[]{"alluminum", "chrome",
 			"iron", "titan", "tungsten", "zing", "gold", "cobalt", "copper",
-			"nickel", "tin", "platinum", "plumbum", "silver"};
+			"nickel", "tin", "platinum", "plumbum", "silver",};
+			
+			//"antimony", "brass", "bronze", "cast_iron", "duralumin", "electrum", "invar", "nichrome", "steel", "TNC2-1",}; -- Сплавы. 
+	
+	
 	public static String[] ore_list = new String[]{"bauxite", "chromite",
 			"crocoite", "uvarovite", "cobaltite", "skutterudite", "azurite",
 			"brochantite", "copper", "almandine", "hematite", "limonite",
