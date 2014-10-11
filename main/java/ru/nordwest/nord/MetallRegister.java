@@ -18,10 +18,7 @@ public class MetallRegister {
 	public static String[] metall_list = new String[]{"alluminum", "chrome",
 			"iron", "titan", "tungsten", "zing", "gold", "cobalt", "copper",
 			"nickel", "tin", "platinum", "plumbum", "silver","antimony", "brass",
-			"bronze", "cast_iron", "duralumin", "electrum", "invar", "nichrome", "steel", "tnc",};
-			
-			// -- Сплавы. 
-	
+			"bronze", "castiron", "duralumin", "electrum", "invar", "nichrome", "steel", "tnc",};
 	
 	public static String[] ore_list = new String[]{"bauxite", "chromite",
 			"crocoite", "uvarovite", "cobaltite", "skutterudite", "azurite",
