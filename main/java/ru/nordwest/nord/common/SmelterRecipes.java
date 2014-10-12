@@ -44,15 +44,25 @@ public class SmelterRecipes {
 			second_output.add(output2);
 			second_output_percent.add(percent);
 			experience_output.add(exp);
-		}else{
-			System.out.println("Smelter recipe #"+index + " owerwrite");
-			output.set(index,output1);
-			second_output.set(index,output2);
-			second_output_percent.set(index,percent);
-			experience_output.set(index,exp);
+		} else {
+			System.out.println("Smelter recipe #" + index + " owerwrite");
+			output.set(index, output1);
+			second_output.set(index, output2);
+			second_output_percent.set(index, percent);
+			experience_output.set(index, exp);
 		}
 	}
+	public void smeltItemStack(String input1, int qual1, int quant1,
+			String input2, int qual2, int quant2, String output1, int oqual1,
+			int oquant1, String output2, int oqual2, int oquant2,
+			float percent, float exp) {
+		smeltItemStack(MetallRegister.getMetallIngot(input1, qual1, quant1),
+				MetallRegister.getMetallIngot(input2, qual2, qual2),
+				MetallRegister.getMetallIngot(output1, oqual1, oqual1),
+				MetallRegister.getMetallIngot(output2, oqual2, oqual2),
+				percent, exp);
 
+	}
 	public int getIndexResult(ItemStack iStack1, ItemStack iStack2) {
 		ItemStack item1 = null;
 		ItemStack item2 = null;
