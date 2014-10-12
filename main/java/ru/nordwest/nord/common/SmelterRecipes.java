@@ -23,15 +23,7 @@ public class SmelterRecipes {
 	}
 
 	private SmelterRecipes() {
-		smeltItemStack(MetallRegister.getMetallIngot("gold", 1, 1),
-				MetallRegister.getMetallIngot("silver", 1, 1),
-				MetallRegister.getMetallIngot("zing", 1, 1),
-				MetallRegister.getMetallIngot("zing", 2, 1), 0.75f, 10f);
-
-		smeltItemStack(MetallRegister.getMetallIngot("zing", 1, 2),
-				MetallRegister.getMetallIngot("silver", 1, 1),
-				MetallRegister.getMetallIngot("gold", 1, 1),
-				MetallRegister.getMetallIngot("gold", 2, 5), 0.75f, 10f);
+		smeltItemStack("gold", 1, 1, "silver", 1, 1, "electrum", 1, 2, 10f);
 	}
 
 	public void smeltItemStack(ItemStack input1, ItemStack input2,
@@ -52,17 +44,32 @@ public class SmelterRecipes {
 			experience_output.set(index, exp);
 		}
 	}
+	public void smeltItemStack(ItemStack input1, ItemStack input2,
+			ItemStack output1, float exp) {
+		smeltItemStack(input1, input2, output1, null, 0, exp);
+	}
+
 	public void smeltItemStack(String input1, int qual1, int quant1,
 			String input2, int qual2, int quant2, String output1, int oqual1,
 			int oquant1, String output2, int oqual2, int oquant2,
 			float percent, float exp) {
 		smeltItemStack(MetallRegister.getMetallIngot(input1, qual1, quant1),
 				MetallRegister.getMetallIngot(input2, qual2, qual2),
-				MetallRegister.getMetallIngot(output1, oqual1, oqual1),
-				MetallRegister.getMetallIngot(output2, oqual2, oqual2),
+				MetallRegister.getMetallIngot(output1, oqual1, oquant1),
+				MetallRegister.getMetallIngot(output2, oqual2, oquant2),
 				percent, exp);
 
 	}
+
+	public void smeltItemStack(String input1, int qual1, int quant1,
+			String input2, int qual2, int quant2, String output1, int oqual1,
+			int oquant1, float exp) {
+		smeltItemStack(MetallRegister.getMetallIngot(input1, qual1, quant1),
+				MetallRegister.getMetallIngot(input2, qual2, qual2),
+				MetallRegister.getMetallIngot(output1, oqual1, oquant1), exp);
+
+	}
+
 	public int getIndexResult(ItemStack iStack1, ItemStack iStack2) {
 		ItemStack item1 = null;
 		ItemStack item2 = null;

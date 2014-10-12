@@ -4,7 +4,7 @@ import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.client.gui.GuiBrickFurnace;
 import ru.nordwest.nord.client.gui.GuiCrusher;
 import ru.nordwest.nord.common.container.ContainerBrickFurnace;
-import ru.nordwest.nord.common.container.ContainerCrusher;
+import ru.nordwest.nord.common.container.ContainerSmelter;
 import ru.nordwest.nord.common.tileentity.TileEntityBrickFurnace;
 import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 import net.minecraft.client.gui.GuiScreen;
@@ -28,7 +28,7 @@ public class GuiHandler implements IGuiHandler {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		switch (ID) {
 			case Nord.guiIDSmelter :
-				return new ContainerCrusher(player.inventory,
+				return new ContainerSmelter(player.inventory,
 						(TileEntitySmelter) tileEntity);
 			case Nord.guiIDBrickFurnace :
 				return new ContainerBrickFurnace(player.inventory,

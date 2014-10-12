@@ -221,13 +221,13 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 			ItemStack iStack = SmelterRecipes.crushing().getSmeltResult(
 					this.smelterItemStacks[input1],
 					this.smelterItemStacks[input2]);
-			boolean second = Nord.instance.rand.nextFloat() > SmelterRecipes
-					.crushing().getSmeltResultSecondPercent(
-							this.smelterItemStacks[input1],
-							this.smelterItemStacks[input2]);
-			ItemStack iStack2 = SmelterRecipes.crushing()
-					.getSmeltResultSecond(this.smelterItemStacks[input1],
-							this.smelterItemStacks[input2]);
+			// boolean second = Nord.instance.rand.nextFloat() < SmelterRecipes
+			// .crushing().getSmeltResultSecondPercent(
+			// this.smelterItemStacks[input1],
+			// this.smelterItemStacks[input2]);
+			ItemStack iStack2 = SmelterRecipes.crushing().getSmeltResultSecond(
+					this.smelterItemStacks[input1],
+					this.smelterItemStacks[input2]);
 
 			if (iStack == null)
 				return false;
@@ -242,13 +242,17 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 					&& !this.smelterItemStacks[output2].isItemEqual(iStack2))
 				return false;
 
-			int result = this.smelterItemStacks[output1] != null
-					? smelterItemStacks[output1].stackSize + iStack.stackSize
-					: -1;;
+			int result = -1;
+			if (this.smelterItemStacks[output1] != null) {
+				result = smelterItemStacks[output1].stackSize
+						+ 7;
+			}
 
-			int result2 = this.smelterItemStacks[output2] != null
-					? smelterItemStacks[output2].stackSize +(second ? iStack2.stackSize : 0)
-					: -1;
+			int result2 = -1;
+			if (this.smelterItemStacks[output2] != null) {
+				result2 = smelterItemStacks[output2].stackSize
+						+ iStack2.stackSize;
+			}
 
 			boolean size1 = result <= getInventoryStackLimit()
 					&& (result == -1 || result <= this.smelterItemStacks[output1]
@@ -269,6 +273,8 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 			ItemStack iStack1 = SmelterRecipes.crushing().getSmeltResult(index);
 			ItemStack iStack2 = SmelterRecipes.crushing().getSmeltResultSecond(
 					index);
+			boolean second = Nord.instance.rand.nextFloat() < SmelterRecipes
+					.crushing().getSmeltResultSecondPercent(index);
 
 			if (this.smelterItemStacks[output1] == null)
 				this.smelterItemStacks[output1] = iStack1.copy();
@@ -276,12 +282,13 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 					.getItem())
 				this.smelterItemStacks[output1].stackSize += iStack1.stackSize;
 
-			if (iStack2 != null) {
+			if (iStack2 != null &&  second) {
 				if (this.smelterItemStacks[output2] == null)
 					this.smelterItemStacks[output2] = iStack2.copy();
 				else if (this.smelterItemStacks[output2].getItem() == iStack2
-						.getItem())
+						.getItem()){
 					this.smelterItemStacks[output2].stackSize += iStack2.stackSize;
+					}
 			}
 
 			int quant1 = SmelterRecipes.crushing().getQuantaty(index, 1);

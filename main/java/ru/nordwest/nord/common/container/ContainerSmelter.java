@@ -12,14 +12,14 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
 
-public class ContainerCrusher extends Container
+public class ContainerSmelter extends Container
 {
 	private TileEntitySmelter tileCrusher;
 	private int lastWorkTime;
 	private int lastCrushTime;
 	private int lastItemCrushTime;
 
-	public ContainerCrusher(InventoryPlayer iPlayer, TileEntitySmelter tileEntityCrusher)
+	public ContainerSmelter(InventoryPlayer iPlayer, TileEntitySmelter tileEntityCrusher)
 	{
 		this.tileCrusher = tileEntityCrusher;
 		this.addSlotToContainer(new Slot(tileEntityCrusher, 0, 35, 23));//input 1
@@ -97,7 +97,6 @@ public class ContainerCrusher extends Container
 
 	public ItemStack transferStackInSlot(EntityPlayer e, int parSlot)
 	{
-		System.out.println(parSlot);
 		ItemStack iStack = null;
 		Slot slot = (Slot) this.inventorySlots.get(parSlot);
 		Slot fuelSlot = (Slot) this.inventorySlots.get(2);
@@ -124,7 +123,6 @@ public class ContainerCrusher extends Container
 				} else
 				if (TileEntitySmelter.isItemFuel(iStack1)  && (fuelSlot.getStack() == null || fuelSlot.getStack().stackSize < 64))
 				{	
-					System.out.println(true);
 					if (!this.mergeItemStack(iStack1, 2, 3, false))
 						return null;
 				} else if (parSlot >= 5 && parSlot <= 31)

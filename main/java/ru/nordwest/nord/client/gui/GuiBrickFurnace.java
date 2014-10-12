@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.container.ContainerBrickFurnace;
-import ru.nordwest.nord.common.container.ContainerCrusher;
+import ru.nordwest.nord.common.container.ContainerSmelter;
 import ru.nordwest.nord.common.tileentity.TileEntityBrickFurnace;
 import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 

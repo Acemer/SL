@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import ru.nordwest.nord.Nord;
-import ru.nordwest.nord.common.container.ContainerCrusher;
+import ru.nordwest.nord.common.container.ContainerSmelter;
 import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 
 public class GuiCrusher extends GuiContainer {
@@ -20,7 +20,7 @@ public class GuiCrusher extends GuiContainer {
 	public GuiCrusher(InventoryPlayer iPlayer, TileEntitySmelter tileCrusher,
 			EntityPlayer player) {
 
-		super(new ContainerCrusher(iPlayer, tileCrusher));
+		super(new ContainerSmelter(iPlayer, tileCrusher));
 		this.tileCrusher = tileCrusher;
 		this.player = player;
 
