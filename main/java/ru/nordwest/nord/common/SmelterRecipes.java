@@ -23,7 +23,10 @@ public class SmelterRecipes {
 	}
 
 	private SmelterRecipes() {
-		smeltItemStack("gold", 1, 1, "silver", 1, 1, "electrum", 1, 2, 10f);
+		smeltItemStack("gold", 2, 1, "silver", 2, 1, "electrum", 2, 1, 10f);
+		smeltItemStack("copper", 2, 3, "tin", 2, 1, "bronze", 2, 4, 10f);
+		smeltItemStack("copper", 2, 2, "zing", 2, 1, "antimony", 2, 3, 10f);
+		smeltItemStack("alluminum", 2, 8, "copper", 2, 1, "duralumin", 2, 9, 10f);		
 	}
 
 	public void smeltItemStack(ItemStack input1, ItemStack input2,

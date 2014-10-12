@@ -38,6 +38,7 @@ public class Nord {
 	public static CreativeTabs tabBase = new CreativeTabNord("tabBase");
 	public static CreativeTabs tabMetall = new CreativeTabNord("tabMetall");
 	public static CreativeTabs tabDeco = new CreativeTabNord("tabDeco");
+	public static CreativeTabs EmpDeco = new CreativeTabNord("EmpDeco");
 	public static CreativeTabs food = new CreativeTabNord("food");
 	public static CreativeTabs flashlights = new CreativeTabNord("flashlights");
 	// ================================================================
@@ -51,6 +52,7 @@ public class Nord {
 	public static Block candle;
 	public static Block smelter;
 	public static Block brickFurnace;
+    public static Block empire;
 	public static Item ifood;
 	public static int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
 			0x51301A, 0x253192, 0x7B2FBE, 0x287697, 0xABABAB, 0x434343,
@@ -66,6 +68,11 @@ public class Nord {
 	public void preInit(final FMLPreInitializationEvent event) {
 		MetallRegister.init();
 		DecoRegister.init();
+		empire = new MetaDataImpBlock(Material.wood, 16)
+		        .setBlockName("empire")
+		        .setCreativeTab(Nord.EmpDeco)
+				.setBlockTextureName("empire");
+		GameRegistry.registerBlock(empire, ItemDecoStoneBlock.class,"empire");
 
 	}
 
