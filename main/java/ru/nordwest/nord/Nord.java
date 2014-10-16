@@ -38,7 +38,6 @@ public class Nord {
 	public static CreativeTabs tabBase = new CreativeTabNord("tabBase");
 	public static CreativeTabs tabMetall = new CreativeTabNord("tabMetall");
 	public static CreativeTabs tabDeco = new CreativeTabNord("tabDeco");
-	public static CreativeTabs EmpDeco = new CreativeTabNord("EmpDeco");
 	public static CreativeTabs food = new CreativeTabNord("food");
 	public static CreativeTabs flashlights = new CreativeTabNord("flashlights");
 	// ================================================================
@@ -52,7 +51,6 @@ public class Nord {
 	public static Block candle;
 	public static Block smelter;
 	public static Block brickFurnace;
-    public static Block empire;
 	public static Item ifood;
 	public static int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
 			0x51301A, 0x253192, 0x7B2FBE, 0x287697, 0xABABAB, 0x434343,
@@ -68,11 +66,6 @@ public class Nord {
 	public void preInit(final FMLPreInitializationEvent event) {
 		MetallRegister.init();
 		DecoRegister.init();
-		empire = new MetaDataImpBlock(Material.wood, 16)
-		        .setBlockName("empire")
-		        .setCreativeTab(Nord.EmpDeco)
-				.setBlockTextureName("empire");
-		GameRegistry.registerBlock(empire, ItemDecoStoneBlock.class,"empire");
 
 	}
 
@@ -105,21 +98,36 @@ public class Nord {
 		GameRegistry.addRecipe(new ItemStack(smelter, 1), "xxx", "x0x", "xxx",
 				'x', new ItemStack(Blocks.brick_block, 1));
 				
-		ItemMetadataFood.addFood(0, 4.0F, "fish_pie", "fish_pie");
+		ItemMetadataFood.addFood(0, 4.5F, "fish_pie", "fish_pie");
 		ItemMetadataFood.addFood(0, 2.0F, "jam_pie", "jam_pie");
-		ItemMetadataFood.addFood(0, 5.0F, "meat_pie", "meat_pie");
-		ItemMetadataFood.addFood(0, 5.0F, "sorrel_pie", "sorrel_pie");
-		ItemMetadataFood.addFood(0, 0.5F, "sorrel", "sorrel");
+		ItemMetadataFood.addFood(0, 5.5F, "meat_pie", "meat_pie");
+		ItemMetadataFood.addFood(0, 3.0F, "potatoes_pie", "potatoes_pie");
+		ItemMetadataFood.addFood(0, 3.0F, "pie_with_onions_and_eggs", "pie_with_onions_and_eggs");
+		ItemMetadataFood.addFood(0, 3.5F, "sorrel_pie", "sorrel_pie");
 		ItemMetadataFood.addFood(0, 0.5F, "dough", "dough");
-		ItemMetadataFood.addFood(0, 2.5F, "dough2", "pitcher_dough");
+		ItemMetadataFood.addFood(0, 2.0F, "dough2", "pitcher_dough");
+		ItemMetadataFood.addFood(0, 1.0F, "bun", "bun");
+		ItemMetadataFood.addFood(0, 1.5F, "bun_jam", "bun_jam");
+		ItemMetadataFood.addFood(0, 2.0F, "bun_jam2", "bun_jam2");
+		ItemMetadataFood.addFood(0, 1.0F, "curd", "curd");
+		ItemMetadataFood.addFood(0, 1.0F, "fritters", "fritters");
+		ItemMetadataFood.addFood(0, 0.5F, "sorrel", "sorrel");
+		ItemMetadataFood.addFood(0, 0.5F, "onion", "onion");
+		ItemMetadataFood.addFood(0, 1.5F, "pancake", "pancake");
+		ItemMetadataFood.addFood(0, 1.5F, "pancake_with_cottage_cheese", "pancake_with_cottage_cheese");
+		ItemMetadataFood.addFood(0, 2.5F, "pancake_with_curd", "pancake_with_curd");
+		ItemMetadataFood.addFood(0, 4.5F, "pancake_with_fish", "pancake_with_fish");
+		ItemMetadataFood.addFood(0, 2.5F, "pancake_with_jam", "pancake_with_jam");
+		ItemMetadataFood.addFood(0, 2.5F, "pancake_with_jam2", "pancake_with_jam2");
+		ItemMetadataFood.addFood(0, 5.5F, "pancake_with_meat", "pancake_with_meat");
+		ItemMetadataFood.addFood(0, 2.5F, "pancake_with_onions_and_eggs", "pancake_with_onions_and_eggs");
+		ItemMetadataFood.addFood(0, 3.0F, "pancake_with_potatoes", "pancake_with_potatoes");
+		ItemMetadataFood.addFood(0, 2.0F, "pancake_with_sorrel", "pancake_with_sorrel");
 		
 		ifood = new ItemMetadataFood().setUnlocalizedName("food").setCreativeTab(Nord.food);
         	GameRegistry.registerItem(ifood,"food");
         	
         	
-        ItemMetaDataSimple.addItem("item", "item");	
-        item = new ItemMetaDataSimple().setUnlocalizedName("item").setCreativeTab(Nord.tabBase);
-        	GameRegistry.registerItem(item,"item");
 
 	}
 
@@ -128,27 +136,59 @@ public class Nord {
 		packetPipeline.postInitialise();
 		tabPostInit();
 		
-		GameRegistry.addRecipe(ItemMetadataFood.getFood("jam_pie"), "___", "xxx", "yyy", 
-				  'x', new ItemStack(Items.apple, 1),'y',new ItemStack(Items.apple,1));
-		   GameRegistry.addRecipe(ItemMetadataFood.getFood("jam_pie"), 
-				"xxx", "zyz", "___", 'x', new ItemStack(Items.apple, 1),'y',new ItemStack(Items.milk_bucket,1));
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("jam_pie"), "_x_", "_x_", "_y_", 
+				  'x', new ItemStack(Items.apple, 2),'y',new ItemStack(Items.milk_bucket, 1));
 		
-		GameRegistry.addRecipe(ItemMetadataFood.getFood("fish_pie"), "___", "xxx", "zyz",
-				  'x', new ItemStack(Items.cooked_fished, 1),'y',new ItemStack(Items.milk_bucket,1));
-		   GameRegistry.addRecipe(ItemMetadataFood.getFood("fish_pie"), 
-				"xxx", "zyz", "___", 'x', new ItemStack(Items.cooked_fished, 1),'y',new ItemStack(Items.milk_bucket,1));
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("fish_pie"), "___", "_x_", "_y_",
+				  'x', new ItemStack(Items.cooked_fished, 1),'y',new ItemStack(Items.milk_bucket, 1));
+		   GameRegistry.addRecipe(ItemMetadataFood.getFood("fish_pie"), "_x_", "_y_", "___",
+				  'x', new ItemStack(Items.cooked_fished, 1),'y',new ItemStack(Items.milk_bucket, 1));
 		
-		GameRegistry.addRecipe(ItemMetadataFood.getFood("meat_pie"), "___", "xxx", "zyz",
-				  'x', new ItemStack(Items.cooked_beef, 1),'y',new ItemStack(Items.milk_bucket,1));
-		   GameRegistry.addRecipe(ItemMetadataFood.getFood("meat_pie"), 
-				"xxx", "zyz", "___", 'x', new ItemStack(Items.cooked_beef, 1),'y',new ItemStack(Items.milk_bucket,1));
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("meat_pie"), "___", "_x_", "_y_",
+				  'x', new ItemStack(Items.cooked_beef, 1),'y',new ItemStack(Items.milk_bucket, 1));
+		   GameRegistry.addRecipe(ItemMetadataFood.getFood("meat_pie"), "_x_", "_y_", "___",
+				  'x', new ItemStack(Items.cooked_beef, 1),'y',new ItemStack(Items.milk_bucket, 1));
+		   
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("potatoes_pie"), "___", "_x_", "_y_",
+				  'x', new ItemStack(Items.potato, 1),'y',new ItemStack(Items.milk_bucket, 1));
+			GameRegistry.addRecipe(ItemMetadataFood.getFood("potatoes_pie"), "_x_", "_y_", "___",
+				  'x', new ItemStack(Items.potato, 1),'y',new ItemStack(Items.milk_bucket, 1)); 			
 		
 		GameRegistry.addRecipe(ItemMetadataFood.getFood("dough"), "___", "___", "xyx",
+				  'x', new ItemStack(Items.egg, 2),'y',new ItemStack(Items.milk_bucket, 1));
+		   GameRegistry.addRecipe(ItemMetadataFood.getFood("dough"), "xyx", "___", "___",
+				  'x', new ItemStack(Items.egg, 2),'y',new ItemStack(Items.milk_bucket, 1));
+		   GameRegistry.addRecipe(ItemMetadataFood.getFood("dough"), "___", "xyx", "___",
+				  'x', new ItemStack(Items.egg, 2),'y',new ItemStack(Items.milk_bucket, 1));
+		   
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("pitcher_dough"), "___", "___", "yxy",
+				  'x', new ItemStack(Items.egg, 1),'y',new ItemStack(Items.milk_bucket, 2));
+		   GameRegistry.addRecipe(ItemMetadataFood.getFood("pitcher_dough"), "yxy", "___", "___",
+				  'x', new ItemStack(Items.egg, 1),'y',new ItemStack(Items.milk_bucket, 2));
+		   GameRegistry.addRecipe(ItemMetadataFood.getFood("pitcher_dough"), "___", "yxy", "___",
+				  'x', new ItemStack(Items.egg, 1),'y',new ItemStack(Items.milk_bucket, 2));
+		   		  
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("bun"), "___", "_x_", "_y_", 
 				  'x', new ItemStack(Items.egg, 1),'y',new ItemStack(Items.milk_bucket,1));
-		   GameRegistry.addRecipe(ItemMetadataFood.getFood("dough"),
-				"xyx", "___", "___", 'x', new ItemStack(Items.egg, 1),'y',new ItemStack(Items.milk_bucket,1));
-		   GameRegistry.addRecipe(ItemMetadataFood.getFood("dough"),
-				"___", "xyx", "___", 'x', new ItemStack(Items.egg, 1),'y',new ItemStack(Items.milk_bucket,1));
+		   
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("bun_jam"), "___", "zx_", "_y_", 
+				  'x', new ItemStack(Items.egg, 1),'y',new ItemStack(Items.milk_bucket, 1),'z',new ItemStack(Items.apple, 1));
+		   
+	    GameRegistry.addRecipe(ItemMetadataFood.getFood("bun_jam2"), "___", "zxz", "_y_", 
+				  'x', new ItemStack(Items.egg, 1),'y',new ItemStack(Items.milk_bucket, 1),'z',new ItemStack(Items.apple, 2));
+		   
+		GameRegistry.addRecipe(ItemMetadataFood.getFood("curd"), "_x_", "___", "___",  
+				  'x', new ItemStack(Items.milk_bucket, 1));
+		    GameRegistry.addRecipe(ItemMetadataFood.getFood("curd"), "___", "_x_", "___",
+		    	  'x', new ItemStack(Items.milk_bucket, 1));
+		    GameRegistry.addRecipe(ItemMetadataFood.getFood("curd"), "___", "___", "_x_",
+		    	  'x', new ItemStack(Items.milk_bucket, 1));
+		    
+		 GameRegistry.addRecipe(ItemMetadataFood.getFood("fritters"), "_x_", "_x_", "___",  
+				  'x', new ItemStack(Items.milk_bucket, 1));
+			 GameRegistry.addRecipe(ItemMetadataFood.getFood("fritters"), "___", "_x_", "_x_",
+			      'x', new ItemStack(Items.milk_bucket, 1));
+		   
 	}
 	
 	
