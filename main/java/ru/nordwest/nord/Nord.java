@@ -1,4 +1,4 @@
-лавный классpackage ru.nordwest.nord;
+package ru.nordwest.nord;
 
 import java.util.Random;
 
