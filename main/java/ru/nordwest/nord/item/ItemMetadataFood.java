@@ -10,6 +10,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import ru.nordwest.nord.FoodRegister;
 import ru.nordwest.nord.MetallRegister;
 import ru.nordwest.nord.Nord;
 import cpw.mods.fml.relauncher.Side;
@@ -83,14 +84,18 @@ public class ItemMetadataFood extends ItemBaseFood {
 		names.add(name);
 		
 	}
-	public static ItemStack getFood(final String name) {
+	public static ItemStack getFood(final String name, int count) {
 		if (ItemMetadataFood.names.contains(name)) {
-			return new ItemStack(Nord.ifood, 1,
+			return new ItemStack(FoodRegister.ifood, count,
 					ItemMetadataFood.names.indexOf(name));
 		} else {
 			System.err.println("Unknow food: " + name);
 			System.err.println("Game has crashed:)");
 			return null;
 		}
+	}
+
+	public static ItemStack getFood(String name) {
+		return getFood(name,1);
 	}
 }
