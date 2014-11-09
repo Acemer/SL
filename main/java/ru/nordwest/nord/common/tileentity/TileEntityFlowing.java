@@ -24,6 +24,7 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.biome.BiomeGenBase.FlowerEntry;
 import net.minecraftforge.common.util.Constants;
 
 // TODO update flowing system
@@ -64,14 +65,25 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
         if (stack != null) {
             if (stack.stackSize <= amount) {
             	setInventorySlotContents(slot, null);
+                if (slot == 1)
+                {
+                	currentItemEnergyProgress = 0;
+                	currentItemEnergyNeed = 0;
+                }
             }
             else {
             	stack = stack.splitStack(amount);
             	if (stack.stackSize == 0) {
             		setInventorySlotContents(slot, null);
+                    if (slot == 1)
+                    {
+                    	currentItemEnergyProgress = 0;
+                    	currentItemEnergyNeed = 0;
+                    }
             	}
             }
         }
+        
         return stack;
 	}
 
@@ -86,6 +98,15 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
+        if (slot == 1)
+        {
+        	FlowingRecipe rec = FlowingRecipesList.getRecipe(stack);
+        	if (rec != null)
+        	{
+        		currentItemEnergyProgress = 0;
+        		currentItemEnergyNeed = rec.needEnergy;
+        	}
+        }
 		inv[slot] = stack;
 	}
 
@@ -265,8 +286,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	{
     		return false;
     	}
-    	
-		FMLLog.log(Level.ERROR, "Not enough energy! %s", currentItemEnergyProgress);
 		
     	if (currentItemEnergyProgress < rec.needEnergy)
     	{
@@ -313,7 +332,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
      */
     public void flow()
     {
-    	FMLLog.log(Level.ERROR, "flowering: %s", worldObj.isRemote);
     	FlowingRecipe rec = FlowingRecipesList.getRecipe(inv[1]);
     	
     	if (rec == null)
@@ -426,10 +444,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     		}
     	}
     	
-    	if (isBurning() || isFlowing())
-    	{
-    		this.markDirty();
-    	}
     	
     	// ��������� ��������
     	if (isFlowing())
