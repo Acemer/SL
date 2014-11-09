@@ -6,6 +6,7 @@ import ru.nordwest.nord.block.*;
 import ru.nordwest.nord.common.*;
 import ru.nordwest.nord.common.handler.*;
 import ru.nordwest.nord.common.tileentity.*;
+import ru.nordwest.nord.flowingRecipes.FlowingRecipesList;
 import ru.nordwest.nord.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -51,6 +52,7 @@ public class Nord {
 	public static Block candle;
 	public static Block smelter;
 	public static Block brickFurnace;
+	public static Block flowingBlock;
 	public static Item ifood;
 	public static int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
 			0x51301A, 0x253192, 0x7B2FBE, 0x287697, 0xABABAB, 0x434343,
@@ -60,6 +62,7 @@ public class Nord {
 			.getNextAvailableRenderId();
 	public static final int guiIDSmelter = 20;
 	public static final int guiIDBrickFurnace = 21;
+	public static final int guiIDFlowing = 22;
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
 	@EventHandler
@@ -97,7 +100,15 @@ public class Nord {
 				"TileEntityBrickFurnace");
 		GameRegistry.addRecipe(new ItemStack(smelter, 1), "xxx", "x0x", "xxx",
 				'x', new ItemStack(Blocks.brick_block, 1));
-				
+		
+    	flowingBlock = new FlowingBlock();
+        GameRegistry.registerBlock(flowingBlock, ItemBlock.class, "flowingBlock");
+        GameRegistry.registerTileEntity(TileEntityFlowing.class, "TileEntityFlowing");
+		GameRegistry.addRecipe(new ItemStack(flowingBlock, 1), "xxx", "x x", "xxx",  // TODO fix recipe
+				'x', new ItemStack(Blocks.stone, 1));
+		FlowingRecipesList.addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.stone), 1),
+				new ItemStack(Item.getItemFromBlock(Blocks.dirt), 2), null, 60);
+		
 		ItemMetadataFood.addFood(0, 4.5F, "fish_pie", "fish_pie");
 		ItemMetadataFood.addFood(0, 2.0F, "jam_pie", "jam_pie");
 		ItemMetadataFood.addFood(0, 5.5F, "meat_pie", "meat_pie");

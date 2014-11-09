@@ -142,7 +142,7 @@ public class ContainerBrickFurnace extends Container
 						return null;
 				} else if (parSlot >= 32 && parSlot < 41 && !this.mergeItemStack(iStack1, 5, 32, false))
 					return null;
-			} else if (!this.mergeItemStack(iStack1, 5, 41, false))
+			} else if (!this.mergeItemStack(iStack1, 5, 40, false))
 				return null;
 
 			if (iStack1.stackSize == 0)
