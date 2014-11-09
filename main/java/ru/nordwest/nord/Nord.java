@@ -107,7 +107,8 @@ public class Nord {
 		GameRegistry.addRecipe(new ItemStack(flowingBlock, 1), "xxx", "x x", "xxx",  // TODO fix recipe
 				'x', new ItemStack(Blocks.stone, 1));
 		FlowingRecipesList.addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.stone), 1),
-				new ItemStack(Item.getItemFromBlock(Blocks.dirt), 2), null, 60);
+				new ItemStack(Item.getItemFromBlock(Blocks.dirt), 2), 
+				new ItemStack(Item.getItemFromBlock(Blocks.quartz_block), 2), 60);
 		
 		ItemMetadataFood.addFood(0, 4.5F, "fish_pie", "fish_pie");
 		ItemMetadataFood.addFood(0, 2.0F, "jam_pie", "jam_pie");

@@ -333,7 +333,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     public void flow()
     {
     	FlowingRecipe rec = FlowingRecipesList.getRecipe(inv[1]);
-        FMLLog.log(Level.ERROR, "flowing, curen: %s", currentItemEnergyProgress);
     	if (rec == null)
     	{
     		return; // should never happen
@@ -373,7 +372,16 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     		inv[1] = null;
     	}
     	
-    	currentItemEnergyNeed = 0;
+    	FlowingRecipe recNext = FlowingRecipesList.getRecipe(inv[1]);
+    	if (recNext != null)
+    	{
+    		currentItemEnergyNeed = recNext.needEnergy;
+    	}
+    	else
+    	{
+    		currentItemEnergyNeed = 0;
+    	}
+    	
     	currentItemEnergyProgress = 0;
     }
     
