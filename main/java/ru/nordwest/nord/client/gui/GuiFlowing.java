@@ -38,14 +38,12 @@ public class GuiFlowing extends GuiContainer {
             int l = (this.height - this.ySize) / 2;
             this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
             
-            if (this.tileEntity.isBurning())
-            {
-                int progress = this.tileEntity.getFlowProgressScaled(24);
-                this.drawTexturedModalRect(k + 78, l + 35, 180, 16, progress + 1, 21);
+            int progress = this.tileEntity.getFlowProgressScaled(24);
+            this.drawTexturedModalRect(k + 78, l + 35, 180, 16, progress, 21);
                 
-                progress = this.tileEntity.getEnergyProgressScaled(52);
-                this.drawTexturedModalRect(k + 11, l + 22, 183, 37, 3, 52); // h = 52
-            }
+            progress = this.tileEntity.getEnergyProgressScaled(52);
+            this.drawTexturedModalRect(k + 11, l + 22, 183, 37, 3, 52); // h = 52
+            this.drawTexturedModalRect(k + 11, l + 22, 11, 22, 3, 52 - progress);
     }
 
 }

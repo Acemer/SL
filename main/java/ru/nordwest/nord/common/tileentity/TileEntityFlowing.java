@@ -42,7 +42,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
 	public int currentItemEnergyNeed;
 	
 	public static int cookTimeLen = 200; // ticks
-	public static int maxEnergy = 128000; // 8 parts of coal
+	public static int maxEnergy = 12800; // 8 parts of coal
 	
     /*public TileEntityFlowing()  {
     	super();
@@ -105,6 +105,11 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
         	{
         		currentItemEnergyProgress = 0;
         		currentItemEnergyNeed = rec.needEnergy;
+        	}
+        	else
+        	{
+        		currentItemEnergyProgress = 0;
+            	currentItemEnergyNeed = 0;
         	}
         }
 		inv[slot] = stack;
@@ -203,7 +208,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     @SideOnly(Side.CLIENT)
     public int getFlowProgressScaled(int val)
     {
-    	if (!isFlowing())
+    	if (currentItemEnergyNeed == 0)
     	{
     		return 0;
     	}
@@ -284,6 +289,8 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	FlowingRecipe rec = FlowingRecipesList.getRecipe(inv[1]);
     	if (rec == null)
     	{
+    		currentItemEnergyProgress = 0;
+        	currentItemEnergyNeed = 0;
     		return false;
     	}
 		
@@ -333,7 +340,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     public void flow()
     {
     	FlowingRecipe rec = FlowingRecipesList.getRecipe(inv[1]);
-        FMLLog.log(Level.ERROR, "flowing, curen: %s", currentItemEnergyProgress);
     	if (rec == null)
     	{
     		return; // should never happen
