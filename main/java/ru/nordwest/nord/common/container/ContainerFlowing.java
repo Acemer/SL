@@ -1,6 +1,9 @@
 package ru.nordwest.nord.common.container;
 
+import org.apache.logging.log4j.Level;
+
 import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +25,7 @@ public class ContainerFlowing extends Container {
 	public ContainerFlowing(InventoryPlayer invPlayer, TileEntityFlowing ent)
 	{
 		tileEntity = ent;
-		// TODO place slots in right places
+		
         addSlotToContainer(new Slot(tileEntity, 0, 18, 58)); // fuel
         addSlotToContainer(new Slot(tileEntity, 1, 53, 38)); // item to flow
         addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, 2, 107, 39)); // result1
@@ -78,16 +81,21 @@ public class ContainerFlowing extends Container {
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int var, int val)
     {
+    	super.updateProgressBar(var, val);
         switch(var)
         {
         case 0:
         	this.tileEntity.energy = val;
+        	break;
         case 1:
         	this.tileEntity.burnTime = val;
+        	break;
         case 2:
         	this.tileEntity.currentItemEnergyProgress = val;
+        	break;
         case 3:
         	this.tileEntity.currentItemEnergyNeed = val;
+        	break;
         }
     }
     

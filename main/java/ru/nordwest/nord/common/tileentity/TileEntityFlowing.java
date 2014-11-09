@@ -333,7 +333,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     public void flow()
     {
     	FlowingRecipe rec = FlowingRecipesList.getRecipe(inv[1]);
-    	
+        FMLLog.log(Level.ERROR, "flowing, curen: %s", currentItemEnergyProgress);
     	if (rec == null)
     	{
     		return; // should never happen
@@ -444,10 +444,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     		}
     	}
     	
-    	if (isBurning() || isFlowing())
-    	{
-    		this.markDirty();
-    	}
     	
     	// Обработка предмета
     	if (isFlowing())
@@ -461,5 +457,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     		}
     	}
     	
+    	this.markDirty();
     }
 }
