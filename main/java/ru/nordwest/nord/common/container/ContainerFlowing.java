@@ -25,8 +25,8 @@ public class ContainerFlowing extends Container {
 		// TODO place slots in right places
         addSlotToContainer(new Slot(tileEntity, 0, 18, 58)); // fuel
         addSlotToContainer(new Slot(tileEntity, 1, 53, 38)); // item to flow
-        addSlotToContainer(new Slot(tileEntity, 2, 107, 39)); // result1
-        addSlotToContainer(new Slot(tileEntity, 3, 128, 39)); // result2
+        addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, 2, 107, 39)); // result1
+        addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, 3, 128, 39)); // result2
         
         bindPlayerInventory(invPlayer);
 	}
