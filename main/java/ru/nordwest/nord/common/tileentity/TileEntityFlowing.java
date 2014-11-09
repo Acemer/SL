@@ -342,6 +342,59 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	return ret;
     }
     
+    public boolean canStartFlowing()
+    {
+    	FlowingRecipe rec = FlowingRecipesList.getRecipe(inv[1]);
+    	if (rec == null)
+    	{
+    		currentItemEnergyProgress = 0;
+        	currentItemEnergyNeed = 0;
+    		return false;
+    	}
+    	
+    	ItemStack out1 = rec.out1;
+    	ItemStack out2 = rec.out2;
+    	
+    	if (inv[1].stackSize < rec.in.stackSize)
+    	{
+    		return false;
+    	}
+    	
+    	if (out1 == null && out2 == null) // should never happen
+    	{
+    		return false;
+    	}
+    	
+    	if (inv[2] == null && inv[3] == null)
+    	{
+    		return true;
+    	}
+    	
+    	if (inv[2] != null && out1 != null && !out1.isItemEqual(inv[2]))
+    	{
+    		return false;
+    	}
+    	
+    	if (inv[3] != null && out2 != null && !out2.isItemEqual(inv[3]))
+    	{
+    		return false;
+    	}
+    	
+    	int result = (inv[2] != null ? inv[2].stackSize : 0) + (out1 != null ? out1.stackSize : 0);
+    	int result2 = (inv[3] != null ? inv[3].stackSize : 0) + (out2 != null ? out2.stackSize : 0);
+    	
+    	boolean ret = result <= getInventoryStackLimit() &&
+    		          result2 <= getInventoryStackLimit();
+    	
+    	if (!ret)
+    	{
+    		currentItemEnergyProgress = 0;
+        	currentItemEnergyNeed = 0;
+    	}
+    	
+    	return ret;
+    }
+    
     /**
      * ��������� ��������
      */
@@ -479,6 +532,18 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     			flow();
     		}
     	}
+    	else if (canStartFlowing())
+		{
+    		FlowingRecipe rec = FlowingRecipesList.getRecipe(inv[1]);
+        	if (rec != null)
+        	{
+        		currentItemEnergyNeed = rec.needEnergy;
+        	}
+        	else
+        	{
+        		currentItemEnergyNeed = 0;
+        	}
+		}
     	
     	this.markDirty();
     }
