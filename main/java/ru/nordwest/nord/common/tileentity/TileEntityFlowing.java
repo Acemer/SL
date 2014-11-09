@@ -330,8 +330,16 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	int result = (inv[2] != null ? inv[2].stackSize : 0) + (out1 != null ? out1.stackSize : 0);
     	int result2 = (inv[3] != null ? inv[3].stackSize : 0) + (out2 != null ? out2.stackSize : 0);
     	
-    	return result <= getInventoryStackLimit() &&
-    		   result2 <= getInventoryStackLimit();
+    	boolean ret = result <= getInventoryStackLimit() &&
+    		          result2 <= getInventoryStackLimit();
+    	
+    	if (!ret)
+    	{
+    		currentItemEnergyProgress = 0;
+        	currentItemEnergyNeed = 0;
+    	}
+    	
+    	return ret;
     }
     
     /**
@@ -440,8 +448,8 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	// �������
     	if (isBurning())
     	{
-    		--burnTime;
-    		++energy;
+    		burnTime -= 16;
+    		energy += 16;
     		
     		if (burnTime == 0)
     		{
@@ -463,8 +471,8 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	// ��������� ��������
     	if (isFlowing())
     	{
-    		++currentItemEnergyProgress;
-    		--energy;
+    		currentItemEnergyProgress += 4;
+    		energy -= 4;
     		
     		if (canFlow())
     		{
