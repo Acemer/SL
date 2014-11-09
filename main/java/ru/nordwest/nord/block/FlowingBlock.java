@@ -69,7 +69,7 @@ public class FlowingBlock extends BlockContainer {
 
                         EntityItem entityItem = new EntityItem(world,
                                         x + rx, y + ry, z + rz,
-                                        new ItemStack(item.getItem()));
+                                        item.copy());
 
                         if (item.hasTagCompound()) {
                                 entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());

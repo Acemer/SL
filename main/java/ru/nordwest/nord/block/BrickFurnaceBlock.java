@@ -115,7 +115,6 @@ public class BrickFurnaceBlock extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int i) {
-		FMLLog.log(Level.ERROR, "createNewTileEntity called!");
 		return new TileEntityBrickFurnace();
 	}
 
