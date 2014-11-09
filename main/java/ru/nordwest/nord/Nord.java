@@ -53,7 +53,7 @@ public class Nord {
 	public static Block smelter;
 	public static Block brickFurnace;
 	public static Block flowingBlock;
-	public static Item ifood;
+	//public static Item ifood;
 	public static int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
 			0x51301A, 0x253192, 0x7B2FBE, 0x287697, 0xABABAB, 0x434343,
 			0xD88198, 0x41CD34, 0xDECF2A, 0x6689D3, 0xC354CD, 0xEB8844,
@@ -69,7 +69,7 @@ public class Nord {
 	public void preInit(final FMLPreInitializationEvent event) {
 		MetallRegister.init();
 		DecoRegister.init();
-
+		FoodRegister.init();
 	}
 
 	@EventHandler
@@ -100,7 +100,14 @@ public class Nord {
 				"TileEntityBrickFurnace");
 		GameRegistry.addRecipe(new ItemStack(smelter, 1), "xxx", "x0x", "xxx",
 				'x', new ItemStack(Blocks.brick_block, 1));
-				
+
+		 flowingBlock = new FlowingBlock();
+		 GameRegistry.registerBlock(flowingBlock, ItemBlock.class, "flowingBlock");
+		 GameRegistry.registerTileEntity(TileEntityFlowing.class, "TileEntityFlowing");
+		 GameRegistry.addRecipe(new ItemStack(flowingBlock, 1), "xxx", "x x", "xxx", // TODO fix recipe
+				 'x', new ItemStack(Blocks.stone, 1));
+		 FlowingRecipesList.addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.stone), 1),
+				 new ItemStack(Item.getItemFromBlock(Blocks.dirt), 2), null, 60);
 		
 	}
 
@@ -108,11 +115,7 @@ public class Nord {
 	public void postInit(final FMLPostInitializationEvent event) {
 		packetPipeline.postInitialise();
 		tabPostInit();
-	}
-
-	@EventHandler
-	public void serverStarting(FMLServerStartingEvent event){
-		event.registerServerCommand(new CommandTest());
+		FoodRegister.posInit();
 	}
 
 	private void tabPostInit() {
