@@ -6,12 +6,15 @@ import ru.nordwest.nord.block.*;
 import ru.nordwest.nord.common.*;
 import ru.nordwest.nord.common.handler.*;
 import ru.nordwest.nord.common.tileentity.*;
+import ru.nordwest.nord.flowingRecipes.FlowingRecipesList;
 import ru.nordwest.nord.item.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
+import net.minecraft.world.World;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -20,9 +23,10 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Nord.MODID, name = Nord.NAME, version = Nord.VERSION)
 public class Nord {
@@ -48,6 +52,8 @@ public class Nord {
 	public static Block candle;
 	public static Block smelter;
 	public static Block brickFurnace;
+	public static Block flowingBlock;
+	public static Item ifood;
 	public static int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
 			0x51301A, 0x253192, 0x7B2FBE, 0x287697, 0xABABAB, 0x434343,
 			0xD88198, 0x41CD34, 0xDECF2A, 0x6689D3, 0xC354CD, 0xEB8844,
@@ -56,6 +62,7 @@ public class Nord {
 			.getNextAvailableRenderId();
 	public static final int guiIDSmelter = 20;
 	public static final int guiIDBrickFurnace = 21;
+	public static final int guiIDFlowing = 22;
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
 	@EventHandler
@@ -93,16 +100,14 @@ public class Nord {
 				"TileEntityBrickFurnace");
 		GameRegistry.addRecipe(new ItemStack(smelter, 1), "xxx", "x0x", "xxx",
 				'x', new ItemStack(Blocks.brick_block, 1));
-		FoodRegister.init();
-        	
-
+				
+		
 	}
 
 	@EventHandler
 	public void postInit(final FMLPostInitializationEvent event) {
 		packetPipeline.postInitialise();
 		tabPostInit();
-		FoodRegister.posInit();
 	}
 
 	@EventHandler

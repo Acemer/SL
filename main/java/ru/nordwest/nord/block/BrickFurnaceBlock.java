@@ -2,9 +2,12 @@ package ru.nordwest.nord.block;
 
 import java.util.Random;
 
+import org.apache.logging.log4j.Level;
+
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.tileentity.TileEntityBrickFurnace;
 import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -112,6 +115,7 @@ public class BrickFurnaceBlock extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int i) {
+		FMLLog.log(Level.ERROR, "createNewTileEntity called!");
 		return new TileEntityBrickFurnace();
 	}
 
