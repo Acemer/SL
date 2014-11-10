@@ -53,6 +53,7 @@ public class Nord {
 	public static Block smelter;
 	public static Block brickFurnace;
 	public static Block flowingBlock;
+	public static Block greatFurnace;
 	//public static Item ifood;
 	public static int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
 			0x51301A, 0x253192, 0x7B2FBE, 0x287697, 0xABABAB, 0x434343,
