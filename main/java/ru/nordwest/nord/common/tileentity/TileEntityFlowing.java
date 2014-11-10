@@ -375,7 +375,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     }
     
     /**
-     * ��������� ��������
+     * Обработать предмет
      */
     public void flow()
     {
