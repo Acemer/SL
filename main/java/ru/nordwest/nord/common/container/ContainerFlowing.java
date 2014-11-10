@@ -19,6 +19,7 @@ public class ContainerFlowing extends Container {
 	
 	private int lastEnergy;
 	private int lastBurnTime;
+	private int lastFuelBurnTime;
 	private int lastCurrentItemEnergyProgress;
 	private int lastCurrentItemEnergyNeed;
 	
@@ -70,6 +71,11 @@ public class ContainerFlowing extends Container {
             {
             	icrafting.sendProgressBarUpdate(this, 3, this.tileEntity.currentItemEnergyNeed);
             }
+            
+            if (this.lastFuelBurnTime != this.tileEntity.fuelBurnTime)
+            {
+            	icrafting.sendProgressBarUpdate(this, 4, this.tileEntity.fuelBurnTime);
+            }
         }
 
     	this.lastEnergy = this.tileEntity.energy;
@@ -95,6 +101,9 @@ public class ContainerFlowing extends Container {
         	break;
         case 3:
         	this.tileEntity.currentItemEnergyNeed = val;
+        	break;
+        case 4:
+        	this.tileEntity.fuelBurnTime = val;
         	break;
         }
     }

@@ -38,16 +38,13 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
 	private ItemStack inv[] = new ItemStack[4];
 	public int energy;
 	public int burnTime;
+	public int fuelBurnTime;
 	public int currentItemEnergyProgress;
 	public int currentItemEnergyNeed;
 	
 	public static int cookTimeLen = 200; // ticks
 	public static int maxEnergy = 12800; // 8 parts of coal
 	
-    /*public TileEntityFlowing()  {
-    	super();
-        inv = new ItemStack[4];
-    }*/
     
 	@Override
 	public int getSizeInventory() {
@@ -98,37 +95,21 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-        if (slot == 1)
-        {
-        	FlowingRecipe rec = FlowingRecipesList.getRecipe(stack);
-        	if (rec != null)
-        	{
-        		currentItemEnergyProgress = 0;
-        		currentItemEnergyNeed = rec.needEnergy;
-        	}
-        	else
-        	{
-        		currentItemEnergyProgress = 0;
-            	currentItemEnergyNeed = 0;
-        	}
-        }
-		inv[slot] = stack;
+        inv[slot] = stack;
 	}
 
 	@Override
 	public String getInventoryName() {
-		return "Flowing";
+		return "Hogger";
 	}
 
 	@Override
 	public boolean hasCustomInventoryName() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public int getInventoryStackLimit() {
-		// TODO Auto-generated method stub
 		return 64;
 	}
 
@@ -139,15 +120,11 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-		
+	public void openInventory() {		
 	}
 
 	@Override
-	public void closeInventory() {
-		// TODO Auto-generated method stub
-		
+	public void closeInventory() {		
 	}
 
 	@Override
@@ -162,7 +139,9 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
 			return false;
 		}
 		
-		return true;
+		FlowingRecipe rec = FlowingRecipesList.getRecipe(stack);
+		
+		return rec != null;
 	}
 	
     @Override
@@ -213,7 +192,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     		return 0;
     	}
     	
-        return currentItemEnergyProgress * val / currentItemEnergyNeed;
+        return fuelBurnTime * val / currentItemEnergyNeed;
     }
     
     @SideOnly(Side.CLIENT)
@@ -225,12 +204,12 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     @SideOnly(Side.CLIENT)
     public int getBurnTimeRemainingScaled(int val)
     {
-    	if (currentItemEnergyNeed == 0)
+    	if (fuelBurnTime == 0)
     	{
-    		return val;
+    		return 0;
     	}
     	
-        return currentItemEnergyProgress * val / currentItemEnergyNeed;
+        return burnTime * val / fuelBurnTime;
     }
     
     public boolean isBurning()
@@ -245,7 +224,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     
     public boolean canSmelt()
     {
-    	// TODO add checks
     	if (energy >= maxEnergy)
     	{
     		return false;
@@ -274,6 +252,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
         if (this.inv[0] != null)
         {       
             this.burnTime = getItemBurnTime(inv[0]);
+            this.fuelBurnTime = this.burnTime;
             
             --this.inv[0].stackSize;
 
@@ -453,7 +432,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	currentItemEnergyProgress = 0;
     }
     
-    // TODO replace standard values
     public static int getItemBurnTime(ItemStack stack)
     {
         if (stack == null)
@@ -503,7 +481,8 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	if (isBurning())
     	{
     		burnTime -= 16;
-    		energy += 16;	
+    		energy += 16;
+    		
     		updated = true;
     		
     		if (burnTime == 0)
@@ -516,6 +495,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	}
     	else
     	{
+    		fuelBurnTime = 0;
     		if (canSmelt())
     		{
     			updated = true;

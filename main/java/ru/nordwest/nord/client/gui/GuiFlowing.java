@@ -17,7 +17,6 @@ import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
 public class GuiFlowing extends GuiContainer {
 	private TileEntityFlowing tileEntity;
 	private EntityPlayer player;
-	private int fireCounter = 0;
 	
 	public GuiFlowing(InventoryPlayer iPlayer, TileEntityFlowing tileFlowing, EntityPlayer player) {
 		super(new ContainerFlowing(iPlayer, tileFlowing));
@@ -46,21 +45,9 @@ public class GuiFlowing extends GuiContainer {
     	this.drawTexturedModalRect(k + 11, l + 22, 183, 37, 3, 52); // h = 52
     	this.drawTexturedModalRect(k + 11, l + 22, 11, 22, 3, 52 - progress);
     	
-    	if (this.tileEntity.isBurning())
-    	{
-    		++fireCounter;
-    		if (fireCounter > 14 * 5)
-    		{
-    			fireCounter = 0;
-    		}
-    	
-    		this.drawTexturedModalRect(k + 19, l + 41, 176, 2, 14, 14);
-    		this.drawTexturedModalRect(k + 19, l + 41, 19, 41, 14, 14 - (fireCounter / 5));
-    	}
-    	else
-    	{
-    		fireCounter = 0;
-    	}
+    	progress = this.tileEntity.getBurnTimeRemainingScaled(14);
+    	this.drawTexturedModalRect(k + 19, l + 41, 176, 2, 14, 14);
+    	this.drawTexturedModalRect(k + 19, l + 41, 19, 41, 14, 14 - progress);
     }
 
 }
