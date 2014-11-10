@@ -498,11 +498,13 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     
     public void updateEntity()
     {
-    	// �������
+    	boolean updated = false;
+    	
     	if (isBurning())
     	{
     		burnTime -= 16;
-    		energy += 16;
+    		energy += 16;	
+    		updated = true;
     		
     		if (burnTime == 0)
     		{
@@ -516,16 +518,18 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	{
     		if (canSmelt())
     		{
+    			updated = true;
     			smelt();
     		}
     	}
     	
     	
     	// ��������� ��������
-    	if (isFlowing())
+    	if (isFlowing() && canStartFlowing())
     	{
     		currentItemEnergyProgress += 4;
     		energy -= 4;
+    		updated = true;
     		
     		if (canFlow())
     		{
@@ -538,6 +542,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
         	if (rec != null)
         	{
         		currentItemEnergyNeed = rec.needEnergy;
+        		updated = true;
         	}
         	else
         	{
@@ -545,6 +550,9 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
         	}
 		}
     	
-    	this.markDirty();
+    	if (updated)
+    	{
+    		this.markDirty();
+    	}
     }
 }
