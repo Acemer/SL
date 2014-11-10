@@ -6,7 +6,7 @@ import cpw.mods.fml.common.FMLLog;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class FlowingRecipesList { // Такая вот криворукая реализация синглтона
+public class FlowingRecipesList { // Takaya vot krivorukaya realizaciya singleton'a
 	private static FlowingRecipe recipes[] = new FlowingRecipe[256];
 	public static int recipesAmount = 0;
 	

@@ -522,7 +522,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	
     	
     	// ��������� ��������
-    	if (isFlowing())
+    	if (isFlowing() && canStartFlowing())
     	{
     		currentItemEnergyProgress += 4;
     		energy -= 4;
