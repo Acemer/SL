@@ -68,9 +68,11 @@ public class Nord {
 
 	@EventHandler
 	public void preInit(final FMLPreInitializationEvent event) {
+		MetallRegister.preInit();
 		MetallRegister.init();
 		DecoRegister.init();
 		FoodRegister.init();
+
 	}
 
 	@EventHandler
