@@ -1,13 +1,8 @@
-package ru.nordwest.nord.common;
+package ru.nordwest.nord.common.recipe;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.*;
-
-import ru.nordwest.nord.MetallRegister;
 
 public class BrickFurnaceRecipes {
 	private static final BrickFurnaceRecipes smelterBase = new BrickFurnaceRecipes();

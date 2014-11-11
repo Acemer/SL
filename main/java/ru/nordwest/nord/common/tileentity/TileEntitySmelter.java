@@ -2,7 +2,7 @@ package ru.nordwest.nord.common.tileentity;
 
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.block.SmelterBlock;
-import ru.nordwest.nord.common.SmelterRecipes;
+import ru.nordwest.nord.common.recipe.SmelterRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
