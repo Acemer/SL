@@ -249,10 +249,10 @@ public class TileEntityGreatFurnace extends TileEntity {
 	 * @return
 	 * false: блок не создан, печка построена неверно
 	 */
-	public boolean tryToCreateTechBlock(World world, int x, int y, int z)
+	public boolean tryToCreateTechBlock(World world, int xp, int yp, int zp)
 	{
 		HashSet<BlockCoord> path = new HashSet();
-		BlockCoord cur = new BlockCoord(x, y, z);
+		BlockCoord cur = new BlockCoord(xp, yp, zp);
 		path.add(cur);
 		
 		BlockCoord find = recFindTechBlock(world, cur, cur, path);
@@ -261,6 +261,19 @@ public class TileEntityGreatFurnace extends TileEntity {
 			this.techBlock = new BlockCoord(find.x, find.y, find.z);
 			Block block = world.getBlock(find.x, find.y, find.z);
 			world.removeTileEntity(find.x, find.y, find.z);
+			
+			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z + 1, 1, 0);
+			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z + 1, 2, 0);
+			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z + 1, 3, 0);
+			
+			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y    , this.techBlock.z + 1, 4, 0);
+			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y    , this.techBlock.z + 1 , 5, 0);
+			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y    , this.techBlock.z + 1, 6, 0);
+			
+			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y + 1, this.techBlock.z + 1, 7, 0);
+			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y + 1, this.techBlock.z + 1, 8, 0);
+			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y + 1, this.techBlock.z + 1, 9, 0);
+			
 			return world.setBlock(find.x, find.y, find.z, Nord.greatFurnaceTech);
 		}
 		
@@ -269,6 +282,10 @@ public class TileEntityGreatFurnace extends TileEntity {
 	
 	public void setTechBlock(BlockCoord techBlock) {
 		this.techBlock = techBlock;
+		if (techBlock == null) // Печь разрушена
+		{
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 0);
+		}
 	}
 	
 	/**
