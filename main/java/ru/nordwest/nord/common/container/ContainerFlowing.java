@@ -122,20 +122,20 @@ public class ContainerFlowing extends Container {
     
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
-    	// TODO fix it!
+    	// TODO Добавить распределение предметов по слотам, исправить дюп
             ItemStack stack = null;
             Slot slotObject = (Slot) inventorySlots.get(slot);
 
             if (slotObject != null && slotObject.getHasStack()) {
                     ItemStack stackInSlot = slotObject.getStack();
-                    stack = stackInSlot.copy();
+                    stack = stackInSlot;
 
                     if (slot < 4) {
                             if (!this.mergeItemStack(stackInSlot, 0, 35, true)) {
                                     return null;
                             }
+                            return null;
                     }
-                    
                     else if (!this.mergeItemStack(stackInSlot, 0, 2, false)) {
                             return null;
                     }
@@ -151,7 +151,7 @@ public class ContainerFlowing extends Container {
                     }
                     slotObject.onPickupFromSlot(player, stackInSlot);
             }
-            return stack;
+            return null;
     }
     
 	@Override

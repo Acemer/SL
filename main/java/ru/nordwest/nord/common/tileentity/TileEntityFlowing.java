@@ -190,7 +190,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     		return 0;
     	}
     	
-        return fuelBurnTime * val / currentItemEnergyNeed;
+        return currentItemEnergyProgress * val / currentItemEnergyNeed;
     }
     
     @SideOnly(Side.CLIENT)
