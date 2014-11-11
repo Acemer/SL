@@ -42,8 +42,8 @@ public class GuiFlowing extends GuiContainer {
     	this.drawTexturedModalRect(k + 78, l + 35, 180, 16, progress, 21);
                 
     	progress = this.tileEntity.getEnergyProgressScaled(52);
-    	this.drawTexturedModalRect(k + 11, l + 22, 183, 37, 3, 52); // h = 52
-    	this.drawTexturedModalRect(k + 11, l + 22, 11, 22, 3, 52 - progress);
+    	this.drawTexturedModalRect(k + 11, l + 22, 183, 37, 3, 52); // Отрисовать полную текстуру огня
+    	this.drawTexturedModalRect(k + 11, l + 22, 11, 22, 3, 52 - progress); // А поверх нее рисовать обычную текстуру (без огня)
     	
     	progress = this.tileEntity.getBurnTimeRemainingScaled(14);
     	this.drawTexturedModalRect(k + 19, l + 41, 176, 2, 14, 14);

@@ -54,6 +54,9 @@ public class Nord {
 	public static Block brickFurnace;
 	public static Block flowingBlock;
 	public static Block greatFurnace;
+	public static Block greatFurnaceTech;
+	public static Block greatFurnaceMain;
+	public static int greatFurnaceMainID;
 	//public static Item ifood;
 	public static int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
 			0x51301A, 0x253192, 0x7B2FBE, 0x287697, 0xABABAB, 0x434343,
@@ -113,6 +116,11 @@ public class Nord {
 				 new ItemStack(Item.getItemFromBlock(Blocks.dirt), 2), 
 				 new ItemStack(Items.diamond, 5), 60);
 		
+		 greatFurnace = new GreatFurnaceBlock();
+		 GameRegistry.registerBlock(greatFurnace, ItemBlock.class, "greatFurnace");
+		 GameRegistry.registerTileEntity(TileEntityGreatFurnace.class, "TileEntityGreatFurnace");
+		 
+		 greatFurnaceMain = new GreatFurnaceBlockTech();
 	}
 
 	@EventHandler

@@ -7,11 +7,12 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class GreatFurnaceBlock extends BlockContainer {
-	Block techBlock;
+	TileEntityGreatFurnace tileEntity;
 	
 	public GreatFurnaceBlock() {
 		super(Material.rock);
@@ -21,36 +22,23 @@ public class GreatFurnaceBlock extends BlockContainer {
         setBlockTextureName(Nord.MODID + ":greatFurnace/great_furnace_block"); // TODO create texture
         setCreativeTab(CreativeTabs.tabRedstone);
 	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityGreatFurnace();
-	}
-	
-	/*
-	 * Proverit', pravil'no li postroena pechka
-	 */
-	public boolean tryToCreateTechBlock()
-	{
-		return false;
-	}
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int metadata, float what, float these, float are)
 	{
-        if (techBlock == null) {
-            if (!tryToCreateTechBlock())
-            {
-            	return false;
-            }
-            else
-            {
-            	return techBlock.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
-            }
-        }
+		TileEntityGreatFurnace tileEntity = (TileEntityGreatFurnace) world.getTileEntity(x, y, z);
+		if (tileEntity == null || player.isSneaking())
+		{
+			return false;
+		}
+		
+		return tileEntity.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
+	}
 
-        return false;
+	@Override
+	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+		return new TileEntityGreatFurnace();
 	}
 
 }
