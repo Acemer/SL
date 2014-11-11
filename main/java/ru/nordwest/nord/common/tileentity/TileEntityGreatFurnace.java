@@ -262,17 +262,31 @@ public class TileEntityGreatFurnace extends TileEntity {
 			Block block = world.getBlock(find.x, find.y, find.z);
 			world.removeTileEntity(find.x, find.y, find.z);
 			
+			// Передняя сторона
 			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z + 1, 1, 0);
 			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z + 1, 2, 0);
 			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z + 1, 3, 0);
 			
 			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y    , this.techBlock.z + 1, 4, 0);
-			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y    , this.techBlock.z + 1 , 5, 0);
+			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y    , this.techBlock.z + 1, 5, 0);
 			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y    , this.techBlock.z + 1, 6, 0);
 			
 			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y + 1, this.techBlock.z + 1, 7, 0);
 			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y + 1, this.techBlock.z + 1, 8, 0);
 			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y + 1, this.techBlock.z + 1, 9, 0);
+			
+			// Центральная сторона
+			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z, 10, 0);
+			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z, 11, 0);
+			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z, 12, 0);
+			
+			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y    , this.techBlock.z, 13, 0);
+			//world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y    , this.techBlock.z, 14, 0); // Технический блок
+			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y    , this.techBlock.z, 15, 0);
+			
+			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y + 1, this.techBlock.z, 16, 0);
+			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y + 1, this.techBlock.z, 17, 0);
+			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y + 1, this.techBlock.z, 18, 0);
 			
 			return world.setBlock(find.x, find.y, find.z, Nord.greatFurnaceTech);
 		}

@@ -53,6 +53,7 @@ public class GreatFurnaceBlock extends BlockContainer {
 	
 	@Override
 	public IIcon getIcon(int side, int meta) {
+		// Передняя сторона
 	    switch (meta)
 	    {
 	    case 1:          // Левый нижний блок
@@ -215,7 +216,7 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    	}
 	    	break;
 	    	
-	    case 9:     // Левый блок
+	    case 9:     // Правый верхний блок
 	    	switch(side)
 	    	{
 	    	case 0:
@@ -234,6 +235,56 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    		return this.icons[0];
 	    	}
 	    	break;
+	    }
+	    
+	    // Цетральная сторона
+	    switch (meta)
+	    {
+	    case 10: // Левый нижний блок
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[6];
+	    	case 1:
+	    		return this.icons[0];
+	    	case 2:
+	    		return this.icons[0];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[5];
+	    	case 5:
+	    		return this.icons[0];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
+	    	
+	    	// Нижний блок
+	    case 11:
+	    	return this.icons[0];
+	    	
+	    	// Правый нижний блок
+	    case 12:
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[8];
+	    	case 1:
+	    		return this.icons[0];
+	    	case 2:
+	    		return this.icons[0];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[0];
+	    	case 5:
+	    		return this.icons[5];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
+	    	
 	    }
 	    
 	    return this.icons[0];
