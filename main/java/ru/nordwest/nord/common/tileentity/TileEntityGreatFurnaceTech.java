@@ -2,6 +2,7 @@ package ru.nordwest.nord.common.tileentity;
 
 import org.apache.logging.log4j.Level;
 
+import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.flowingRecipes.FlowingRecipe;
 import ru.nordwest.nord.flowingRecipes.FlowingRecipesList;
 import cpw.mods.fml.common.FMLLog;
@@ -24,6 +25,7 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase.FlowerEntry;
 import net.minecraftforge.common.util.Constants;
 
@@ -111,6 +113,11 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
 			return false;
 		}
 		
+		return true;
+	}
+
+	public boolean clicked(EntityPlayer player, World world, int x, int y, int z) {
+		//player.openGui(Nord.instance, Nord.guiIDGreatFurnace, world, x, y, z);
 		return true;
 	}
 

@@ -34,8 +34,8 @@ import net.minecraft.world.biome.BiomeGenBase.FlowerEntry;
 import net.minecraftforge.common.util.Constants;
 
 public class TileEntityGreatFurnace extends TileEntity {
-	ItemStack inv[] = new ItemStack[5];
 	public BlockCoord techBlock;
+	public boolean isPartOfMultiblock;
 	
 	private static int abs(int x)
 	{
@@ -141,7 +141,22 @@ public class TileEntityGreatFurnace extends TileEntity {
 		result += isFurnaceBlock(world, block.x - 1, block.y, block.z + 1);
 		result += isFurnaceBlock(world, block.x - 1, block.y, block.z - 1);
 		
-		return result == 4;
+		if (result != 4)
+		{
+			return false;
+		}
+		
+		result = 0;
+		result += isFurnaceBlock(world, block.x + 1, block.y + 1, block.z);
+		result += isFurnaceBlock(world, block.x - 1, block.y + 1, block.z);
+		result += isFurnaceBlock(world, block.x, block.y + 1, block.z + 1);
+		result += isFurnaceBlock(world, block.x, block.y + 1, block.z - 1);
+		result += isFurnaceBlock(world, block.x + 1, block.y - 1, block.z);
+		result += isFurnaceBlock(world, block.x - 1, block.y - 1, block.z);
+		result += isFurnaceBlock(world, block.x, block.y - 1, block.z + 1);
+		result += isFurnaceBlock(world, block.x, block.y - 1, block.z - 1);
+		// TOTAL: 26
+		return result == 8;
 	}
 	
 	public BlockCoord recFindTechBlock(World world, BlockCoord start, BlockCoord cur, HashSet path)
@@ -243,16 +258,168 @@ public class TileEntityGreatFurnace extends TileEntity {
 		BlockCoord find = recFindTechBlock(world, cur, cur, path);
 		if (find != null)
 		{
-			techBlock = find;
-			return true;
+			this.techBlock = new BlockCoord(find.x, find.y, find.z);
+			Block block = world.getBlock(find.x, find.y, find.z);
+			world.removeTileEntity(find.x, find.y, find.z);
+			return world.setBlock(find.x, find.y, find.z, Nord.greatFurnaceTech);
 		}
 		
 		return false;
 	}
 	
+	public void setTechBlock(BlockCoord techBlock) {
+		this.techBlock = techBlock;
+	}
+	
+	/**
+	 * Установить заданный techBlock всем TileEntity печки.
+	 */
+	public static void broadcastSetTechBlock(World world, BlockCoord center, BlockCoord newTechBlock)
+	{
+		TileEntity ent;
+		
+		// Углы
+		ent = world.getTileEntity(center.x + 1, center.y + 1, center.z + 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+			
+		ent = world.getTileEntity(center.x + 1, center.y + 1, center.z - 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x + 1, center.y - 1, center.z + 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x + 1, center.y - 1, center.z - 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x - 1, center.y + 1, center.z + 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x - 1, center.y + 1, center.z - 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x - 1, center.y - 1, center.z + 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x - 1, center.y - 1, center.z - 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		// Стороны
+		ent = world.getTileEntity(center.x + 1, center.y, center.z);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x - 1, center.y, center.z);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x, center.y + 1, center.z);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x, center.y - 1, center.z);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x, center.y, center.z + 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x, center.y, center.z - 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		// Какие-то еще центры, не знаю, как их назвать :D
+		ent = world.getTileEntity(center.x + 1, center.y, center.z + 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x + 1, center.y, center.z - 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x - 1, center.y, center.z + 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x - 1, center.y, center.z - 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x + 1, center.y + 1, center.z);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x - 1, center.y + 1, center.z);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x + 1, center.y - 1, center.z);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x - 1, center.y - 1, center.z);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x, center.y + 1, center.z + 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x, center.y + 1, center.z - 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x, center.y - 1, center.z + 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+		
+		ent = world.getTileEntity(center.x, center.y - 1, center.z - 1);
+		if (ent != null)
+			((TileEntityGreatFurnace)ent).setTechBlock(newTechBlock);
+	}
+	
 	public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer player, int metadata, float what, float these, float are)
 	{
-		return tryToCreateTechBlock(world, x, y, z);
+		if (this.techBlock == null)
+		{
+			if (!tryToCreateTechBlock(world, x, y, z))
+			{
+				return false;
+			}
+		}
+		
+		TileEntity ent = world.getTileEntity(this.techBlock.x, this.techBlock.y, this.techBlock.z);
+		if (ent == null)
+		{
+			return false;
+		}
+		
+		broadcastSetTechBlock(world, this.techBlock, this.techBlock);
+
+		return ((TileEntityGreatFurnaceTech)ent).clicked(player, world, this.techBlock.x, this.techBlock.y, this.techBlock.z);
+	}
+
+	public void removeTechBlock(World world) {
+		if (this.techBlock == null)
+		{
+			return;
+		}
+		
+		if (this.techBlock != null)
+		{
+			world.removeTileEntity(this.techBlock.x, this.techBlock.y, this.techBlock.z);
+			world.setBlock(this.techBlock.x, this.techBlock.y, this.techBlock.z, Nord.greatFurnace);
+			
+			broadcastSetTechBlock(world, this.techBlock, null);
+		}
 	}
 }

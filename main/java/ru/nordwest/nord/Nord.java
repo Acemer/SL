@@ -67,6 +67,7 @@ public class Nord {
 	public static final int guiIDSmelter = 20;
 	public static final int guiIDBrickFurnace = 21;
 	public static final int guiIDFlowing = 22;
+	public static final int guiIDGreatFurnace = 23;
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
 	@EventHandler
@@ -120,7 +121,10 @@ public class Nord {
 		 GameRegistry.registerBlock(greatFurnace, ItemBlock.class, "greatFurnace");
 		 GameRegistry.registerTileEntity(TileEntityGreatFurnace.class, "TileEntityGreatFurnace");
 		 
-		 greatFurnaceMain = new GreatFurnaceBlockTech();
+		 greatFurnaceTech = new GreatFurnaceBlockTech();
+		 GameRegistry.registerBlock(greatFurnaceTech, ItemBlock.class, "greatFurnaceTech");
+		 GameRegistry.registerTileEntity(TileEntityGreatFurnace.class, "TileEntityGreatFurnaceTech");
+	
 	}
 
 	@EventHandler
