@@ -1,15 +1,9 @@
 package ru.nordwest.nord.common.tileentity;
 
-import org.apache.logging.log4j.Level;
-
-import ru.nordwest.nord.flowingRecipes.FlowingRecipe;
-import ru.nordwest.nord.flowingRecipes.FlowingRecipesList;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -24,8 +18,8 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.biome.BiomeGenBase.FlowerEntry;
 import net.minecraftforge.common.util.Constants;
+import ru.nordwest.nord.common.recipe.FlowingRecipes;
 
 // TODO update flowing system
 public class TileEntityFlowing extends TileEntity implements IInventory {
@@ -45,6 +39,10 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
 	public static int cookTimeLen = 200; // ticks
 	public static int maxEnergy = 12800; // 8 parts of coal
 	
+    /*public TileEntityFlowing()  {
+    	super();
+        inv = new ItemStack[4];
+    }*/
     
 	@Override
 	public int getSizeInventory() {
@@ -139,7 +137,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
 			return false;
 		}
 		
-		FlowingRecipe rec = FlowingRecipesList.getRecipe(stack);
+		FlowingRecipes.FlowingRecipe rec = FlowingRecipes.getRecipe(stack);
 		
 		return rec != null;
 	}
@@ -265,7 +263,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     
     public boolean canFlow()
     {
-    	FlowingRecipe rec = FlowingRecipesList.getRecipe(inv[1]);
+    	FlowingRecipes.FlowingRecipe rec = FlowingRecipes.getRecipe(inv[1]);
     	if (rec == null)
     	{
     		currentItemEnergyProgress = 0;
@@ -278,10 +276,10 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     		return false;
     	}
     	
-    	ItemStack out1 = rec.out1;
-    	ItemStack out2 = rec.out2;
+    	ItemStack out1 = rec.output1;
+    	ItemStack out2 = rec.output2;
     	
-    	if (inv[1].stackSize < rec.in.stackSize)
+    	if (inv[1].stackSize < rec.input.stackSize)
     	{
     		return false;
     	}
@@ -323,7 +321,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     
     public boolean canStartFlowing()
     {
-    	FlowingRecipe rec = FlowingRecipesList.getRecipe(inv[1]);
+    	FlowingRecipes.FlowingRecipe rec = FlowingRecipes.getRecipe(inv[1]);
     	if (rec == null)
     	{
     		currentItemEnergyProgress = 0;
@@ -331,10 +329,10 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     		return false;
     	}
     	
-    	ItemStack out1 = rec.out1;
-    	ItemStack out2 = rec.out2;
+    	ItemStack out1 = rec.output1;
+    	ItemStack out2 = rec.output2;
     	
-    	if (inv[1].stackSize < rec.in.stackSize)
+    	if (inv[1].stackSize < rec.input.stackSize)
     	{
     		return false;
     	}
@@ -379,14 +377,14 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
      */
     public void flow()
     {
-    	FlowingRecipe rec = FlowingRecipesList.getRecipe(inv[1]);
+    	FlowingRecipes.FlowingRecipe rec = FlowingRecipes.getRecipe(inv[1]);
     	if (rec == null)
     	{
     		return; // should never happen
     	}
     	
-    	ItemStack out1 = rec.out1;
-    	ItemStack out2 = rec.out2;
+    	ItemStack out1 = rec.output1;
+    	ItemStack out2 = rec.output2;
     	
     	if (out1 != null)
     	{
@@ -412,14 +410,14 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     		}
     	}
     	
-    	inv[1].stackSize -= rec.in.stackSize;
+    	inv[1].stackSize -= rec.input.stackSize;
     	
     	if (inv[1].stackSize == 0)
     	{
     		inv[1] = null;
     	}
     	
-    	FlowingRecipe recNext = FlowingRecipesList.getRecipe(inv[1]);
+    	FlowingRecipes.FlowingRecipe recNext = FlowingRecipes.getRecipe(inv[1]);
     	if (recNext != null)
     	{
     		currentItemEnergyNeed = recNext.needEnergy;
@@ -518,7 +516,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	}
     	else if (canStartFlowing())
 		{
-    		FlowingRecipe rec = FlowingRecipesList.getRecipe(inv[1]);
+    		FlowingRecipes.FlowingRecipe rec = FlowingRecipes.getRecipe(inv[1]);
         	if (rec != null)
         	{
         		currentItemEnergyNeed = rec.needEnergy;

@@ -1,6 +1,6 @@
 package ru.nordwest.nord.common.container;
 
-import ru.nordwest.nord.common.SmelterRecipes;
+import ru.nordwest.nord.common.recipe.SmelterRecipes;
 import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

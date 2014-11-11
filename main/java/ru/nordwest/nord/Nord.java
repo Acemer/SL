@@ -6,15 +6,13 @@ import ru.nordwest.nord.block.*;
 import ru.nordwest.nord.common.*;
 import ru.nordwest.nord.common.handler.*;
 import ru.nordwest.nord.common.tileentity.*;
-import ru.nordwest.nord.flowingRecipes.FlowingRecipesList;
+import ru.nordwest.nord.common.recipe.FlowingRecipes;
 import ru.nordwest.nord.item.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
-import net.minecraft.world.World;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -25,8 +23,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Nord.MODID, name = Nord.NAME, version = Nord.VERSION)
 public class Nord {
@@ -113,8 +109,8 @@ public class Nord {
 		 GameRegistry.registerTileEntity(TileEntityFlowing.class, "TileEntityFlowing");
 		 GameRegistry.addRecipe(new ItemStack(flowingBlock, 1), "xxx", "x x", "xxx", // TODO fix recipe
 				 'x', new ItemStack(Blocks.stone, 1));
-		 FlowingRecipesList.addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.stone), 1),
-				 new ItemStack(Item.getItemFromBlock(Blocks.dirt), 2), 
+		 FlowingRecipes.addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.stone), 1),
+				 new ItemStack(Item.getItemFromBlock(Blocks.dirt), 2),
 				 new ItemStack(Items.diamond, 5), 60);
 		
 		 greatFurnace = new GreatFurnaceBlock();
