@@ -243,12 +243,10 @@ public class TileEntityGreatFurnace extends TileEntity {
 		BlockCoord find = recFindTechBlock(world, cur, cur, path);
 		if (find != null)
 		{
-			techBlock = 
+			techBlock = find;
+			return true;
 		}
-		else
-		{
-			FMLLog.log(Level.ERROR, "not found");
-		}
+		
 		return false;
 	}
 	
