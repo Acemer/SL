@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlowingRecipes { // Takaya vot krivorukaya realizaciya singleton'a
-    // Это не синголтон, это статик класс. д32
     private static List<FlowingRecipe> recipes = new ArrayList<FlowingRecipe>(64);
 
     public static void addRecipe(ItemStack input, ItemStack output1, ItemStack output2, int needEnergy) {
@@ -17,7 +16,10 @@ public class FlowingRecipes { // Takaya vot krivorukaya realizaciya singleton'a
         recipe.needEnergy = needEnergy;
         recipes.add(recipe);
     }
-
+    public static boolean hasRecipe(ItemStack input){
+    	return getRecipe(input)!=null;
+    }
+    
     public static FlowingRecipe getRecipe(ItemStack input) {
         if (input == null) {
             return null;
