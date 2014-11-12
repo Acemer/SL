@@ -20,6 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class GreatFurnaceBlock extends BlockContainer {
@@ -31,7 +32,7 @@ public class GreatFurnaceBlock extends BlockContainer {
 		setHardness(2.0F);
         setResistance(5.0F);
         setBlockName("GreatFurnaceBlock");
-        setBlockTextureName(Nord.MODID + ":greatFurnace/main_block"); // TODO create texture
+        setBlockTextureName(Nord.MODID + ":greatFurnace/main_block");
         setCreativeTab(CreativeTabs.tabRedstone);
 	}
 	
@@ -53,6 +54,28 @@ public class GreatFurnaceBlock extends BlockContainer {
 	
 	@Override
 	public IIcon getIcon(int side, int meta) {
+		return this.icons[7];
+	}
+	@Override
+	public IIcon getIcon(IBlockAccess block, int x, int y, int z, int side)
+	{
+		TileEntityGreatFurnace ent = (TileEntityGreatFurnace)block.getTileEntity(x, y, z);
+		if (ent == null)
+		{
+			return this.icons[7];
+		}
+		
+		int meta = ent.textureCode;
+		if (meta == 0)
+		{
+			return this.icons[7];
+		}
+		
+		/*
+		 * TODO к релизу заменить неиспользуемые кейсы с return this.icons[0]
+		 * на deafult.
+		 * (сейчас сделано для легкости модификации)
+		 */
 		// Передняя сторона
 	    switch (meta)
 	    {
@@ -284,7 +307,222 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    		return this.icons[0];
 	    	}
 	    	break;
+	    
+	    case 13:
+	    case 14:
+	    case 15:
+	    	return this.icons[0];
 	    	
+	    case 16: // Левый верхний блок
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[0];
+	    	case 1:
+	    		return this.icons[6];
+	    	case 2:
+	    		return this.icons[0];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[11];
+	    	case 5:
+	    		return this.icons[0];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
+	    	
+	    case 17: // Центральный верхний блок
+	    	return this.icons[0];
+	    	
+	    case 18: // Правый верхний блок
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[0];
+	    	case 1:
+	    		return this.icons[8];
+	    	case 2:
+	    		return this.icons[0];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[0];
+	    	case 5:
+	    		return this.icons[11];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
+	    	
+	    }
+	    
+		// Задняя сторона
+	    switch (meta)
+	    {
+	    case 19:          // Левый нижний блок
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[9];
+	    	case 1:
+	    		return this.icons[0];
+	    	case 2:
+	    		return this.icons[4];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[3];
+	    	case 5:
+	    		return this.icons[0];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
+	    	
+	    case 20:        // Нижний блок
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[11];
+	    	case 1:
+	    		return this.icons[0];
+	    	case 2:
+	    		return this.icons[5];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[0];
+	    	case 5:
+	    		return this.icons[0];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
+	    	
+	    case 21:     // Правый нижний блок
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[10];
+	    	case 1:
+	    		return this.icons[0];
+	    	case 2:
+	    		return this.icons[3];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[0];
+	    	case 5:
+	    		return this.icons[4];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
+	    	
+	    case 22:     // Левый блок
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[0];
+	    	case 1:
+	    		return this.icons[0];
+	    	case 2:
+	    		return this.icons[8];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[6];
+	    	case 5:
+	    		return this.icons[0];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
+	    	
+	    case 23:     // Центральный блок
+	    	return this.icons[0];
+	    	
+	    case 24:     // Правый блок
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[0];
+	    	case 1:
+	    		return this.icons[0];
+	    	case 2:
+	    		return this.icons[6];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[0];
+	    	case 5:
+	    		return this.icons[8];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
+	    	
+	    case 25:     // Левый верхний блок
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[0];
+	    	case 1:
+	    		return this.icons[9];
+	    	case 2:
+	    		return this.icons[10];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[9];
+	    	case 5:
+	    		return this.icons[0];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
+	    	
+	    case 26:     // Верхний блок
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[0];
+	    	case 1:
+	    		return this.icons[11];
+	    	case 2:
+	    		return this.icons[11];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[0];
+	    	case 5:
+	    		return this.icons[0];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
+	    	
+	    case 27:     // Правый верхний блок
+	    	switch(side)
+	    	{
+	    	case 0:
+	    		return this.icons[0];
+	    	case 1:
+	    		return this.icons[10];
+	    	case 2:
+	    		return this.icons[9];
+	    	case 3:
+	    		return this.icons[0];
+	    	case 4:
+	    		return this.icons[0];
+	    	case 5:
+	    		return this.icons[10];
+	    	case 6:
+	    		return this.icons[0];
+	    	}
+	    	break;
 	    }
 	    
 	    return this.icons[0];

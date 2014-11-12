@@ -19,8 +19,7 @@ public class GreatFurnaceBlockTech extends BlockContainer {
 		setHardness(2.0F);
         setResistance(5.0F);
         setBlockName("GreatFurnaceBlockTech");
-        setBlockTextureName(Nord.MODID + ":greatFurnace/great_furnace_block_tech"); // TODO create texture
-        setCreativeTab(CreativeTabs.tabRedstone); // TODO удалить
+        setBlockTextureName(Nord.MODID + ":greatFurnace/main_block");
 	}
 
 	@Override

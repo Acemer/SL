@@ -24,6 +24,7 @@ import java.util.HashSet;
 public class TileEntityGreatFurnace extends TileEntity {
 	public BlockCoord techBlock;
 	public boolean isPartOfMultiblock;
+	public int textureCode;
 	
 	private static int abs(int x)
 	{
@@ -251,30 +252,45 @@ public class TileEntityGreatFurnace extends TileEntity {
 			world.removeTileEntity(find.x, find.y, find.z);
 			
 			// Передняя сторона
-			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z + 1, 1, 0);
-			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z + 1, 2, 0);
-			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z + 1, 3, 0);
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z + 1)).textureCode = 1;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z + 1)).textureCode = 2;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z + 1)).textureCode = 3;
 			
-			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y    , this.techBlock.z + 1, 4, 0);
-			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y    , this.techBlock.z + 1, 5, 0);
-			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y    , this.techBlock.z + 1, 6, 0);
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y    , this.techBlock.z + 1)).textureCode = 4;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y    , this.techBlock.z + 1)).textureCode = 5;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y    , this.techBlock.z + 1)).textureCode = 6;
 			
-			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y + 1, this.techBlock.z + 1, 7, 0);
-			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y + 1, this.techBlock.z + 1, 8, 0);
-			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y + 1, this.techBlock.z + 1, 9, 0);
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y + 1, this.techBlock.z + 1)).textureCode = 7;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y + 1, this.techBlock.z + 1)).textureCode = 8;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y + 1, this.techBlock.z + 1)).textureCode = 9;
+			
 			
 			// Центральная сторона
-			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z, 10, 0);
-			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z, 11, 0);
-			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z, 12, 0);
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z    )).textureCode = 10;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z    )).textureCode = 11;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z    )).textureCode = 12;
 			
-			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y    , this.techBlock.z, 13, 0);
-			//world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y    , this.techBlock.z, 14, 0); // Технический блок
-			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y    , this.techBlock.z, 15, 0);
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y    , this.techBlock.z    )).textureCode = 13;
+		  //((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y    , this.techBlock.z    )).textureCode = 14; // Технический блок
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y    , this.techBlock.z    )).textureCode = 15;
 			
-			world.setBlockMetadataWithNotify(this.techBlock.x - 1, this.techBlock.y + 1, this.techBlock.z, 16, 0);
-			world.setBlockMetadataWithNotify(this.techBlock.x    , this.techBlock.y + 1, this.techBlock.z, 17, 0);
-			world.setBlockMetadataWithNotify(this.techBlock.x + 1, this.techBlock.y + 1, this.techBlock.z, 18, 0);
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y + 1, this.techBlock.z    )).textureCode = 16;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y + 1, this.techBlock.z    )).textureCode = 17;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y + 1, this.techBlock.z    )).textureCode = 18;
+			
+			
+			// Заднаяя сторона
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z - 1)).textureCode = 19;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z - 1)).textureCode = 20;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z - 1)).textureCode = 21;
+			
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y    , this.techBlock.z - 1)).textureCode = 22;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y    , this.techBlock.z - 1)).textureCode = 23;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y    , this.techBlock.z - 1)).textureCode = 24;
+			
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y + 1, this.techBlock.z - 1)).textureCode = 25;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y + 1, this.techBlock.z - 1)).textureCode = 26;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y + 1, this.techBlock.z - 1)).textureCode = 27;
 			
 			return world.setBlock(find.x, find.y, find.z, Nord.greatFurnaceTech);
 		}
@@ -286,7 +302,7 @@ public class TileEntityGreatFurnace extends TileEntity {
 		this.techBlock = techBlock;
 		if (techBlock == null) // Печь разрушена
 		{
-			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 0);
+			this.textureCode = 0;
 		}
 	}
 	
