@@ -531,6 +531,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	if (updated)
     	{
     		this.markDirty();
+    		
     	}
     }
 }

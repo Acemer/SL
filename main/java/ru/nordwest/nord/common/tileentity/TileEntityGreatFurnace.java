@@ -1,6 +1,7 @@
 package ru.nordwest.nord.common.tileentity;
 
 import net.minecraft.world.World;
+
 import org.apache.logging.log4j.Level;
 
 import ru.nordwest.nord.Nord;
@@ -12,8 +13,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.biome.BiomeGenBase.FlowerEntry;
 import net.minecraftforge.common.util.Constants;
@@ -23,7 +29,6 @@ import java.util.HashSet;
 
 public class TileEntityGreatFurnace extends TileEntity {
 	public BlockCoord techBlock;
-	public boolean isPartOfMultiblock;
 	public int textureCode;
 	
 	private static int abs(int x)
@@ -455,6 +460,52 @@ public class TileEntityGreatFurnace extends TileEntity {
 			world.setBlock(this.techBlock.x, this.techBlock.y, this.techBlock.z, Nord.greatFurnace);
 			
 			broadcastSetTechBlock(world, this.techBlock, null);
+		}
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
+		this.writeSyncableDataToNBT(tag);
+	}
+	
+	void writeSyncableDataToNBT(NBTTagCompound tag)
+	{
+		tag.setShort("textCode", (short)textureCode);
+		if (techBlock != null)
+		{
+			tag.setInteger("tech_x", techBlock.x);
+			tag.setShort("tech_y", (short)techBlock.y);
+			tag.setInteger("tech_z", techBlock.z);
+		}
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound tag) {
+		super.readFromNBT(tag);
+		this.readSyncableDataFromNBT(tag);
+	}
+	
+	@Override
+	public Packet getDescriptionPacket()
+	{
+		NBTTagCompound syncData = new NBTTagCompound();
+		this.writeSyncableDataToNBT(syncData);
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, syncData);
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readSyncableDataFromNBT(pkt.func_148857_g());
+	}
+
+	public void readSyncableDataFromNBT(NBTTagCompound tag) {
+		textureCode = tag.getInteger("textCode");
+		
+		if (tag.hasKey("tech_x"))
+		{
+			techBlock = new BlockCoord(tag.getInteger("tech_x"), (int)tag.getShort("tech_y"), tag.getInteger("tech_z"));
 		}
 	}
 }

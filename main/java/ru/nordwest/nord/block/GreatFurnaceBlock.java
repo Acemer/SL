@@ -56,6 +56,7 @@ public class GreatFurnaceBlock extends BlockContainer {
 	public IIcon getIcon(int side, int meta) {
 		return this.icons[7];
 	}
+	
 	@Override
 	public IIcon getIcon(IBlockAccess block, int x, int y, int z, int side)
 	{
@@ -676,5 +677,11 @@ public class GreatFurnaceBlock extends BlockContainer {
 			tileEnt.broadcastSetTechBlock(world, tileEnt.techBlock, tileEnt.techBlock);
 		}
 		super.onBlockPlacedBy(world, x, y, z, ent, item);
+	}
+	
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z) {
+		FMLLog.log(Level.INFO, "block added!");
+		super.onBlockAdded(world, x, y, z);
 	}
 }

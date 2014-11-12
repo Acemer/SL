@@ -22,18 +22,20 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
+import ru.nordwest.nord.common.tileentity.TileEntityGreatFurnace;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class FlowingBlock extends BlockContainer {
-
+	public IIcon[] icons = new IIcon[11];
+	
 	public FlowingBlock() {
 		super(Material.rock);
 		setHardness(2.0F);
         setResistance(5.0F);
         setBlockName("Flowing");
-        setBlockTextureName(Nord.MODID + ":flowing/flowingblock"); // TODO create texture
+        setBlockTextureName(Nord.MODID + ":flowing/hogger_down");
         setCreativeTab(CreativeTabs.tabRedstone);
 	}
 
@@ -96,4 +98,60 @@ public class FlowingBlock extends BlockContainer {
 		return new TileEntityFlowing();
 	}
 	
+	@Override
+	public void registerBlockIcons(IIconRegister reg) {
+		this.icons[0] = reg.registerIcon(Nord.MODID + ":flowing/hogger_down");
+		this.icons[1] = reg.registerIcon(Nord.MODID + ":flowing/hogger_side_1");
+		this.icons[2] = reg.registerIcon(Nord.MODID + ":flowing/hogger_side_2");
+		this.icons[3] = reg.registerIcon(Nord.MODID + ":flowing/hogger_side_3");
+		this.icons[4] = reg.registerIcon(Nord.MODID + ":flowing/hogger_side_4");
+		this.icons[5] = reg.registerIcon(Nord.MODID + ":flowing/hogger_side");
+		this.icons[6] = reg.registerIcon(Nord.MODID + ":flowing/hogger_up_1");
+		this.icons[7] = reg.registerIcon(Nord.MODID + ":flowing/hogger_up_2");
+		this.icons[8] = reg.registerIcon(Nord.MODID + ":flowing/hogger_up_3");
+		this.icons[9] = reg.registerIcon(Nord.MODID + ":flowing/hogger_up_4");
+		this.icons[10] = reg.registerIcon(Nord.MODID + ":flowing/hogger_up");
+	}
+	
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		switch (side)
+		{
+		case 0:
+			return this.icons[0];
+		case 1:
+			return this.icons[10];
+		}
+		
+		return this.icons[1];
+	}
+	
+	/*
+	 * TODO
+	 * Сделать второй технический блок с текстурой включенного дробителя
+	 */
+	@Override
+	public IIcon getIcon(IBlockAccess block, int x, int y, int z, int side)
+	{
+		TileEntityFlowing ent = (TileEntityFlowing)block.getTileEntity(x, y, z);
+		if (ent == null)
+		{
+			return getIcon(side, 0);
+		}
+		
+		if (!ent.isFlowing() && !ent.isBurning())
+		{
+			return getIcon(side, 0);
+		}
+		
+		switch (side)
+		{
+		case 0:
+			return this.icons[0];
+		case 1:
+			return this.icons[7];
+		default:
+			return this.icons[1];
+		}
+	}
 }
