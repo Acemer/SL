@@ -36,11 +36,12 @@ public class ContainerGreatFurnace extends Container {
 		tileEntity = ent;
 		
         addSlotToContainer(new Slot(tileEntity, 0, 18, 58)); // fuel
-        addSlotToContainer(new Slot(tileEntity, 1, 53, 38)); // item to smelt1
-        addSlotToContainer(new Slot(tileEntity, 1, 70, 38)); // item to smelt2
         
-        addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, 2, 107, 39)); // result1
-        addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, 3, 128, 39)); // result2
+        addSlotToContainer(new Slot(tileEntity, 1, 45, 38)); // item to smelt1
+        addSlotToContainer(new Slot(tileEntity, 2, 66, 38)); // item to smelt2
+        
+        addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, 3, 124, 38)); // result1
+        addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, 4, 145, 38)); // result2
         
         bindPlayerInventory(invPlayer);
 	}

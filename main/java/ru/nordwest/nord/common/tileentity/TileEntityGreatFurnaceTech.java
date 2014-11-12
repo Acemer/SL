@@ -168,6 +168,12 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
 		return true;
 	}
 	
+	@Override
+	public void updateEntity() {
+		
+		super.updateEntity();
+	}
+	
 	public int getSmeltProgressScaled(int val, int item)
 	{
 		if (item == 0)

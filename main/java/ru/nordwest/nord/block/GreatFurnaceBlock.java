@@ -678,10 +678,4 @@ public class GreatFurnaceBlock extends BlockContainer {
 		}
 		super.onBlockPlacedBy(world, x, y, z, ent, item);
 	}
-	
-	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-		FMLLog.log(Level.INFO, "block added!");
-		super.onBlockAdded(world, x, y, z);
-	}
 }
