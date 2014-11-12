@@ -662,6 +662,9 @@ public class GreatFurnaceBlock extends BlockContainer {
 			super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 			return;
 		}
+		
+		((GreatFurnaceBlockTech) Nord.greatFurnaceTech).dropItems(world, x, y, z);
+		
 		super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 	}
 	
