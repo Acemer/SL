@@ -35,13 +35,13 @@ public class GuiFlowing extends GuiContainer {
     	//this.fontRendererObj.drawString(String.valueOf(xAxis)+":"+String.valueOf(yAxis), xAxis, yAxis, 4210752);
     	String name = this.tileEntity.hasCustomInventoryName()
 				? this.tileEntity.getInventoryName()
-				: I18n.format(this.tileEntity.getInventoryName(),
-						new Object[0]);
-		int energy = this.tileEntity.energy/16;
-		int maxEnergy = this.tileEntity.maxEnergy/16;
+				: I18n.format(this.tileEntity.getInventoryName());
+				
+		int energy = this.tileEntity.energy / 16;
+		int maxEnergy = this.tileEntity.maxEnergy / 16;
 		this.fontRendererObj.drawString(name, 16, 6, 4210752);
-		if (xAxis>9 && xAxis<13 && yAxis>20 && yAxis<74 ){
-			this.drawCreativeTabHoveringText(String.valueOf(energy)+"/"+String.valueOf(maxEnergy)+" share", xAxis, yAxis);
+		if (xAxis > 9 && xAxis < 13 && yAxis > 20 && yAxis < 74 ){
+			this.drawCreativeTabHoveringText(String.valueOf(energy) + "/" + String.valueOf(maxEnergy) + " share" + (energy > 1 ? "s" : ""), xAxis, yAxis);
 		}
     }
     

@@ -121,37 +121,19 @@ public class FlowingBlock extends BlockContainer {
 			return this.icons[0];
 		case 1:
 			return this.icons[10];
+		case 3:
+			return this.icons[1];
 		}
 		
-		return this.icons[1];
+		return this.icons[5];
 	}
 	
 	/*
-	 * TODO
-	 * Сделать второй технический блок с текстурой включенного дробителя
+	 * TODO Сделать второй технический блок с текстурой включенного дробителя
 	 */
 	@Override
 	public IIcon getIcon(IBlockAccess block, int x, int y, int z, int side)
 	{
-		TileEntityFlowing ent = (TileEntityFlowing)block.getTileEntity(x, y, z);
-		if (ent == null)
-		{
-			return getIcon(side, 0);
-		}
-		
-		if (!ent.isFlowing() && !ent.isBurning())
-		{
-			return getIcon(side, 0);
-		}
-		
-		switch (side)
-		{
-		case 0:
-			return this.icons[0];
-		case 1:
-			return this.icons[7];
-		default:
-			return this.icons[1];
-		}
+		return getIcon(side, 0);
 	}
 }

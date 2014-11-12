@@ -42,7 +42,7 @@ public class GuiGreatFurnace extends GuiContainer {
 		this.fontRendererObj.drawString(name, 16, 6, 4210752);
 		
 		if (xAxis > 9 && xAxis < 13 && yAxis > 20 && yAxis < 74 ){
-			this.drawCreativeTabHoveringText(String.valueOf(energy) + "/" + String.valueOf(maxEnergy) + " share", xAxis, yAxis);
+			this.drawCreativeTabHoveringText(String.valueOf(energy) + "/" + String.valueOf(maxEnergy) + " share" + (energy > 1 ? "s" : ""), xAxis, yAxis);
 		}
     }
     
@@ -68,11 +68,8 @@ public class GuiGreatFurnace extends GuiContainer {
     	int l = (this.height - this.ySize) / 2;
     	this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
             
-    	int progress = this.tileEntity.getSmeltProgressScaled(24, 0);
-    	this.drawTexturedModalRect(k + 78, l + 35, 180, 16, progress, 21);
-    	
-    	progress = this.tileEntity.getSmeltProgressScaled(24, 1);
-    	this.drawTexturedModalRect(k + 90, l + 35, 180, 16, progress, 21);     
+    	int progress = this.tileEntity.getSmeltProgressScaled(23);
+    	this.drawTexturedModalRect(k + 92, l + 38, 177, 20, progress, 15);
     	
     	progress = this.tileEntity.getEnergyProgressScaled(52);
     	this.drawTexturedModalRect(k + 11, l + 22, 183, 37, 3, 52); // Отрисовать полную текстуру огня

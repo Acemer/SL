@@ -20,6 +20,7 @@ import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -27,6 +28,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase.FlowerEntry;
 import net.minecraftforge.common.util.Constants;
 
+// TODO Добавить сохранение предметов (ForcePush)
+// TODO Проверить все на баги
+// TODO Добавить обработку шифт-клика (Dark32)
 public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory {
 	ItemStack inv[] = new ItemStack[5];
 	
@@ -35,8 +39,7 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
 	public int burnTime;
 	public int fuelBurnTime;
 	
-	public int currentItemEnergyProgress1;
-	public int currentItemEnergyProgress2;
+	public int currentItemEnergyProgress;
 	
 	public static final int needEnergy = 200;
 	
@@ -50,21 +53,9 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
 		return inv[slot];
 	}
 	
-	public void setEnergy(int item, int energy)
+	public void setEnergy(int energy)
 	{
-		switch(item)
-		{
-		case 0:
-			currentItemEnergyProgress1 = energy;
-			break;
-		case 1:
-			currentItemEnergyProgress2 = energy;
-			break;
-		default:
-			currentItemEnergyProgress1 = energy;
-			currentItemEnergyProgress2 = energy;
-			break;
-		}
+		currentItemEnergyProgress = energy;
 	}
 	
 	@Override
@@ -73,26 +64,18 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
         if (stack != null) {
             if (stack.stackSize <= amount) {
             	setInventorySlotContents(slot, null);
-                if (slot == 1)
+                if (slot == 1 || slot == 2)
                 {
-                	setEnergy(0, 0);
-                }
-                else if (slot == 2)
-                {
-                	setEnergy(1, 0);
+                	setEnergy(0);
                 }
             }
             else {
             	stack = stack.splitStack(amount);
             	if (stack.stackSize == 0) {
             		setInventorySlotContents(slot, null);
-                    if (slot == 1)
+                    if (slot == 1 || slot == 2)
                     {
-                    	setEnergy(0, 0);
-                    }
-                    else if (slot == 2)
-                    {
-                    	setEnergy(1, 0);
+                    	setEnergy(0);
                     }
             	}
             }
@@ -106,13 +89,9 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
         ItemStack stack = getStackInSlot(slot);
         if (stack != null) {
         	setInventorySlotContents(slot, null);
-            if (slot == 1)
+            if (slot == 1 || slot == 2)
             {
-            	setEnergy(0, 0);
-            }
-            else if (slot == 2)
-            {
-            	setEnergy(1, 0);
+            	setEnergy(0);
             }
         }
         return stack;
@@ -168,32 +147,303 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
 		return true;
 	}
 	
+	/**
+	 * Главная функция, прошу относиться к ней с любовью
+	 */
 	@Override
 	public void updateEntity() {
+		if (isBurning())
+		{
+			this.energy += 16;
+			this.burnTime -= 16;
+			
+			if (this.burnTime <= 0)
+			{
+				this.energy -= -this.burnTime;
+			}
+			
+			if (this.energy < 0)
+			{
+				this.energy = 0;
+			}
+		}
+		else if (canStartBurning())
+		{
+			this.fuelBurnTime = getItemBurnTime(inv[0]);
+			this.burnTime = this.fuelBurnTime;
+			--inv[0].stackSize;
+			if (inv[0].stackSize <= 0)
+			{
+				inv[0] = null;
+			}
+		}
+		
+		boolean isSmelting = false;
+		
+		if (canStartSmelting())
+		{
+			if (inv[1] != null)
+			{
+				ItemStack item = FurnaceRecipes.smelting().getSmeltingResult(inv[1]);
+				
+				if (item != null && this.energy >= 4)
+				{
+					this.currentItemEnergyProgress += 4;
+					isSmelting = true;
+				}
+			}
+		
+			if (inv[2] != null)
+			{
+				ItemStack item = FurnaceRecipes.smelting().getSmeltingResult(inv[2]);
+			
+				if (item != null && this.energy >= 4 && !isSmelting)
+				{
+					this.currentItemEnergyProgress += 4;
+					isSmelting = true;
+				}
+			}
+		
+			if (isSmelting)
+			{
+				this.energy -= 4;
+			}
+		}
+		
+		trySmelt(canSmelt());
 		
 		super.updateEntity();
 	}
 	
-	public int getSmeltProgressScaled(int val, int item)
+	public int canSmelt()
 	{
-		if (item == 0)
+		int result = 0;
+		ItemStack result1 = null;
+		ItemStack result2 = null;
+		
+		if (this.inv[1] != null && this.currentItemEnergyProgress >= this.needEnergy)
 		{
-			if (this.currentItemEnergyProgress1 == 0)
+			result1 = FurnaceRecipes.smelting().getSmeltingResult(inv[1]);
+			if (result1 != null)
 			{
-				return 0;
+				if (this.inv[3] == null)
+				{
+					result |= 1;
+				}
+				else
+				{
+					if (this.inv[3].isItemEqual(result1))
+					{
+						int res = inv[3].stackSize + result1.stackSize;
+						if (res <= getInventoryStackLimit())
+						{
+							result |= 1;
+						}
+					}
+				}
 			}
-			
-			return this.currentItemEnergyProgress1 * val / this.needEnergy;
 		}
-		else
+		
+		if (this.inv[2] != null && this.currentItemEnergyProgress >= this.needEnergy)
 		{
-			if (this.currentItemEnergyProgress2 == 0)
+			result2 = FurnaceRecipes.smelting().getSmeltingResult(inv[2]);
+			if (result2 != null)
 			{
-				return 0;
+				if (this.inv[4] == null)
+				{
+					result |= 2;
+				}
+				else
+				{
+					if (this.inv[4].isItemEqual(result2))
+					{
+						int res = inv[4].stackSize + result2.stackSize;
+						if (res <= getInventoryStackLimit())
+						{
+							result |= 2;
+						}
+					}
+				}
 			}
-			
-			return this.currentItemEnergyProgress2 * val / this.needEnergy;
 		}
+		
+		return result;
+	}
+	
+	public boolean canStartSmelting()
+	{
+		ItemStack result1 = null;
+		ItemStack result2 = null;
+		
+		if (this.inv[1] != null)
+		{
+			result1 = FurnaceRecipes.smelting().getSmeltingResult(inv[1]);
+			if (result1 != null)
+			{
+				if (this.inv[3] == null)
+				{
+					return true;
+				}
+				else
+				{
+					if (this.inv[3].isItemEqual(result1))
+					{
+						int res = inv[3].stackSize + result1.stackSize;
+						if (res <= getInventoryStackLimit())
+						{
+							return true;
+						}
+					}
+				}
+			}
+		}
+		
+		if (this.inv[2] != null && this.currentItemEnergyProgress >= this.needEnergy)
+		{
+			result2 = FurnaceRecipes.smelting().getSmeltingResult(inv[2]);
+			if (result2 != null)
+			{
+				if (this.inv[4] == null)
+				{
+					return true;
+				}
+				else
+				{
+					if (this.inv[4].isItemEqual(result2))
+					{
+						int res = inv[4].stackSize + result2.stackSize;
+						if (res <= getInventoryStackLimit())
+						{
+							return true;
+						}
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public void trySmelt(int id)
+	{
+		if (id == 0)
+		{
+			return;
+		}
+		
+		if ((id & 1) != 0)
+		{
+			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.inv[1]);
+
+			if (this.inv[3] == null)
+            {
+                this.inv[3] = itemstack.copy();
+            }
+            else if (this.inv[3].getItem() == itemstack.getItem())
+            {
+                this.inv[3].stackSize += itemstack.stackSize;
+            }
+
+            --this.inv[1].stackSize;
+
+            if (this.inv[1].stackSize <= 0)
+            {
+                this.inv[1] = null;
+            }
+            
+            this.currentItemEnergyProgress = 0;
+		}
+		
+		if ((id & 2) != 0)
+		{
+            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.inv[2]);
+
+            if (this.inv[4] == null)
+            {
+                this.inv[4] = itemstack.copy();
+            }
+            else if (this.inv[4].getItem() == itemstack.getItem())
+            {
+                this.inv[4].stackSize += itemstack.stackSize;
+            }
+
+            --this.inv[2].stackSize;
+
+            if (this.inv[2].stackSize <= 0)
+            {
+                this.inv[2] = null;
+            }
+            this.currentItemEnergyProgress = 0;
+		}
+	}
+	
+    public static boolean isItemFuel(ItemStack stack)
+    {
+    	return getItemBurnTime(stack) > 0;
+    }
+    
+    public static int getItemBurnTime(ItemStack stack)
+    {
+        if (stack == null)
+        {
+            return 0;
+        }
+        else
+        {
+            Item item = stack.getItem();
+
+            if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.air)
+            {
+                Block block = Block.getBlockFromItem(item);
+
+                if (block == Blocks.wooden_slab)
+                {
+                    return 150;
+                }
+
+                if (block.getMaterial() == Material.wood)
+                {
+                    return 300;
+                }
+
+                if (block == Blocks.coal_block)
+                {
+                    return 16000;
+                }
+            }
+
+            if (item instanceof ItemTool && ((ItemTool)item).getToolMaterialName().equals("WOOD")) return 200;
+            if (item instanceof ItemSword && ((ItemSword)item).getToolMaterialName().equals("WOOD")) return 200;
+            if (item instanceof ItemHoe && ((ItemHoe)item).getToolMaterialName().equals("WOOD")) return 200;
+            if (item == Items.stick) return 100;
+            if (item == Items.coal) return 1600;
+            if (item == Items.lava_bucket) return 20000;
+            if (item == Item.getItemFromBlock(Blocks.sapling)) return 100;
+            if (item == Items.blaze_rod) return 2400;
+            return GameRegistry.getFuelValue(stack);
+        }
+    }
+    
+	public boolean isBurning()
+	{
+		return this.energy < this.maxEnergy && this.burnTime > 0;	
+	}
+	
+	public boolean canStartBurning()
+	{
+		return isItemFuel(this.inv[0]) && this.energy < this.maxEnergy;
+	}
+	/**
+	 * Обрабатываем ли предметы в данный момент
+	 */
+	public boolean isSmelting()
+	{
+		return this.currentItemEnergyProgress > 0;
+	}
+	
+	public int getSmeltProgressScaled(int val)
+	{
+		return this.currentItemEnergyProgress * val / this.needEnergy;
 	}
 	
 	public int getEnergyProgressScaled(int val)

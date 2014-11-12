@@ -21,7 +21,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import ru.nordwest.nord.common.recipe.FlowingRecipes;
 
-// TODO update flowing system
 public class TileEntityFlowing extends TileEntity implements IInventory {
 	/**
 	 * inv[0] - fuel
@@ -38,11 +37,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
 	
 	public static int cookTimeLen = 200; // ticks
 	public static int maxEnergy = 12800; // 8 parts of coal
-	
-    /*public TileEntityFlowing()  {
-    	super();
-        inv = new ItemStack[4];
-    }*/
     
 	@Override
 	public int getSizeInventory() {

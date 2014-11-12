@@ -23,8 +23,7 @@ public class ContainerGreatFurnace extends Container {
 	private int lastBurnTime;
 	private int lastFuelBurnTime;
 	
-	private int lastCurrentItemEnergyProgress1;
-	private int lastCurrentItemEnergyProgress2;
+	private int lastCurrentItemEnergyProgress;
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
@@ -54,8 +53,7 @@ public class ContainerGreatFurnace extends Container {
         icrafter.sendProgressBarUpdate(this, 1, this.tileEntity.burnTime);
         icrafter.sendProgressBarUpdate(this, 2, this.tileEntity.fuelBurnTime);
  
-        icrafter.sendProgressBarUpdate(this, 3, this.tileEntity.currentItemEnergyProgress1);
-        icrafter.sendProgressBarUpdate(this, 4, this.tileEntity.currentItemEnergyProgress2);
+        icrafter.sendProgressBarUpdate(this, 3, this.tileEntity.currentItemEnergyProgress);
     }
     
     public void detectAndSendChanges()
@@ -75,18 +73,14 @@ public class ContainerGreatFurnace extends Container {
             if (this.lastFuelBurnTime != this.tileEntity.fuelBurnTime)
                 icrafting.sendProgressBarUpdate(this, 2, this.tileEntity.burnTime);
 
-            if (this.lastCurrentItemEnergyProgress1 != this.tileEntity.currentItemEnergyProgress1)
-                icrafting.sendProgressBarUpdate(this, 3, this.tileEntity.currentItemEnergyProgress1);
-            
-            if (this.lastCurrentItemEnergyProgress2 != this.tileEntity.currentItemEnergyProgress2)
-                icrafting.sendProgressBarUpdate(this, 4, this.tileEntity.currentItemEnergyProgress2);
+            if (this.lastCurrentItemEnergyProgress != this.tileEntity.currentItemEnergyProgress)
+                icrafting.sendProgressBarUpdate(this, 3, this.tileEntity.currentItemEnergyProgress);
         }
 
     	this.lastEnergy = this.tileEntity.energy;
     	this.lastBurnTime = this.tileEntity.burnTime;
     	this.lastFuelBurnTime = this.tileEntity.fuelBurnTime;
-    	this.lastCurrentItemEnergyProgress1 = this.tileEntity.currentItemEnergyProgress1;
-    	this.lastCurrentItemEnergyProgress2 = this.tileEntity.currentItemEnergyProgress2;
+    	this.lastCurrentItemEnergyProgress = this.tileEntity.currentItemEnergyProgress;
     }
     
     @SideOnly(Side.CLIENT)
@@ -105,10 +99,7 @@ public class ContainerGreatFurnace extends Container {
         	this.tileEntity.fuelBurnTime = val;
         	break;
         case 3:
-        	this.tileEntity.currentItemEnergyProgress1 = val;
-        	break;
-        case 4:
-        	this.tileEntity.currentItemEnergyProgress2 = val;
+        	this.tileEntity.currentItemEnergyProgress = val;
         	break;
         }
     }

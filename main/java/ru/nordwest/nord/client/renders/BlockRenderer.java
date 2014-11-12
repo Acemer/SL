@@ -72,7 +72,6 @@ public class BlockRenderer {
 	}
 
 	public boolean shouldRender3DInInventory() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }
