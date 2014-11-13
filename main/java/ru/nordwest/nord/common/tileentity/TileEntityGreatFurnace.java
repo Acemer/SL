@@ -21,6 +21,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.biome.BiomeGenBase.FlowerEntry;
 import net.minecraftforge.common.util.Constants;
 import ru.nordwest.nord.util.BlockCoord;
@@ -243,7 +244,7 @@ public class TileEntityGreatFurnace extends TileEntity {
 	 * @return
 	 * false: блок не создан, печка построена неверно
 	 */
-	public boolean tryToCreateTechBlock(World world, int xp, int yp, int zp)
+	public boolean tryToCreateTechBlock(World world, int xp, int yp, int zp, int side)
 	{
 		HashSet<BlockCoord> path = new HashSet();
 		BlockCoord cur = new BlockCoord(xp, yp, zp);
@@ -258,7 +259,8 @@ public class TileEntityGreatFurnace extends TileEntity {
 			
 			// Передняя сторона
 			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z + 1)).textureCode = 1;
-			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z + 1)).textureCode = 2;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z + 1)).textureCode = 
+					(side == 0 ? (0 << 8) | (28) : 2);
 			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z + 1)).textureCode = 3;
 			
 			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y    , this.techBlock.z + 1)).textureCode = 4;
@@ -271,9 +273,11 @@ public class TileEntityGreatFurnace extends TileEntity {
 			
 			
 			// Центральная сторона
-			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z    )).textureCode = 10;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z    )).textureCode =
+					(side == 1 ? (1 << 8) | (28) : 10);
 			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z    )).textureCode = 11;
-			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z    )).textureCode = 12;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z    )).textureCode =
+					(side == 3 ? (3 << 8) | (28) : 12);
 			
 			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y    , this.techBlock.z    )).textureCode = 13;
 		  //((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y    , this.techBlock.z    )).textureCode = 14; // Технический блок
@@ -286,7 +290,8 @@ public class TileEntityGreatFurnace extends TileEntity {
 			
 			// Заднаяя сторона
 			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y - 1, this.techBlock.z - 1)).textureCode = 19;
-			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z - 1)).textureCode = 20;
+			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x    , this.techBlock.y - 1, this.techBlock.z - 1)).textureCode =
+					(side == 2 ? (2 << 8) | (28) : 20);
 			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x + 1, this.techBlock.y - 1, this.techBlock.z - 1)).textureCode = 21;
 			
 			((TileEntityGreatFurnace) world.getTileEntity(this.techBlock.x - 1, this.techBlock.y    , this.techBlock.z - 1)).textureCode = 22;
@@ -431,7 +436,26 @@ public class TileEntityGreatFurnace extends TileEntity {
 	{
 		if (this.techBlock == null)
 		{
-			if (!tryToCreateTechBlock(world, x, y, z))
+			int look = MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			
+			int side = 0;
+			switch (look)
+			{
+			case 2:
+				side = 0;
+				break;
+			case 3:
+				side = 1;
+				break;
+			case 0:
+				side = 2;
+				break;
+			case 1:
+				side = 3;
+				break;
+			}
+			
+			if (!tryToCreateTechBlock(world, x, y, z, side))
 			{
 				return false;
 			}

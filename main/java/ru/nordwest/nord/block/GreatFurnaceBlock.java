@@ -1,5 +1,7 @@
 package ru.nordwest.nord.block;
 
+import java.util.List;
+
 import org.apache.logging.log4j.Level;
 
 import cpw.mods.fml.common.FMLLog;
@@ -14,12 +16,15 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -66,17 +71,14 @@ public class GreatFurnaceBlock extends BlockContainer {
 			return this.icons[7];
 		}
 		
-		int meta = ent.textureCode;
+		int meta = ent.textureCode & 0x000000FF;
+		int commandBlockSide = (ent.textureCode & 0x0000FF00) >> 8;
+		
 		if (meta == 0)
 		{
 			return this.icons[7];
 		}
 		
-		/*
-		 * TODO к релизу заменить неиспользуемые кейсы с return this.icons[0]
-		 * на deafult.
-		 * (сейчас сделано для легкости модификации)
-		 */
 		// Передняя сторона
 	    switch (meta)
 	    {
@@ -85,18 +87,10 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    	{
 	    	case 0:
 	    		return this.icons[3];
-	    	case 1:
-	    		return this.icons[0];
-	    	case 2:
-	    		return this.icons[0];
 	    	case 3:
 	    		return this.icons[3];
 	    	case 4:
 	    		return this.icons[4];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
@@ -105,18 +99,8 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    	{
 	    	case 0:
 	    		return this.icons[5];
-	    	case 1:
-	    		return this.icons[0];
-	    	case 2:
-	    		return this.icons[0];
 	    	case 3:
-	    		return this.icons[2];
-	    	case 4:
-	    		return this.icons[0];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
+	    		return this.icons[5];
 	    	}
 	    	break;
 	    	
@@ -125,78 +109,32 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    	{
 	    	case 0:
 	    		return this.icons[4];
-	    	case 1:
-	    		return this.icons[0];
-	    	case 2:
-	    		return this.icons[0];
 	    	case 3:
 	    		return this.icons[4];
 	    	case 4:
 	    		return this.icons[0];
 	    	case 5:
 	    		return this.icons[3];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
 	    case 4:     // Левый блок
 	    	switch(side)
 	    	{
-	    	case 0:
-	    		return this.icons[0];
-	    	case 1:
-	    		return this.icons[0];
-	    	case 2:
-	    		return this.icons[0];
 	    	case 3:
 	    		return this.icons[6];
 	    	case 4:
 	    		return this.icons[8];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
-	    	
-	    case 5:     // Центральный блок
-	    	switch(side)
-	    	{
-	    	case 0:
-	    		return this.icons[0];
-	    	case 1:
-	    		return this.icons[0];
-	    	case 2:
-	    		return this.icons[0];
-	    	case 3:
-	    		return this.icons[0];
-	    	case 4:
-	    		return this.icons[0];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
-	    	}
-	    	break;
-	    	
+
 	    case 6:     // Правый блок
 	    	switch(side)
 	    	{
-	    	case 0:
-	    		return this.icons[0];
-	    	case 1:
-	    		return this.icons[0];
-	    	case 2:
-	    		return this.icons[0];
 	    	case 3:
 	    		return this.icons[8];
-	    	case 4:
-	    		return this.icons[0];
 	    	case 5:
 	    		return this.icons[6];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
@@ -207,56 +145,32 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    		return this.icons[3];
 	    	case 1:
 	    		return this.icons[3];
-	    	case 2:
-	    		return this.icons[0];
 	    	case 3:
 	    		return this.icons[9];
 	    	case 4:
 	    		return this.icons[10];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
 	    case 8:     // Верхний блок
 	    	switch(side)
 	    	{
-	    	case 0:
-	    		return this.icons[0];
 	    	case 1:
 	    		return this.icons[5];
-	    	case 2:
-	    		return this.icons[0];
 	    	case 3:
 	    		return this.icons[11];
-	    	case 4:
-	    		return this.icons[0];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
 	    case 9:     // Правый верхний блок
 	    	switch(side)
 	    	{
-	    	case 0:
-	    		return this.icons[0];
 	    	case 1:
 	    		return this.icons[4];
-	    	case 2:
-	    		return this.icons[0];
 	    	case 3:
 	    		return this.icons[10];
-	    	case 4:
-	    		return this.icons[0];
 	    	case 5:
 	    		return this.icons[9];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    }
@@ -269,24 +183,10 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    	{
 	    	case 0:
 	    		return this.icons[6];
-	    	case 1:
-	    		return this.icons[0];
-	    	case 2:
-	    		return this.icons[0];
-	    	case 3:
-	    		return this.icons[0];
 	    	case 4:
 	    		return this.icons[5];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
-	    	
-	    	// Нижний блок
-	    case 11:
-	    	return this.icons[0];
 	    	
 	    	// Правый нижний блок
 	    case 12:
@@ -294,66 +194,28 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    	{
 	    	case 0:
 	    		return this.icons[8];
-	    	case 1:
-	    		return this.icons[0];
-	    	case 2:
-	    		return this.icons[0];
-	    	case 3:
-	    		return this.icons[0];
-	    	case 4:
-	    		return this.icons[0];
 	    	case 5:
 	    		return this.icons[5];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
-	    
-	    case 13:
-	    case 14:
-	    case 15:
-	    	return this.icons[0];
 	    	
 	    case 16: // Левый верхний блок
 	    	switch(side)
 	    	{
-	    	case 0:
-	    		return this.icons[0];
 	    	case 1:
 	    		return this.icons[6];
-	    	case 2:
-	    		return this.icons[0];
-	    	case 3:
-	    		return this.icons[0];
 	    	case 4:
 	    		return this.icons[11];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
-	    	
-	    case 17: // Центральный верхний блок
-	    	return this.icons[0];
 	    	
 	    case 18: // Правый верхний блок
 	    	switch(side)
 	    	{
-	    	case 0:
-	    		return this.icons[0];
 	    	case 1:
 	    		return this.icons[8];
-	    	case 2:
-	    		return this.icons[0];
-	    	case 3:
-	    		return this.icons[0];
-	    	case 4:
-	    		return this.icons[0];
 	    	case 5:
 	    		return this.icons[11];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
@@ -367,18 +229,10 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    	{
 	    	case 0:
 	    		return this.icons[9];
-	    	case 1:
-	    		return this.icons[0];
 	    	case 2:
 	    		return this.icons[4];
-	    	case 3:
-	    		return this.icons[0];
 	    	case 4:
 	    		return this.icons[3];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
@@ -387,18 +241,8 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    	{
 	    	case 0:
 	    		return this.icons[11];
-	    	case 1:
-	    		return this.icons[0];
 	    	case 2:
 	    		return this.icons[5];
-	    	case 3:
-	    		return this.icons[0];
-	    	case 4:
-	    		return this.icons[0];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
@@ -407,61 +251,30 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    	{
 	    	case 0:
 	    		return this.icons[10];
-	    	case 1:
-	    		return this.icons[0];
 	    	case 2:
 	    		return this.icons[3];
-	    	case 3:
-	    		return this.icons[0];
-	    	case 4:
-	    		return this.icons[0];
 	    	case 5:
 	    		return this.icons[4];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
 	    case 22:     // Левый блок
 	    	switch(side)
 	    	{
-	    	case 0:
-	    		return this.icons[0];
-	    	case 1:
-	    		return this.icons[0];
 	    	case 2:
 	    		return this.icons[8];
-	    	case 3:
-	    		return this.icons[0];
 	    	case 4:
 	    		return this.icons[6];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
-	    	
-	    case 23:     // Центральный блок
-	    	return this.icons[0];
 	    	
 	    case 24:     // Правый блок
 	    	switch(side)
 	    	{
-	    	case 0:
-	    		return this.icons[0];
-	    	case 1:
-	    		return this.icons[0];
 	    	case 2:
 	    		return this.icons[6];
-	    	case 3:
-	    		return this.icons[0];
-	    	case 4:
-	    		return this.icons[0];
 	    	case 5:
 	    		return this.icons[8];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
@@ -474,56 +287,60 @@ public class GreatFurnaceBlock extends BlockContainer {
 	    		return this.icons[9];
 	    	case 2:
 	    		return this.icons[10];
-	    	case 3:
-	    		return this.icons[0];
 	    	case 4:
 	    		return this.icons[9];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
 	    case 26:     // Верхний блок
 	    	switch(side)
 	    	{
-	    	case 0:
-	    		return this.icons[0];
 	    	case 1:
-	    		return this.icons[11];
 	    	case 2:
 	    		return this.icons[11];
-	    	case 3:
-	    		return this.icons[0];
-	    	case 4:
-	    		return this.icons[0];
-	    	case 5:
-	    		return this.icons[0];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
 	    	
 	    case 27:     // Правый верхний блок
 	    	switch(side)
 	    	{
-	    	case 0:
-	    		return this.icons[0];
 	    	case 1:
 	    		return this.icons[10];
 	    	case 2:
 	    		return this.icons[9];
-	    	case 3:
-	    		return this.icons[0];
-	    	case 4:
-	    		return this.icons[0];
 	    	case 5:
 	    		return this.icons[10];
-	    	case 6:
-	    		return this.icons[0];
 	    	}
 	    	break;
+	    	
+	    case 28:    // Командный блок
+	    	switch (side)
+	    	{
+	    	case 0:
+	    		switch (commandBlockSide)
+	    		{
+	    		case 0:
+	    			return this.icons[5];
+	    		case 1:
+	    			return this.icons[6];
+	    		case 2:
+	    			return this.icons[11];
+	    		case 3:
+	    			return this.icons[8];
+	    		}
+	    	}
+	    	
+	    	if (commandBlockSide == 0 && side == 3)
+	    		return this.icons[2];
+	    	
+	    	if (commandBlockSide == 1 && side == 4)
+	    		return this.icons[2];
+	    	
+	    	if (commandBlockSide == 2 && side == 2)
+	    		return this.icons[2];
+	    	
+	    	if (commandBlockSide == 3 && side == 5)
+	    		return this.icons[2];
 	    }
 	    
 	    return this.icons[0];
@@ -672,7 +489,26 @@ public class GreatFurnaceBlock extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase ent, ItemStack item) {
 		TileEntityGreatFurnace tileEnt = (TileEntityGreatFurnace)world.getTileEntity(x, y, z);
-		if (tileEnt.tryToCreateTechBlock(world, x, y, z))
+		int look = MathHelper.floor_double((double)(ent.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		
+		int side = 0;
+		switch (look)
+		{
+		case 2:
+			side = 0;
+			break;
+		case 3:
+			side = 1;
+			break;
+		case 0:
+			side = 2;
+			break;
+		case 1:
+			side = 3;
+			break;
+		}
+		
+		if (tileEnt.tryToCreateTechBlock(world, x, y, z, side))
 		{
 			tileEnt.broadcastSetTechBlock(world, tileEnt.techBlock, tileEnt.techBlock);
 		}
