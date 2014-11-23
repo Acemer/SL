@@ -18,9 +18,8 @@ import ru.nordwest.nord.common.container.ContainerFlowing;
 import ru.nordwest.nord.common.tileentity.TileEntityBrickFurnace;
 import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
 
-public class GuiFlowing extends GuiContainer {
+public class GuiFlowing extends GuiMachine {
 	private TileEntityFlowing tileEntity;
-	private EntityPlayer player;
 	
 	public GuiFlowing(InventoryPlayer iPlayer, TileEntityFlowing tileFlowing, EntityPlayer player) {
 		super(new ContainerFlowing(iPlayer, tileFlowing));
@@ -32,32 +31,16 @@ public class GuiFlowing extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     	int xAxis = (mouseX - (width - xSize) / 2);
     	int yAxis = (mouseY - (height - ySize) / 2);
-    	//this.fontRendererObj.drawString(String.valueOf(xAxis)+":"+String.valueOf(yAxis), xAxis, yAxis, 4210752);
     	String name = this.tileEntity.hasCustomInventoryName()
 				? this.tileEntity.getInventoryName()
 				: I18n.format(this.tileEntity.getInventoryName());
 				
-		int energy = this.tileEntity.energy / 16;
-		int maxEnergy = this.tileEntity.maxEnergy / 16;
+		int energy = this.tileEntity.getEnergy() / 16;
+		int maxEnergy = this.tileEntity.getMaxEnergy() / 16;
 		this.fontRendererObj.drawString(name, 16, 6, 4210752);
-		if (xAxis > 9 && xAxis < 13 && yAxis > 20 && yAxis < 74 ){
-			this.drawCreativeTabHoveringText(String.valueOf(energy) + "/" + String.valueOf(maxEnergy) + " share" + (energy > 1 ? "s" : ""), xAxis, yAxis);
-		}
+		drawOverText(9,20,4,54,xAxis,yAxis, String.valueOf(energy) + "/" + String.valueOf(maxEnergy) + " share" + (energy > 1 ? "s" : ""));
     }
-    
-    @Override
-    protected void drawCreativeTabHoveringText(String text, int x, int y)
-    {
-    	func_146283_a(Arrays.asList(new String[] {text}), x, y);
-    }
-    @Override
-    protected void func_146283_a(List list, int x, int y)
-    {
-    	GL11.glPushAttrib(GL11.GL_ENABLE_BIT + GL11.GL_LIGHTING_BIT);
-    	super.func_146283_a(list, x, y);
-    	GL11.glPopAttrib();
-    }
-    
+
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
     	this.mc.renderEngine.bindTexture(new ResourceLocation(Nord.MODID + ":textures/gui/container/flowing.png"));

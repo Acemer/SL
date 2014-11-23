@@ -2,7 +2,7 @@ package ru.nordwest.nord.common.handler;
 
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.client.gui.GuiBrickFurnace;
-import ru.nordwest.nord.client.gui.GuiCrusher;
+import ru.nordwest.nord.client.gui.GuiSmelter;
 import ru.nordwest.nord.client.gui.GuiFlowing;
 import ru.nordwest.nord.client.gui.GuiGreatFurnace;
 import ru.nordwest.nord.common.container.ContainerBrickFurnace;
@@ -64,7 +64,7 @@ public class GuiHandler implements IGuiHandler {
 
 		switch (ID) {
 			case Nord.guiIDSmelter :
-				return new GuiCrusher(player.inventory,
+				return new GuiSmelter(player.inventory,
 						(TileEntitySmelter) tileEntity, player);
 				
 			case Nord.guiIDBrickFurnace :

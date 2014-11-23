@@ -40,7 +40,7 @@ public class ContainerFlowing extends Container {
     public void addCraftingToCrafters(ICrafting icrafter)
     {
         super.addCraftingToCrafters(icrafter);
-        icrafter.sendProgressBarUpdate(this, 0, this.tileEntity.energy);
+        icrafter.sendProgressBarUpdate(this, 0, this.tileEntity.getEnergy());
         icrafter.sendProgressBarUpdate(this, 1, this.tileEntity.burnTime);
         icrafter.sendProgressBarUpdate(this, 2, this.tileEntity.currentItemEnergyProgress);
         icrafter.sendProgressBarUpdate(this, 3, this.tileEntity.currentItemEnergyNeed);
@@ -54,9 +54,9 @@ public class ContainerFlowing extends Container {
         {
             ICrafting icrafting = (ICrafting)this.crafters.get(i);
 
-            if (this.lastEnergy != this.tileEntity.energy)
+            if (this.lastEnergy != this.tileEntity.getEnergy())
             {
-                icrafting.sendProgressBarUpdate(this, 0, this.tileEntity.energy);
+                icrafting.sendProgressBarUpdate(this, 0, this.tileEntity.getEnergy());
             }
 
             if (this.lastBurnTime != this.tileEntity.burnTime)
@@ -80,7 +80,7 @@ public class ContainerFlowing extends Container {
             }
         }
 
-    	this.lastEnergy = this.tileEntity.energy;
+    	this.lastEnergy = this.tileEntity.getEnergy();
     	this.lastBurnTime = this.tileEntity.burnTime;
     	this.lastCurrentItemEnergyProgress = this.tileEntity.currentItemEnergyProgress;
     	this.lastCurrentItemEnergyNeed = this.tileEntity.currentItemEnergyNeed;
@@ -93,7 +93,7 @@ public class ContainerFlowing extends Container {
         switch(var)
         {
         case 0:
-        	this.tileEntity.energy = val;
+        	this.tileEntity.setEnergy(val);
         	break;
         case 1:
         	this.tileEntity.burnTime = val;

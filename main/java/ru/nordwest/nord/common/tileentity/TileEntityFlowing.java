@@ -21,32 +21,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import ru.nordwest.nord.common.recipe.FlowingRecipes;
 
-public class TileEntityFlowing extends TileEntity implements IInventory {
-	/**
-	 * inv[0] - fuel
-	 * inv[1] - item to flow
-	 * inv[2] - result 1
-	 * inv[3] - result 2
-	 */
-	private ItemStack inv[] = new ItemStack[4];
-	public int energy;
+public class TileEntityFlowing extends AbstractEnergyMachina{
+	
 	public int burnTime;
 	public int fuelBurnTime;
 	public int currentItemEnergyProgress;
 	public int currentItemEnergyNeed;
 	
 	public static int cookTimeLen = 200; // ticks
-	public static int maxEnergy = 12800; // 8 parts of coal
     
-	@Override
-	public int getSizeInventory() {
-		return 4;
-	}
 
-	@Override
-	public ItemStack getStackInSlot(int slotID) {
-		return inv[slotID];
-	}
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
@@ -76,14 +60,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
         return stack;
 	}
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-        ItemStack stack = getStackInSlot(slot);
-        if (stack != null) {
-        	setInventorySlotContents(slot, null);
-        }
-        return stack;
-	}
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
@@ -109,14 +85,6 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this &&
                 player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) <= 64.0D;
-	}
-
-	@Override
-	public void openInventory() {		
-	}
-
-	@Override
-	public void closeInventory() {		
 	}
 
 	@Override
@@ -148,7 +116,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
             		inv[slot] = ItemStack.loadItemStackFromNBT(tag);
             }
             
-        	energy = tagCompound.getShort("energy");
+        	this.setEnergy(tagCompound.getShort("energy"));
         	burnTime = tagCompound.getShort("burnTime");
         	currentItemEnergyProgress = tagCompound.getShort("curEnergyProg");
         	currentItemEnergyNeed = tagCompound.getShort("curEnergyNeed");
@@ -157,7 +125,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
     	super.writeToNBT(tagCompound);
-    	tagCompound.setShort("energy", (short)energy);
+    	tagCompound.setShort("energy", (short)this.getEnergy());
     	tagCompound.setShort("burnTime", (short)burnTime);
     	tagCompound.setShort("curBurnTime", (short)currentItemEnergyProgress);
     	tagCompound.setShort("curCookTime", (short)currentItemEnergyNeed);
@@ -190,7 +158,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     @SideOnly(Side.CLIENT)
     public int getEnergyProgressScaled(int val)
     {
-        return energy * val / (maxEnergy);
+        return this.getEnergy() * val / (this.getMaxEnergy());
     }
     
     @SideOnly(Side.CLIENT)
@@ -206,17 +174,17 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     
     public boolean isBurning()
     {
-        return burnTime > 0 && energy < maxEnergy; // stop burning when we reach max energy
+        return burnTime > 0 && this.getEnergy() < this.getMaxEnergy(); // stop burning when we reach max energy
     }
     
     public boolean isFlowing()
     {
-    	return currentItemEnergyNeed > 0 && energy > 0;
+    	return currentItemEnergyNeed > 0 && this.getEnergy() > 0;
     }
     
     public boolean canSmelt()
     {
-    	if (energy >= maxEnergy)
+    	if (this.getEnergy() >= this.getMaxEnergy())
     	{
     		return false;
     	}
@@ -473,7 +441,7 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	if (isBurning())
     	{
     		burnTime -= 16;
-    		energy += 16;
+    		this.addEnergy(16);
     		
     		updated = true;
     		
@@ -496,11 +464,10 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     	}
     	
     	
-    	// ��������� ��������
     	if (isFlowing() && canStartFlowing())
     	{
     		currentItemEnergyProgress += 4;
-    		energy -= 4;
+    		this.subEnergy(4);
     		updated = true;
     		
     		if (canFlow())
@@ -528,4 +495,10 @@ public class TileEntityFlowing extends TileEntity implements IInventory {
     		
     	}
     }
+
+	@Override
+	public int getMaxEnergy() {
+		return 12800;
+	}
+
 }
