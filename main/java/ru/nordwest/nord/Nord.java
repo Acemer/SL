@@ -8,7 +8,9 @@ import ru.nordwest.nord.common.handler.*;
 import ru.nordwest.nord.common.tileentity.*;
 import ru.nordwest.nord.common.recipe.FlowingRecipes;
 import ru.nordwest.nord.item.*;
+import ru.nordwest.nord.util.Fuel;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -72,7 +74,15 @@ public class Nord {
 		MetallRegister.init();
 		DecoRegister.init();
 		FoodRegister.init();
-
+		
+		Fuel.getInstance().addFuel(Blocks.wooden_slab, 150);
+		Fuel.getInstance().addFuel(Blocks.coal_block, 16000);
+		Fuel.getInstance().addFuel(Material.wood, 300);
+		Fuel.getInstance().addFuel(Items.stick, 100);
+		Fuel.getInstance().addFuel(Items.coal, 1600);
+		Fuel.getInstance().addFuel(Items.lava_bucket, 20000);
+		Fuel.getInstance().addFuel(Blocks.sapling, 100);
+		Fuel.getInstance().addFuel(Items.blaze_rod, 2400);
 	}
 
 	@EventHandler
@@ -80,8 +90,8 @@ public class Nord {
 		Nord.proxy.registerRenderers();
 
 		packetPipeline.initialise();
-		// packetPipeline.registerPacket(YourPacket.class); //Ну и другие ваши
-		// пакеты аналогично.
+		// packetPipeline.registerPacket(YourPacket.class); //Ð�Ñƒ Ð¸ Ð´Ñ€ÑƒÐ³Ð¸Ðµ Ð²Ð°ÑˆÐ¸
+		// Ð¿Ð°ÐºÐµÑ‚Ñ‹ Ð°Ð½Ð°Ð»Ð¾Ð³Ð¸Ñ‡Ð½Ð¾.
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		
