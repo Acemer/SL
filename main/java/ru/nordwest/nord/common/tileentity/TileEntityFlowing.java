@@ -60,32 +60,12 @@ public class TileEntityFlowing extends AbstractEnergyMachina{
         return stack;
 	}
 
-
-	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-        inv[slot] = stack;
-	}
-
 	@Override
 	public String getInventoryName() {
 		return "Hogger";
 	}
 
-	@Override
-	public boolean hasCustomInventoryName() {
-		return true;
-	}
 
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
-		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this &&
-                player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) <= 64.0D;
-	}
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
@@ -155,11 +135,7 @@ public class TileEntityFlowing extends AbstractEnergyMachina{
         return currentItemEnergyProgress * val / currentItemEnergyNeed;
     }
     
-    @SideOnly(Side.CLIENT)
-    public int getEnergyProgressScaled(int val)
-    {
-        return this.getEnergy() * val / (this.getMaxEnergy());
-    }
+
     
     @SideOnly(Side.CLIENT)
     public int getBurnTimeRemainingScaled(int val)
@@ -280,7 +256,6 @@ public class TileEntityFlowing extends AbstractEnergyMachina{
     	
     	return ret;
     }
-    
     public boolean canStartFlowing()
     {
     	FlowingRecipes.FlowingRecipe rec = FlowingRecipes.getRecipe(inv[1]);

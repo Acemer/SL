@@ -1,5 +1,7 @@
 package ru.nordwest.nord.common.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -108,4 +110,18 @@ public abstract class AbstractEnergyMachina extends TileEntity
 	public ItemStack getStackInSlot(int slotID) {
 		return inv[slotID];
 	}
+	
+	@Override
+	public void setInventorySlotContents(int slot, ItemStack stack) {
+        inv[slot] = stack;
+	}
+	@Override
+	public boolean hasCustomInventoryName() {
+		return true;
+	}
+    @SideOnly(Side.CLIENT)
+    public int getEnergyProgressScaled(int val)
+    {
+        return this.getEnergy() * val / (this.getMaxEnergy());
+    }
 }
