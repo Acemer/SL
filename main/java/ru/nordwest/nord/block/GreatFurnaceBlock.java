@@ -436,6 +436,7 @@ public class GreatFurnaceBlock extends BlockContainer {
 		TileEntity ent = world.getTileEntity(x + 1, y, z);
 		if (ent instanceof TileEntityGreatFurnace)
 		{
+			((GreatFurnaceBlockTech) Nord.greatFurnaceTech).dropItems(world, (TileEntityGreatFurnace)ent);
 			((TileEntityGreatFurnace)ent).removeTechBlock(world);
 			super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 			return;
@@ -444,6 +445,7 @@ public class GreatFurnaceBlock extends BlockContainer {
 		ent =  world.getTileEntity(x - 1, y, z);
 		if (ent instanceof TileEntityGreatFurnace)
 		{
+			((GreatFurnaceBlockTech) Nord.greatFurnaceTech).dropItems(world, (TileEntityGreatFurnace)ent);
 			((TileEntityGreatFurnace)ent).removeTechBlock(world);
 			super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 			return;
@@ -452,6 +454,7 @@ public class GreatFurnaceBlock extends BlockContainer {
 		ent =  world.getTileEntity(x, y + 1, z);
 		if (ent instanceof TileEntityGreatFurnace)
 		{
+			((GreatFurnaceBlockTech) Nord.greatFurnaceTech).dropItems(world, (TileEntityGreatFurnace)ent);
 			((TileEntityGreatFurnace)ent).removeTechBlock(world);
 			super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 			return;
@@ -460,6 +463,7 @@ public class GreatFurnaceBlock extends BlockContainer {
 		ent =  world.getTileEntity(x, y - 1, z);
 		if (ent instanceof TileEntityGreatFurnace)
 		{
+			((GreatFurnaceBlockTech) Nord.greatFurnaceTech).dropItems(world, (TileEntityGreatFurnace)ent);
 			((TileEntityGreatFurnace)ent).removeTechBlock(world);
 			super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 			return;
@@ -468,6 +472,7 @@ public class GreatFurnaceBlock extends BlockContainer {
 		ent =  world.getTileEntity(x, y, z + 1);
 		if (ent instanceof TileEntityGreatFurnace)
 		{
+			((GreatFurnaceBlockTech) Nord.greatFurnaceTech).dropItems(world, (TileEntityGreatFurnace)ent);
 			((TileEntityGreatFurnace)ent).removeTechBlock(world);
 			super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 			return;
@@ -476,12 +481,11 @@ public class GreatFurnaceBlock extends BlockContainer {
 		ent =  world.getTileEntity(x, y, z - 1);
 		if (ent instanceof TileEntityGreatFurnace)
 		{
+			((GreatFurnaceBlockTech) Nord.greatFurnaceTech).dropItems(world, (TileEntityGreatFurnace)ent);
 			((TileEntityGreatFurnace)ent).removeTechBlock(world);
 			super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 			return;
 		}
-		
-		((GreatFurnaceBlockTech) Nord.greatFurnaceTech).dropItems(world, x, y, z);
 		
 		super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 	}

@@ -154,17 +154,20 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
 	public void updateEntity() {
 		if (isBurning())
 		{
-			this.energy += 16;
-			this.burnTime -= 16;
-			
-			if (this.burnTime <= 0)
+			if (this.energy + 16 <= this.maxEnergy) // TODO сделать нормальную проверку
 			{
-				this.energy -= -this.burnTime;
-			}
+				this.energy += 16;
+				this.burnTime -= 16;
 			
-			if (this.energy < 0)
-			{
-				this.energy = 0;
+				if (this.burnTime <= 0)
+				{
+					this.energy -= -this.burnTime;
+				}
+			
+				if (this.energy < 0)
+				{
+					this.energy = 0;
+				}
 			}
 		}
 		else if (canStartBurning())
@@ -298,7 +301,7 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
 			}
 		}
 		
-		if (this.inv[2] != null && this.currentItemEnergyProgress >= this.needEnergy)
+		if (this.inv[2] != null)
 		{
 			result2 = FurnaceRecipes.smelting().getSmeltingResult(inv[2]);
 			if (result2 != null)
@@ -465,4 +468,45 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
 		
 		return this.burnTime * val / this.fuelBurnTime;
 	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound tagCompound) {
+		super.readFromNBT(tagCompound);
+		
+        NBTTagList tagList = tagCompound.getTagList("Inventory", Constants.NBT.TAG_COMPOUND);
+
+        for (int i = 0; i < tagList.tagCount(); i++) {
+                NBTTagCompound tag = tagList.getCompoundTagAt(i);
+                byte slot = tag.getByte("Slot");
+        		inv[slot] = ItemStack.loadItemStackFromNBT(tag);
+        }
+        
+        this.energy = (int)tagCompound.getShort("energy");
+        this.burnTime = (int)tagCompound.getShort("burnTime");
+        this.fuelBurnTime = (int)tagCompound.getShort("fBurnTime");
+        this.currentItemEnergyProgress = (int)tagCompound.getShort("itemEnergyProg");
+	}
+	
+	@Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
+    	super.writeToNBT(tagCompound);
+    	
+    	tagCompound.setShort("energy", (short)this.energy);
+    	tagCompound.setShort("burnTime", (short)this.burnTime);
+    	tagCompound.setShort("fBurnTime", (short)this.fuelBurnTime);
+    	tagCompound.setShort("itemEnergyProg", (short)this.currentItemEnergyProgress);
+    	
+    	NBTTagList itemList = new NBTTagList();
+        for (int i = 0; i < inv.length; i++) {
+            ItemStack stack = inv[i];
+            if (stack != null) {
+            	NBTTagCompound tag = new NBTTagCompound();
+            	tag.setByte("Slot", (byte) i);
+            	stack.writeToNBT(tag);
+            	itemList.appendTag(tag);
+            }
+        }
+    	
+    	tagCompound.setTag("Inventory", itemList);
+    }
 }

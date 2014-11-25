@@ -2,9 +2,13 @@ package ru.nordwest.nord.block;
 
 import java.util.Random;
 
+import org.apache.logging.log4j.Level;
+
+import cpw.mods.fml.common.FMLLog;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.tileentity.TileEntityGreatFurnace;
 import ru.nordwest.nord.common.tileentity.TileEntityGreatFurnaceTech;
+import ru.nordwest.nord.util.BlockCoord;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -33,39 +37,42 @@ public class GreatFurnaceBlockTech extends BlockContainer {
 		return new TileEntityGreatFurnaceTech();
 	}
 	
-	public void dropItems(World world, int x, int y, int z) {
+	public void dropItems(World world, TileEntityGreatFurnace ent) {
         Random rand = new Random();
-
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (!(tileEntity instanceof IInventory)) {
-                return;
+        int x = ent.xCoord;
+        int y = ent.yCoord;
+        int z = ent.zCoord;
+        
+        if (ent == null || ent.techBlock == null)
+        {
+        	return;
         }
         
-        IInventory inventory = (IInventory) tileEntity;
-
+        BlockCoord techBlock = ent.techBlock;
+        
+        IInventory inventory = (IInventory)(world.getTileEntity(techBlock.x, techBlock.y, techBlock.z));
+        
         for (int i = 0; i < inventory.getSizeInventory(); i++) {
-                ItemStack item = inventory.getStackInSlot(i);
+        	ItemStack item = inventory.getStackInSlot(i);
 
-                if (item != null && item.stackSize > 0) {
-                        float rx = rand.nextFloat() * 0.8F + 0.1F;
-                        float ry = rand.nextFloat() * 0.8F + 0.1F;
-                        float rz = rand.nextFloat() * 0.8F + 0.1F;
+        	if (item != null && item.stackSize > 0) {
+        		float rx = rand.nextFloat() * 0.8F + 0.1F;
+        		float ry = rand.nextFloat() * 0.8F + 0.1F;
+        		float rz = rand.nextFloat() * 0.8F + 0.1F;
 
-                        EntityItem entityItem = new EntityItem(world,
-                                        x + rx, y + ry, z + rz,
-                                        item.copy());
+        		EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, item.copy());
 
-                        if (item.hasTagCompound()) {
-                                entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
-                        }
+        		if (item.hasTagCompound()) {
+        			entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
+        		}
 
-                        float factor = 0.05F;
-                        entityItem.motionX = rand.nextGaussian() * factor;
-                        entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
-                        entityItem.motionZ = rand.nextGaussian() * factor;
-                        world.spawnEntityInWorld(entityItem);
-                        item.stackSize = 0;
-                }
+        		float factor = 0.05F;
+        		entityItem.motionX = rand.nextGaussian() * factor;
+        		entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+        		entityItem.motionZ = rand.nextGaussian() * factor;
+        		world.spawnEntityInWorld(entityItem);
+        		item.stackSize = 0;
+        	}
         }
     }
 }

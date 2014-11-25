@@ -129,7 +129,7 @@ public class Nord {
 		 
 		 greatFurnaceTech = new GreatFurnaceBlockTech();
 		 GameRegistry.registerBlock(greatFurnaceTech, ItemBlock.class, "greatFurnaceTech");
-		 GameRegistry.registerTileEntity(TileEntityGreatFurnace.class, "TileEntityGreatFurnaceTech");
+		 GameRegistry.registerTileEntity(TileEntityGreatFurnaceTech.class, "TileEntityGreatFurnaceTech");
 	
 	}
 
