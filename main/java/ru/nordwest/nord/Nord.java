@@ -15,6 +15,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -54,6 +55,8 @@ public class Nord {
 	public static Block greatFurnace;
 	public static Block greatFurnaceTech;
 	public static Block greatFurnaceMain;
+	public static Block FoundryTech;
+	public static Block Foundry;
 	public static int greatFurnaceMainID;
 	//public static Item ifood;
 	public static int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
@@ -67,6 +70,7 @@ public class Nord {
 	public static final int guiIDFlowing = 22;
 	public static final int guiIDGreatFurnace = 23;
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
+
 
 	@EventHandler
 	public void preInit(final FMLPreInitializationEvent event) {
@@ -130,7 +134,14 @@ public class Nord {
 		 greatFurnaceTech = new GreatFurnaceBlockTech();
 		 GameRegistry.registerBlock(greatFurnaceTech, ItemBlock.class, "greatFurnaceTech");
 		 GameRegistry.registerTileEntity(TileEntityGreatFurnaceTech.class, "TileEntityGreatFurnaceTech");
-	
+		 
+		 FoundryTech = new FoundryBlockTech();
+		 GameRegistry.registerBlock(FoundryTech, ItemBlock.class, "FoundryBlockTech");
+		 GameRegistry.registerTileEntity(TileEntityFoundry.class, "TileEntityFoundry");
+		 ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFoundry.class, new TileEntityRendererFoundry());
+		 
+		 Foundry = new Foundry();
+		 GameRegistry.registerBlock(Foundry, ItemBlock.class, "FoundryBlock");
 	}
 
 	@EventHandler
