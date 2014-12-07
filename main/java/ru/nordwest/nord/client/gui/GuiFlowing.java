@@ -1,21 +1,12 @@
 package ru.nordwest.nord.client.gui;
 
-import java.util.Arrays;
-import java.util.List;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-
-import org.lwjgl.opengl.GL11;
 
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.container.ContainerFlowing;
-import ru.nordwest.nord.common.tileentity.TileEntityBrickFurnace;
 import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
 
 public class GuiFlowing extends GuiMachine {
@@ -50,7 +41,7 @@ public class GuiFlowing extends GuiMachine {
     	int l = (this.height - this.ySize) / 2;
     	this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
             
-    	int progress = this.tileEntity.getFlowProgressScaled(24);
+    	int progress = this.tileEntity.getProgressScaled(24);
     	this.drawTexturedModalRect(k + 78, l + 35, 180, 16, progress, 21);
                 
     	progress = this.tileEntity.getEnergyProgressScaled(52);

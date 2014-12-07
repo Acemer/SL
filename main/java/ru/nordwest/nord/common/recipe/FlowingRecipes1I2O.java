@@ -17,8 +17,8 @@ public class FlowingRecipes1I2O implements IRecipes1I2O {
 		recipes.add(recipe);
 	}
 	private static IRecipes1I2O INSTANCE;
-	@Override
-	public IRecipes1I2O INSTANCE() {
+
+	public static IRecipes1I2O INSTANCE() {
 		if (INSTANCE == null) {
 			INSTANCE = new FlowingRecipes1I2O();
 		}
@@ -31,7 +31,10 @@ public class FlowingRecipes1I2O implements IRecipes1I2O {
 	}
 	@Override
 	public IRecipe1I2O getRecipe(int index) {
-		return recipes.get(index);
+        if (index>-1)
+		    return recipes.get(index);
+        else
+            return null;
 	}
 	@Override
 	public int getIndexRecipe(ItemStack item) {
@@ -39,18 +42,17 @@ public class FlowingRecipes1I2O implements IRecipes1I2O {
 			return -1;
 		}
 
-		byte check = 0;
-		IRecipe1I2O recipe = null;
+		boolean check = true;
+		IRecipe1I2O recipe;
 		for (int i = 0; i < recipes.size(); i++) {
-			check = 0;
 			recipe = recipes.get(i);
-			check ^= (recipe.getInput().getItem() == item.getItem())? 1 : 0 ;
-			check ^= (recipe.getInput().getItemDamage() == item.getItemDamage())? 2 : 0;
-			check ^= (recipe.getInput().stackSize <= item.stackSize)? 4 : 0;
-			if ((check|0) == 0) {
+			check &= (recipe.getInput().getItem() == item.getItem());
+			check &= (recipe.getInput().getItemDamage() == item.getItemDamage());
+			check &= (recipe.getInput().stackSize <= item.stackSize);
+			if (check) {
 				return i;
 			}
 		}
-		return -check;
+		return -1;
 	}
 }

@@ -22,7 +22,7 @@ public class DecoRegister {
 					"stone_" + i);
 		}
 
-		// Фонари
+        // Фонари
 		for (int i = 0; i < Nord.deco2.length; i++) {
 			Nord.deco2[i] = new LightLampBlock(Material.glass, i)
 					.setBlockName("flashlight_" + i)

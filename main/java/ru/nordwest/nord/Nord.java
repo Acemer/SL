@@ -5,6 +5,7 @@ import java.util.Random;
 import ru.nordwest.nord.block.*;
 import ru.nordwest.nord.common.*;
 import ru.nordwest.nord.common.handler.*;
+import ru.nordwest.nord.common.recipe.FlowingRecipes1I2O;
 import ru.nordwest.nord.common.tileentity.*;
 import ru.nordwest.nord.common.recipe.FlowingRecipes;
 import ru.nordwest.nord.item.*;
@@ -94,8 +95,7 @@ public class Nord {
 		Nord.proxy.registerRenderers();
 
 		packetPipeline.initialise();
-		// packetPipeline.registerPacket(YourPacket.class); //Ð�Ñƒ Ð¸ Ð´Ñ€ÑƒÐ³Ð¸Ðµ Ð²Ð°ÑˆÐ¸
-		// Ð¿Ð°ÐºÐµÑ‚Ñ‹ Ð°Ð½Ð°Ð»Ð¾Ð³Ð¸Ñ‡Ð½Ð¾.
+		// packetPipeline.registerPacket(YourPacket.class);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		
@@ -123,9 +123,11 @@ public class Nord {
 		 GameRegistry.registerTileEntity(TileEntityFlowing.class, "TileEntityFlowing");
 		 GameRegistry.addRecipe(new ItemStack(flowingBlock, 1), "xxx", "x x", "xxx", // TODO fix recipe
 				 'x', new ItemStack(Blocks.stone, 1));
-		 FlowingRecipes.addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.stone), 1),
-				 new ItemStack(Item.getItemFromBlock(Blocks.dirt), 2),
-				 new ItemStack(Items.diamond, 5), 60);
+		 FlowingRecipes1I2O.addRecipe(
+                 new ItemStack(Item.getItemFromBlock(Blocks.stone), 1),
+                 new ItemStack(Item.getItemFromBlock(Blocks.dirt), 2),
+                 new ItemStack(Items.diamond, 5),
+                 60,100,5);
 		
 		 greatFurnace = new GreatFurnaceBlock();
 		 GameRegistry.registerBlock(greatFurnace, ItemBlock.class, "greatFurnace");

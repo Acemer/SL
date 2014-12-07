@@ -102,7 +102,7 @@ public class LightLampBlock extends MetadataBlock {
 
 	private boolean canPlaceOn(final World par1World, final int par2,
 			final int par3, final int par4) {
-		if (World.doesBlockHaveSolidTopSurface(par1World, par2, par3, par4)) {
+		if (World.doesBlockHaveSolidTopSurface(par1World, par2, par3, par4) || par1World.getBlock( par2, par3, par4)==this) {
 			return true;
 		} else {
 			final Block block = par1World.getBlock(par2, par3, par4);

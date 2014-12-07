@@ -22,6 +22,8 @@ public class BaseDecoStoneBlock extends MetadataBlock {
 	public BaseDecoStoneBlock(final Material par2Material, final int index) {
 		super(par2Material, 16);
 		this.index = index;
+        setHardness(3);
+        setResistance(3);
 	}
 
 	@Override
@@ -39,7 +41,7 @@ public class BaseDecoStoneBlock extends MetadataBlock {
 		this.texture = new IIcon[this.type];
 		for (int i = 0; i < this.type; i++) {
 			this.texture[i] = par1IconRegister.registerIcon(Nord.MODID + ":"
-					+ this.getTextureName() + "/" + this.getTextureName() + "_"
+					+ "stone/" + this.getTextureName() + "_"
 					+ this.index);
 		}
 	}

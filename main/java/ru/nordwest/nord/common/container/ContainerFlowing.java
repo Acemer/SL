@@ -3,6 +3,7 @@ package ru.nordwest.nord.common.container;
 import org.apache.logging.log4j.Level;
 
 import ru.nordwest.nord.common.recipe.FlowingRecipes;
+import ru.nordwest.nord.common.recipe.FlowingRecipes1I2O;
 import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
 import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 import cpw.mods.fml.common.FMLLog;
@@ -30,7 +31,7 @@ public class ContainerFlowing extends Container {
 		tileEntity = ent;
 		
         addSlotToContainer(new Slot(tileEntity, 0, 18, 58)); // fuel
-        addSlotToContainer(new Slot(tileEntity, 1, 53, 38)); // item to flow
+        addSlotToContainer(new Slot(tileEntity, 1, 53, 38)); // item to work
         addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, 2, 107, 39)); // result1
         addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, 3, 128, 39)); // result2
         
@@ -141,7 +142,7 @@ public class ContainerFlowing extends Container {
                        slotObject.onSlotChange(stackInSlot, stack);
                     }
                     else if(slot != 1 && slot != 0){
-                    	boolean _check = FlowingRecipes.hasRecipe(stackInSlot);
+                    	boolean _check = FlowingRecipes1I2O.INSTANCE().getIndexRecipe(stackInSlot)!=-1;
 						if (_check){
 							if(!this.mergeItemStack(stackInSlot, 1, 2, false)) {
 								return null;
