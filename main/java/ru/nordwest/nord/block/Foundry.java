@@ -19,11 +19,11 @@ public class Foundry extends Block {
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return Nord.FoundryTech.canPlaceBlockAt(world, x, y, z);
+		return Nord.foundryTech.canPlaceBlockAt(world, x, y, z);
 	};
 	
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
-		world.setBlock(x, y, z, Nord.FoundryTech);
+		world.setBlock(x, y, z, Nord.foundryTech);
 	}
 }

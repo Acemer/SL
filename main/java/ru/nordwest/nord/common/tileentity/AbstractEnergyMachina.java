@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
+import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.recipe.FlowingRecipes;
 import ru.nordwest.nord.common.recipe.*;
 import ru.nordwest.nord.util.Fuel;
@@ -20,9 +21,7 @@ import ru.nordwest.nord.util.Fuel;
  * Абстрактная машина с 1 входом, 2 выходами и энергией
  */
 public abstract class AbstractEnergyMachina extends TileEntity
-		implements
-			IInventory,
-			IEnergyTile {
+		implements IMachine{
 	/**
 	 * inv[0] - fuel
 	 * inv[1] - item to work
@@ -35,13 +34,12 @@ public abstract class AbstractEnergyMachina extends TileEntity
     private int second_result_slot = 3;
 	protected ItemStack inv[] = new ItemStack[4];
 	private int energy;
-    public int burnTime;
-    public int fuelBurnTime;
-    public int currentItemEnergyProgress;
-    public int currentItemEnergyNeed;
+    private int burnTime;
+    private int fuelBurnTime;
+    private int currentItemEnergyProgress;
+    private int currentItemEnergyNeed;
     protected int burnSpeed = 16;
     protected  int workSpeed = 4;
-    abstract protected IRecipes1I2O getRecipes();
 
 	@Override
 	public int setEnergy(int energy) {
@@ -393,7 +391,7 @@ public abstract class AbstractEnergyMachina extends TileEntity
 
         ItemStack out1 = rec.getResult();
         ItemStack out2 = rec.getSecondResult();
-
+        boolean second = Nord.instance.rand.nextFloat()*100 < rec.getPercent();
         if (out1 != null) {
             if (inv[result_slot] != null) {
                 inv[result_slot].stackSize += out1.stackSize;
@@ -402,7 +400,7 @@ public abstract class AbstractEnergyMachina extends TileEntity
             }
         }
 
-        if (out2 != null) {
+        if (out2 != null && second) {
             if (inv[second_result_slot] != null) {
                 inv[second_result_slot].stackSize += out2.stackSize;
             } else {
@@ -426,4 +424,43 @@ public abstract class AbstractEnergyMachina extends TileEntity
         currentItemEnergyProgress = 0;
     }
 
+    @Override
+    public int getburnTime() {
+        return burnTime;
+    }
+
+    @Override
+    public int getCurrentItemEnergyProgress() {
+        return currentItemEnergyProgress;
+    }
+
+    @Override
+    public int getCurrentItemEnergyNeed() {
+        return currentItemEnergyNeed;
+    }
+
+    @Override
+    public void setburnTime(int val) {
+        burnTime=val;
+    }
+
+    @Override
+    public void setCurrentItemEnergyProgress(int val) {
+        currentItemEnergyProgress=val;
+    }
+
+    @Override
+    public void setCurrentItemEnergyNeed(int val) {
+        currentItemEnergyNeed=val;
+    }
+
+    @Override
+    public void setFuelBurnTime(int val) {
+        fuelBurnTime=val;
+    }
+
+    @Override
+    public int getFuelBurnTime() {
+        return fuelBurnTime;
+    }
 }

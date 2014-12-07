@@ -56,8 +56,8 @@ public class Nord {
 	public static Block greatFurnace;
 	public static Block greatFurnaceTech;
 	public static Block greatFurnaceMain;
-	public static Block FoundryTech;
-	public static Block Foundry;
+	public static Block foundryTech;
+	public static Block foundry;
 	public static int greatFurnaceMainID;
 	//public static Item ifood;
 	public static int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
@@ -79,15 +79,9 @@ public class Nord {
 		MetallRegister.init();
 		DecoRegister.init();
 		FoodRegister.init();
-		
-		Fuel.getInstance().addFuel(Blocks.wooden_slab, 150);
-		Fuel.getInstance().addFuel(Blocks.coal_block, 16000);
-		Fuel.getInstance().addFuel(Material.wood, 300);
-		Fuel.getInstance().addFuel(Items.stick, 100);
-		Fuel.getInstance().addFuel(Items.coal, 1600);
-		Fuel.getInstance().addFuel(Items.lava_bucket, 20000);
-		Fuel.getInstance().addFuel(Blocks.sapling, 100);
-		Fuel.getInstance().addFuel(Items.blaze_rod, 2400);
+		MachineRegister.init();
+        Fuel.init();
+
 	}
 
 	@EventHandler
@@ -98,52 +92,7 @@ public class Nord {
 		// packetPipeline.registerPacket(YourPacket.class);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-		
-		smelter = new SmelterBlock().setBlockName("smelter")
-				.setCreativeTab(Nord.tabMetall).setBlockTextureName("smelter")
-				.setHardness(3.0F).setHardness(5.0F);
-		GameRegistry.registerBlock(smelter, ItemMetallBlock.class, "smelter");
-		GameRegistry.registerTileEntity(TileEntitySmelter.class,
-				"TileEntitySmelter");
-		GameRegistry.addRecipe(new ItemStack(smelter, 1), "xyx", "y0y", "yyy",
-				'x', new ItemStack(Blocks.furnace, 1), 'y', new ItemStack(
-						Blocks.cobblestone, 1));
 
-		brickFurnace = new BrickFurnaceBlock().setBlockName("brickFurnace")
-				.setCreativeTab(Nord.tabMetall).setBlockTextureName("brickFurnace")
-				.setHardness(3.0F).setHardness(5.0F);
-		GameRegistry.registerBlock(brickFurnace, ItemMetallBlock.class, "brickFurnace");
-		GameRegistry.registerTileEntity(TileEntityBrickFurnace.class,
-				"TileEntityBrickFurnace");
-		GameRegistry.addRecipe(new ItemStack(smelter, 1), "xxx", "x0x", "xxx",
-				'x', new ItemStack(Blocks.brick_block, 1));
-
-		 flowingBlock = new FlowingBlock();
-		 GameRegistry.registerBlock(flowingBlock, ItemBlock.class, "flowingBlock");
-		 GameRegistry.registerTileEntity(TileEntityFlowing.class, "TileEntityFlowing");
-		 GameRegistry.addRecipe(new ItemStack(flowingBlock, 1), "xxx", "x x", "xxx", // TODO fix recipe
-				 'x', new ItemStack(Blocks.stone, 1));
-		 FlowingRecipes1I2O.addRecipe(
-                 new ItemStack(Item.getItemFromBlock(Blocks.stone), 1),
-                 new ItemStack(Item.getItemFromBlock(Blocks.dirt), 2),
-                 new ItemStack(Items.diamond, 5),
-                 60,100,5);
-		
-		 greatFurnace = new GreatFurnaceBlock();
-		 GameRegistry.registerBlock(greatFurnace, ItemBlock.class, "greatFurnace");
-		 GameRegistry.registerTileEntity(TileEntityGreatFurnace.class, "TileEntityGreatFurnace");
-		 
-		 greatFurnaceTech = new GreatFurnaceBlockTech();
-		 GameRegistry.registerBlock(greatFurnaceTech, ItemBlock.class, "greatFurnaceTech");
-		 GameRegistry.registerTileEntity(TileEntityGreatFurnaceTech.class, "TileEntityGreatFurnaceTech");
-		 
-		 FoundryTech = new FoundryBlockTech();
-		 GameRegistry.registerBlock(FoundryTech, ItemBlock.class, "FoundryBlockTech");
-		 GameRegistry.registerTileEntity(TileEntityFoundry.class, "TileEntityFoundry");
-		 ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFoundry.class, new TileEntityRendererFoundry());
-		 
-		 Foundry = new Foundry();
-		 GameRegistry.registerBlock(Foundry, ItemBlock.class, "FoundryBlock");
 	}
 
 	@EventHandler

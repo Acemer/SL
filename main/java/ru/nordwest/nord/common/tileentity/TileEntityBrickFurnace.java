@@ -23,8 +23,8 @@ public class TileEntityBrickFurnace extends TileEntity
 	private static final int[] slotsTop = new int[]{0, 1};
 	private static final int[] slotsBottom = new int[]{3, 4};
 	private static final int[] slotsSide = new int[]{2};
-	private int input1 = 0;
-	private int fuel = 1;
+	private int input1 = 1;
+	private int fuel = 0;
 	private int output1 = 2;
 	private int output2 = 3;
 	private ItemStack[] smelterItemStacks = new ItemStack[4];

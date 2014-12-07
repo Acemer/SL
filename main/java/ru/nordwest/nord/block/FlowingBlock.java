@@ -36,7 +36,8 @@ public class FlowingBlock extends BlockContainer {
         setResistance(5.0F);
         setBlockName("Flowing");
         setBlockTextureName(Nord.MODID + ":flowing/hogger_down");
-        setCreativeTab(CreativeTabs.tabRedstone);
+        setCreativeTab(Nord.tabBase);
+
 	}
 
     @Override
@@ -127,7 +128,7 @@ public class FlowingBlock extends BlockContainer {
 		
 		return this.icons[5];
 	}
-	
+
 	/*
 	 * TODO Сделать второй технический блок с текстурой включенного дробителя
 	 */
@@ -136,4 +137,5 @@ public class FlowingBlock extends BlockContainer {
 	{
 		return getIcon(side, 0);
 	}
+
 }

@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -39,7 +40,16 @@ public class Fuel {
 		}
 		return INSTANCE;
 	}
-
+    public static void init() {
+        Fuel.getInstance().addFuel(Blocks.wooden_slab, 150);
+        Fuel.getInstance().addFuel(Blocks.coal_block, 16000);
+        Fuel.getInstance().addFuel(Material.wood, 300);
+        Fuel.getInstance().addFuel(Items.stick, 100);
+        Fuel.getInstance().addFuel(Items.coal, 1600);
+        Fuel.getInstance().addFuel(Items.lava_bucket, 20000);
+        Fuel.getInstance().addFuel(Blocks.sapling, 100);
+        Fuel.getInstance().addFuel(Items.blaze_rod, 2400);
+    }
 	/**
 	 * Добавляем обычное топливо
 	 * 
@@ -269,7 +279,10 @@ public class Fuel {
 		}
 		return 0;
 	}
-	/**
+
+
+
+    /**
 	 * @author andrew Медата топливо
 	 */
 	private static class FuelMetadata {
@@ -315,7 +328,7 @@ public class Fuel {
 		}
 
 		/**
-		 * @param charges
+		 * @param last
 		 *            сгорает до конца
 		 * @return себя же
 		 */

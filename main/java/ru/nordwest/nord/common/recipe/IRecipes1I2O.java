@@ -21,7 +21,7 @@ public interface IRecipes1I2O {
 	 * 
 	 * @return Себя
 	 */
-    //static IRecipes1I2O INSTANCE();
+    //IRecipes1I2O INSTANCE();
 
 	/**
 	 * Получаем рецепт по предмету
@@ -48,4 +48,5 @@ public interface IRecipes1I2O {
 	 * @return индекс
 	 */
 	int getIndexRecipe(ItemStack item);
+
 }

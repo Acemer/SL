@@ -24,7 +24,7 @@ public class TileEntityRendererFoundry extends TileEntitySpecialRenderer{
          GL11.glTranslatef((float)d, (float)d1, (float)d2);
          TileEntityFoundry ent = (TileEntityFoundry)tileEntity;
          /*Note that true tile entity coordinates (tileEntity.xCoord, etc) do not match to render coordinates (d, etc) that are calculated as [true coordinates] - [player coordinates (camera coordinates)]*/
-         renderBlockFoundry(ent, tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, Nord.FoundryTech);
+         renderBlockFoundry(ent, tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, Nord.foundryTech);
         GL11.glPopMatrix();
     }
     //And this method actually renders your tile entity
