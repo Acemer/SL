@@ -2,7 +2,7 @@ package ru.nordwest.nord.common.tileentity;
 
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.block.SmelterBlock;
-import ru.nordwest.nord.common.recipe.SmelterRecipes;
+import ru.nordwest.nord.common.recipe.old.SmelterRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,11 +20,11 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 	private static final int[] slotsTop = new int[]{0, 1};
 	private static final int[] slotsBottom = new int[]{3, 4};
 	private static final int[] slotsSide = new int[]{2};
-	private int input1 = 0;
-	private int input2 = 1;
-	private int fuel = 2;
-	private int output1 = 3;
-	private int output2 = 4;
+	private final int input1 = 0;
+	private final int input2 = 1;
+	private final int fuel = 2;
+	private final int output1 = 3;
+	private final int output2 = 4;
 	private ItemStack[] smelterItemStacks = new ItemStack[5];
 
 	public int smelterSmeltTime;
@@ -331,9 +331,9 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1) {
 		return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
-				this.zCoord) != this ? false : par1.getDistanceSq(
-				(double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
-				(double) this.zCoord + 0.5D) <= 64.0D;
+                this.zCoord) == this && par1.getDistanceSq(
+                (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
+                (double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -346,7 +346,7 @@ public class TileEntitySmelter extends TileEntity implements ISidedInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack iStack) {
-		return slot == 2 ? false : (slot == 1 ? isItemFuel(iStack) : true);
+		return slot != 2 && (slot != 1 || isItemFuel(iStack));
 	}
 
 	@Override

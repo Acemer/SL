@@ -83,7 +83,7 @@ public class BlockCandleRenderer extends BlockRenderer
 				0.525F);
 		renderer.setRenderBoundsFromBlock(block);
 		renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, 0.8F,
-				0.8F, 0.8F);;
+				0.8F, 0.8F);
 		block.setBlockBounds(BlockRenderer.W6, 0.0F, BlockRenderer.W6,
 				BlockRenderer.W10, 0.5F, BlockRenderer.W10);
 		renderer.setRenderBounds(0.375F, 0.0F, 0.375F, 0.625F, 0.5F, 0.625F);

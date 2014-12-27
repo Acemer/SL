@@ -15,11 +15,14 @@ import ru.nordwest.nord.Nord;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BaseMetallOre extends MetadataBlock {
+public class BaseMetalOre extends MetadataBlock {
 	private IIcon[] texture;
 	private int type = 16;
 	private final int shift;
-	public BaseMetallOre(final Material par2Material, final int shift) {
+
+
+
+    public BaseMetalOre(final Material par2Material, final int shift) {
 		super(par2Material, 16);
 		this.shift = shift;
 		this.type = MetallRegister.ore_list.length > (shift + 16)

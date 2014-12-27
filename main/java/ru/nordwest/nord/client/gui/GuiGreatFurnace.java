@@ -19,8 +19,8 @@ import ru.nordwest.nord.common.container.ContainerGreatFurnace;
 import ru.nordwest.nord.common.tileentity.TileEntityGreatFurnaceTech;
 
 public class GuiGreatFurnace extends GuiContainer {
-	private TileEntityGreatFurnaceTech tileEntity;
-	private EntityPlayer player;
+	private final TileEntityGreatFurnaceTech tileEntity;
+	private final EntityPlayer player;
 	
 	public GuiGreatFurnace(InventoryPlayer iPlayer, TileEntityGreatFurnaceTech tileGreat, EntityPlayer player) {
 		super(new ContainerGreatFurnace(iPlayer, tileGreat));
@@ -38,7 +38,7 @@ public class GuiGreatFurnace extends GuiContainer {
 				: I18n.format(this.tileEntity.getInventoryName());
 				
 		int energy = this.tileEntity.energy / 16;
-		int maxEnergy = this.tileEntity.maxEnergy / 16;
+		int maxEnergy = TileEntityGreatFurnaceTech.maxEnergy / 16;
 		this.fontRendererObj.drawString(name, 16, 6, 4210752);
 		
 		if (xAxis > 9 && xAxis < 13 && yAxis > 20 && yAxis < 74 ){

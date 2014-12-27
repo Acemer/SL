@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class OilLampBlock extends MetadataBlock {
 	private IIcon[] texture;
-	private final int colors[] = Nord.colors;;
+	private final int colors[] = Nord.colors;
 	private final int type = 1;
 
 	public OilLampBlock(final Material par2Material) {

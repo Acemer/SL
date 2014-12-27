@@ -5,8 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import ru.nordwest.nord.block.BaseMetalOre;
 import ru.nordwest.nord.block.BaseMetallBlock;
-import ru.nordwest.nord.block.BaseMetallOre;
 import ru.nordwest.nord.item.ItemMetallBlock;
 import ru.nordwest.nord.item.ItemMetallDrop;
 import ru.nordwest.nord.item.ItemMetallIngot;
@@ -18,20 +18,20 @@ import java.util.List;
 
 public class MetallRegister {
     public static class Ores {
-        public String name;
-        public float hard;
+        public final String name;
+        public final float hard;
         /**
          * Sets or removes the tool and level required to harvest this block.
          *
-         * @param toolClass Class
-         * @param level Harvest level:
+         * param toolClass Class
+         * param level Harvest level:
          * Wood:    0
          * Stone:   1
          * Iron:    2
          * Diamond: 3
          * Gold:    0
          */
-        public int harvest;
+        public final int harvest;
 
         public Ores(String name, float hard, int harvest) {
             this.name = name;
@@ -40,26 +40,26 @@ public class MetallRegister {
         }
     }
 
-    public static String[] metall_list = new String[]{"alluminum", "chrome",
+    public static final String[] metall_list = new String[]{"alluminum", "chrome",
             "iron", "titan", "tungsten", "zing", "gold", "cobalt", "copper",
             "nickel", "tin", "platinum", "plumbum", "silver", "antimony", "brass",
             "bronze", "castiron", "duralumin", "electrum", "invar", "nichrome", "steel", "tnc",};
 
-    public static String[] ore_list = new String[]{"bauxite", "chromite",
+    public static final String[] ore_list = new String[]{"bauxite", "chromite",
             "crocoite", "uvarovite", "cobaltite", "skutterudite", "azurite",
             "brochantite", "copper", "almandine", "hematite", "limonite",
             "magnetite", "pyrite", "olivine", "gold_quartz", "millerite",
             "pentlandite", "proustite", "cerussite", "dundas", "vanadinite",
             "tin", "ilmenite", "titanite", "wolframite", "blende", "zincite",
             "argentite", "galena", "silver"};
-    public static List<Ores> ores = new ArrayList<Ores>();
-    private static HashMap<String, Block> metall_block = new HashMap<String, Block>();
-    private static HashMap<String, Item> metall_ingot = new HashMap<String, Item>();
+    public static final List<Ores> ores = new ArrayList<Ores>();
+    private static final HashMap<String, Block> metall_block = new HashMap<String, Block>();
+    private static final HashMap<String, Item> metall_ingot = new HashMap<String, Item>();
 
-    private static HashMap<String, ItemStack> metall_ore = new HashMap<String, ItemStack>();
-    private static HashMap<String, ItemStack> metall_drop = new HashMap<String, ItemStack>();
-    private static HashMap<String, ItemStack> metall_powder = new HashMap<String, ItemStack>();
-    private static HashMap<String, ItemStack> metall_clear_powder = new HashMap<String, ItemStack>();
+    private static final HashMap<String, ItemStack> metall_ore = new HashMap<String, ItemStack>();
+    private static final HashMap<String, ItemStack> metall_drop = new HashMap<String, ItemStack>();
+    private static final HashMap<String, ItemStack> metall_powder = new HashMap<String, ItemStack>();
+    private static final HashMap<String, ItemStack> metall_clear_powder = new HashMap<String, ItemStack>();
 
     static public void preInit() {
         ores.add(new Ores("bauxite", 2, 3));
@@ -137,7 +137,7 @@ public class MetallRegister {
         for (int i = 0; i < MetallRegister.ores.size(); i++) {
             final String name = MetallRegister.ores.get(i).name;
             if ((i % 16) == 0) {
-                block = new BaseMetallOre(Material.rock, i)
+                block = new BaseMetalOre(Material.rock, i)
                         .setCreativeTab(Nord.tabMetall).setResistance(5.0F).setBlockName("ore_" + i);
                 GameRegistry.registerBlock(block, ItemMetallOre.class, "ore_"
                         + i);

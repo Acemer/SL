@@ -1,6 +1,6 @@
 package ru.nordwest.nord.common.container;
 
-import ru.nordwest.nord.common.recipe.SmelterRecipes;
+import ru.nordwest.nord.common.recipe.old.SmelterRecipes;
 import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerSmelter extends Container
 {
-	private TileEntitySmelter tileCrusher;
+	private final TileEntitySmelter tileCrusher;
 	private int lastWorkTime;
 	private int lastCrushTime;
 	private int lastItemCrushTime;

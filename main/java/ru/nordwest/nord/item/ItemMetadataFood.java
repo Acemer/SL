@@ -33,7 +33,7 @@ public class ItemMetadataFood extends ItemBaseFood {
 	@Override
 	public String getUnlocalizedName(final ItemStack item) {
 		int meta = item.getItemDamage();
-		meta = this.healAmount.size() > meta ? meta : 0;
+		meta = healAmount.size() > meta ? meta : 0;
 		return super.getUnlocalizedName() + "." + names.get(meta);
 	}
 
@@ -60,20 +60,20 @@ public class ItemMetadataFood extends ItemBaseFood {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(final int index) {
 		int meta = index;
-		meta = this.textures.length > meta ? meta : 0; // если метадата больше чем текстур, то берём 0 текстуру
-		return this.textures[meta];
+		meta = textures.length > meta ? meta : 0; // если метадата больше чем текстур, то берём 0 текстуру
+		return textures[meta];
 	}
 
 	public int func_150905_g(ItemStack item) {
 		int meta = item.getItemDamage();
-		meta = this.healAmount.size() > meta ? meta : 0;
-		return this.healAmount.get(meta);
+		meta = healAmount.size() > meta ? meta : 0;
+		return healAmount.get(meta);
 	}
 
 	public float func_150906_h(ItemStack item) {
 		int meta = item.getItemDamage();
-		meta = this.saturationModifier.size() > meta ? meta : 0;
-		return this.saturationModifier.get(meta);
+		meta = saturationModifier.size() > meta ? meta : 0;
+		return saturationModifier.get(meta);
 	}
 
 	public static void addFood(final int heal, final float sturation,

@@ -2,10 +2,9 @@ package ru.nordwest.nord.common.recipe;
 
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ru.nordwest.nord.util.Fuel;
+import ru.nordwest.nord.common.recipe.Interfaces.IRecipes1I2O;
+import ru.nordwest.nord.common.recipe.abstracts.Recipe1I2O;
+import ru.nordwest.nord.common.recipe.abstracts.Recipes1I2O;
 
 public class FlowingRecipes1I2O extends Recipes1I2O {
 	public static void addRecipe(ItemStack input, ItemStack output1,
@@ -14,5 +13,11 @@ public class FlowingRecipes1I2O extends Recipes1I2O {
 				percent, exp);
 		recipes.add(recipe);
 	}
-
+    private static IRecipes1I2O INSTANCE;
+    public static IRecipes1I2O INSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new FlowingRecipes1I2O();
+        }
+        return INSTANCE;
+    }
 }

@@ -1,4 +1,4 @@
-package ru.nordwest.nord.common.recipe;
+package ru.nordwest.nord.common.recipe.old;
 
 import net.minecraft.item.ItemStack;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlowingRecipes { // Takaya vot krivorukaya realizaciya singleton'a
-    private static List<FlowingRecipe> recipes = new ArrayList<FlowingRecipe>(64);
+    private static final List<FlowingRecipe> recipes = new ArrayList<FlowingRecipe>(64);
 
     public static void addRecipe(ItemStack input, ItemStack output1, ItemStack output2, int needEnergy) {
         FlowingRecipe recipe = new FlowingRecipe();

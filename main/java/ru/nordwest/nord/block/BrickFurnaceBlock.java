@@ -201,7 +201,7 @@ public class BrickFurnaceBlock extends BlockContainer {
 			worldObj.setTileEntity(xCoord, yCoord, zCoord, tileentity);
 		}
 	}
-	private Random rand = new Random();
+	private final Random rand = new Random();
 	public void breakBlock(World world, int x, int y, int z, Block oldblock,
 			int oldMetadata) {
 		if (!keepInventory) {

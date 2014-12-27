@@ -12,9 +12,6 @@ import ru.nordwest.nord.common.recipe.FlowingRecipes1I2O;
 import ru.nordwest.nord.common.tileentity.*;
 import ru.nordwest.nord.item.ItemMetallBlock;
 
-/**
- * Created by andrew on 07.12.14.
- */
 public class MachineRegister {
     public static void init() {
 

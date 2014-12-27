@@ -9,10 +9,10 @@ import cpw.mods.fml.common.FMLLog;
  *
  */
 public class BlockCoord {
-	public int x;
-	public int y;
-	public int z;
-	public int ID;
+	public final int x;
+	public final int y;
+	public final int z;
+	public final int ID;
 	
 	public BlockCoord(int x, int y, int z)
 	{

@@ -3,7 +3,7 @@ package ru.nordwest.nord.common.tileentity;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.block.SmelterBlock;
 import ru.nordwest.nord.common.recipe.BrickFurnaceRecipes;
-import ru.nordwest.nord.common.recipe.SmelterRecipes;
+import ru.nordwest.nord.common.recipe.old.SmelterRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,10 +23,10 @@ public class TileEntityBrickFurnace extends TileEntity
 	private static final int[] slotsTop = new int[]{0, 1};
 	private static final int[] slotsBottom = new int[]{3, 4};
 	private static final int[] slotsSide = new int[]{2};
-	private int input1 = 1;
-	private int fuel = 0;
-	private int output1 = 2;
-	private int output2 = 3;
+	private final int input1 = 1;
+	private final int fuel = 0;
+	private final int output1 = 2;
+	private final int output2 = 3;
 	private ItemStack[] smelterItemStacks = new ItemStack[4];
 
 	public int burnTime;
@@ -244,7 +244,7 @@ public class TileEntityBrickFurnace extends TileEntity
 
 			int result = this.smelterItemStacks[output1] != null
 					? smelterItemStacks[output1].stackSize + iStack.stackSize
-					: -1;;
+					: -1;
 
 			int result2 = this.smelterItemStacks[output2] != null
 					? smelterItemStacks[output2].stackSize
@@ -319,9 +319,9 @@ public class TileEntityBrickFurnace extends TileEntity
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1) {
 		return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
-				this.zCoord) != this ? false : par1.getDistanceSq(
-				(double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
-				(double) this.zCoord + 0.5D) <= 64.0D;
+                this.zCoord) == this && par1.getDistanceSq(
+                (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
+                (double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -334,7 +334,7 @@ public class TileEntityBrickFurnace extends TileEntity
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack iStack) {
-		return slot == 2 ? false : (slot == 1 ? isItemFuel(iStack) : true);
+		return slot != 2 && (slot != 1 || isItemFuel(iStack));
 	}
 
 	@Override

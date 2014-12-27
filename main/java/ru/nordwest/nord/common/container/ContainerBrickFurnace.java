@@ -1,6 +1,6 @@
 package ru.nordwest.nord.common.container;
 
-import ru.nordwest.nord.common.recipe.SmelterRecipes;
+import ru.nordwest.nord.common.recipe.old.SmelterRecipes;
 import ru.nordwest.nord.common.tileentity.TileEntityBrickFurnace;
 import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 import cpw.mods.fml.relauncher.Side;
@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerBrickFurnace extends Container
 {
-	private TileEntityBrickFurnace tileCrusher;
+	private final TileEntityBrickFurnace tileCrusher;
 	private int lastWorkTime;
 	private int lastCrushTime;
 	private int lastItemCrushTime;

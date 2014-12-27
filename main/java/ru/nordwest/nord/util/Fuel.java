@@ -19,16 +19,16 @@ public class Fuel {
 
 	private static Fuel INSTANCE;
 
-	public static int DAMAGABLE = 1; // 1
-	public static int METADATA = 2;  // 2
-	public static int SIMPLE = 3;    // 3
-	public static int MATERIAL = 4;  // 4
-	public static int NOT = -1;      // 5
+	public static final int DAMAGABLE = 1; // 1
+	public static final int METADATA = 2;  // 2
+	public static final int SIMPLE = 3;    // 3
+	public static final int MATERIAL = 4;  // 4
+	public static final int NOT = -1;      // 5
 	
-	private Map<Item, Integer> itemFuel = new HashMap<Item, Integer>();
-	private Map<Material, Integer> itemFuelMaterial = new HashMap<Material, Integer>();
-	private List<FuelMetadata> itemFuelMetadata = new ArrayList<FuelMetadata>();
-	private List<FuelDamagable> itemFuelDamagable = new ArrayList<FuelDamagable>();
+	private final Map<Item, Integer> itemFuel = new HashMap<Item, Integer>();
+	private final Map<Material, Integer> itemFuelMaterial = new HashMap<Material, Integer>();
+	private final List<FuelMetadata> itemFuelMetadata = new ArrayList<FuelMetadata>();
+	private final List<FuelDamagable> itemFuelDamagable = new ArrayList<FuelDamagable>();
 	/**
 	 * Получаем экземпляр Словаря, лениво.
 	 * 
@@ -233,9 +233,11 @@ public class Fuel {
 	 * 
 	 * @param itemStack
 	 *            топливо
-	 * @return
+	 * @return ItemStack
 	 */
 	public ItemStack burn(ItemStack itemStack) {
+        if (itemStack==null)
+            return null;
 		if (isFuelCode(itemStack) == DAMAGABLE) {
 			itemStack.setItemDamage(itemStack.getItemDamage() + 1);
 		} else {
@@ -286,8 +288,8 @@ public class Fuel {
 	 * @author andrew Медата топливо
 	 */
 	private static class FuelMetadata {
-		public Item item;
-		public int metadata;
+		public final Item item;
+		public final int metadata;
 		public int energy;
 		public FuelMetadata(Item item, int metadata, int energy) {
 			this.item = item;
@@ -309,7 +311,7 @@ public class Fuel {
 	 * @author andrew Повреждаемое топливо
 	 */
 	private static class FuelDamagable {
-		public Item item;
+		public final Item item;
 		public int energy;
 		public boolean last;
 		public FuelDamagable(Item item, int energy, boolean last) {

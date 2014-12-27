@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 
 public class ModelFoundry extends ModelBase
 {
-	ModelRenderer Foundry;
+	final ModelRenderer Foundry;
 
 	public ModelFoundry()
 	{

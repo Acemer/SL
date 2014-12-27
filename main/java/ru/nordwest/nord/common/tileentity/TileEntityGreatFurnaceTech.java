@@ -32,7 +32,7 @@ import net.minecraftforge.common.util.Constants;
 // TODO Проверить все на баги
 // TODO Добавить обработку шифт-клика (Dark32)
 public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory {
-	ItemStack inv[] = new ItemStack[5];
+	final ItemStack[] inv = new ItemStack[5];
 	
 	public int energy;
 	public static final int maxEnergy = 12800;
@@ -138,7 +138,7 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
 		{
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -154,7 +154,7 @@ public class TileEntityGreatFurnaceTech extends TileEntity implements IInventory
 	public void updateEntity() {
 		if (isBurning())
 		{
-			if (this.energy + 16 <= this.maxEnergy) // TODO сделать нормальную проверку
+			if (this.energy + 16 <= maxEnergy) // TODO сделать нормальную проверку
 			{
 				this.energy += 16;
 				this.burnTime -= 16;

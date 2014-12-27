@@ -27,7 +27,7 @@ public class ItemMetaDataSimple extends Item {
 	@Override
 	public String getUnlocalizedName(final ItemStack item) {
 		int meta = item.getItemDamage();
-		meta = this.names.size() > meta ? meta : 0;
+		meta = names.size() > meta ? meta : 0;
 		return super.getUnlocalizedName() + "." + names.get(meta);
 	}
 
@@ -54,8 +54,8 @@ public class ItemMetaDataSimple extends Item {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(final int index) {
 		int meta = index;
-		meta = this.textures.length > meta ? meta : 0; // если метадата больше чем текстур, то берём 0 текстуру
-		return this.textures[meta];
+		meta = textures.length > meta ? meta : 0; // если метадата больше чем текстур, то берём 0 текстуру
+		return textures[meta];
 	}
 
 

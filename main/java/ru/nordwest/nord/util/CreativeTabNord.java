@@ -1,4 +1,4 @@
-package ru.nordwest.nord.common;
+package ru.nordwest.nord.util;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

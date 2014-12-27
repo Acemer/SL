@@ -16,7 +16,7 @@ import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.client.renders.ModelFoundry;
 
 public class TileEntityRendererFoundry extends TileEntitySpecialRenderer{
-	ModelFoundry model = new ModelFoundry();
+	final ModelFoundry model = new ModelFoundry();
     //This method is called when minecraft renders a tile entity
     public void renderTileEntityAt(TileEntity tileEntity, double d, double d1, double d2, float f) {
         GL11.glPushMatrix();

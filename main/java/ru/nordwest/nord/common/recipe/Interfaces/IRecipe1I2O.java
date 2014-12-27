@@ -1,4 +1,4 @@
-package ru.nordwest.nord.common.recipe;
+package ru.nordwest.nord.common.recipe.Interfaces;
 
 import net.minecraft.item.ItemStack;
 

@@ -6,11 +6,11 @@ import java.util.*;
 
 public class BrickFurnaceRecipes {
 	private static final BrickFurnaceRecipes smelterBase = new BrickFurnaceRecipes();
-	private List<ItemStack> firstSlot = new ArrayList();
-	private List<ItemStack> output = new ArrayList();
-	private List<ItemStack> second_output = new ArrayList();
-	private List<Float> second_output_percent = new ArrayList();
-	private List<Float> experience_output = new ArrayList();
+	private final List<ItemStack> firstSlot = new ArrayList();
+	private final List<ItemStack> output = new ArrayList();
+	private final List<ItemStack> second_output = new ArrayList();
+	private final List<Float> second_output_percent = new ArrayList();
+	private final List<Float> experience_output = new ArrayList();
 
 	public static BrickFurnaceRecipes crushing() {
 		return smelterBase;

@@ -10,7 +10,7 @@ import ru.nordwest.nord.common.container.ContainerFlowing;
 import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
 
 public class GuiFlowing extends GuiMachine {
-	private TileEntityFlowing tileEntity;
+	private final TileEntityFlowing tileEntity;
 	
 	public GuiFlowing(InventoryPlayer iPlayer, TileEntityFlowing tileFlowing, EntityPlayer player) {
 		super(new ContainerFlowing(iPlayer, tileFlowing));

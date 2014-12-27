@@ -1,4 +1,4 @@
-package ru.nordwest.nord.common.recipe;
+package ru.nordwest.nord.common.recipe.Interfaces;
 
 import net.minecraft.item.ItemStack;
 
@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
  * @author andrew
  * 
  */
-public interface IRecipes1I2O {
+public interface IRecipes1I2O extends IAbstractRecipes{
 
 	/**
 	 * Получаем сингелтон

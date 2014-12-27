@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class LightLampBlock extends MetadataBlock {
 	private IIcon[] texture;
-	private final int colors[] = Nord.colors;;
+	private final int colors[] = Nord.colors;
 	private final int type = 16;
 	private int index = 0;
 

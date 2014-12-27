@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 
 public class GreatFurnaceBlock extends BlockContainer {
 	TileEntityGreatFurnace tileEntity;
-	public IIcon[] icons = new IIcon[12];
+	public final IIcon[] icons = new IIcon[12];
 	
 	public GreatFurnaceBlock() {
 		super(Material.rock);
@@ -427,7 +427,7 @@ public class GreatFurnaceBlock extends BlockContainer {
 		{
 			return false;
 		}
-		
+
 		return true;
 	}
 	
@@ -514,7 +514,7 @@ public class GreatFurnaceBlock extends BlockContainer {
 		
 		if (tileEnt.tryToCreateTechBlock(world, x, y, z, side))
 		{
-			tileEnt.broadcastSetTechBlock(world, tileEnt.techBlock, tileEnt.techBlock);
+			TileEntityGreatFurnace.broadcastSetTechBlock(world, tileEnt.techBlock, tileEnt.techBlock);
 		}
 		super.onBlockPlacedBy(world, x, y, z, ent, item);
 	}

@@ -1,12 +1,14 @@
-package ru.nordwest.nord.common.recipe;
+package ru.nordwest.nord.common.recipe.abstracts;
 
 import net.minecraft.item.ItemStack;
+import ru.nordwest.nord.common.recipe.Interfaces.IRecipe1I2O;
+import ru.nordwest.nord.common.recipe.Interfaces.IRecipes1I2O;
 
 import java.util.ArrayList;
 import java.util.List;
 
 abstract public class Recipes1I2O implements IRecipes1I2O {
-	protected static List<Recipe1I2O> recipes = new ArrayList<Recipe1I2O>(64);
+	protected static final List<Recipe1I2O> recipes = new ArrayList<Recipe1I2O>(64);
 
 	@Override
 	public IRecipe1I2O getRecipe(ItemStack item) {
@@ -19,14 +21,13 @@ abstract public class Recipes1I2O implements IRecipes1I2O {
         else
             return null;
 	}
-    private static IRecipes1I2O INSTANCE;
 
-    public static IRecipes1I2O INSTANCE() {
-        if (INSTANCE == null) {
-            INSTANCE = new FlowingRecipes1I2O();
-        }
-        return INSTANCE;
+
+    @Override
+    public TYPES getType() {
+        return TYPES.TYPE_1I2O;
     }
+
 	@Override
 	public int getIndexRecipe(ItemStack item) {
 		if (item == null) {

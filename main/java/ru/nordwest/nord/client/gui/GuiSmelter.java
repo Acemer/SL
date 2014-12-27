@@ -15,8 +15,8 @@ import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 public class GuiSmelter extends GuiContainer {
 	private static final ResourceLocation crusherGuiTextures = new ResourceLocation(
 			Nord.MODID + ":textures/gui/container/stone_smelter.png");
-	private TileEntitySmelter tileCrusher;
-	private EntityPlayer player;
+	private final TileEntitySmelter tileCrusher;
+	private final EntityPlayer player;
 	public GuiSmelter(InventoryPlayer iPlayer, TileEntitySmelter tileCrusher,
 			EntityPlayer player) {
 

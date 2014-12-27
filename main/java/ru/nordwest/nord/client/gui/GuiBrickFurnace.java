@@ -17,8 +17,8 @@ import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 public class GuiBrickFurnace extends GuiContainer {
 	private static final ResourceLocation crusherGuiTextures = new ResourceLocation(
 			Nord.MODID + ":textures/gui/container/brick_furnace.png");
-	private TileEntityBrickFurnace tileCrusher;
-	private EntityPlayer player;
+	private final TileEntityBrickFurnace tileCrusher;
+	private final EntityPlayer player;
 	public GuiBrickFurnace(InventoryPlayer iPlayer, TileEntityBrickFurnace tileCrusher,
 			EntityPlayer player) {
 

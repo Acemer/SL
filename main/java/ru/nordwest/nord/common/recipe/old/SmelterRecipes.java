@@ -1,4 +1,4 @@
-package ru.nordwest.nord.common.recipe;
+package ru.nordwest.nord.common.recipe.old;
 
 import net.minecraft.item.ItemStack;
 
@@ -8,12 +8,12 @@ import ru.nordwest.nord.MetallRegister;
 
 public class SmelterRecipes {
 	private static final SmelterRecipes smelterBase = new SmelterRecipes();
-	private List<ItemStack> firstSlot = new ArrayList();
-	private List<ItemStack> secondSlot = new ArrayList();
-	private List<ItemStack> output = new ArrayList();
-	private List<ItemStack> second_output = new ArrayList();
-	private List<Float> second_output_percent = new ArrayList();
-	private List<Float> experience_output = new ArrayList();
+	private final List<ItemStack> firstSlot = new ArrayList();
+	private final List<ItemStack> secondSlot = new ArrayList();
+	private final List<ItemStack> output = new ArrayList();
+	private final List<ItemStack> second_output = new ArrayList();
+	private final List<Float> second_output_percent = new ArrayList();
+	private final List<Float> experience_output = new ArrayList();
 
 	public static SmelterRecipes crushing() {
 		return smelterBase;

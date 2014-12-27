@@ -1,4 +1,4 @@
-package ru.nordwest.nord.common.tileentity;
+package ru.nordwest.nord.common.tileentity.interfaces;
 
 public interface IEnergyTile {
 	/**
@@ -40,13 +40,13 @@ public interface IEnergyTile {
 	/**
 	 * Принимает ли энергию
 	 * 
-	 * @return
+	 * @return boolean
 	 */
 	public boolean isAcepter();
 	/**
 	 * Раздаёт ли энергию
 	 * 
-	 * @return
+	 * @return boolean
 	 */
 	public boolean isDispenser();
 
@@ -55,7 +55,7 @@ public interface IEnergyTile {
 	 * 
 	 * @param energy
 	 *            на сколько пробуем убавить
-	 * @return
+	 * @return boolean
 	 */
 	public boolean hasSubEnergy(int energy);
 	/**
@@ -63,7 +63,7 @@ public interface IEnergyTile {
 	 * 
 	 * @param energy
 	 *            на сколько хотим прибавить
-	 * @return
+	 * @return boolean
 	 */
 	public boolean hasAddEnergy(int energy);
 }

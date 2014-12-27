@@ -1,6 +1,7 @@
 package ru.nordwest.nord.common.tileentity;
 import ru.nordwest.nord.common.recipe.FlowingRecipes1I2O;
-import ru.nordwest.nord.common.recipe.IRecipes1I2O;
+import ru.nordwest.nord.common.recipe.Interfaces.IRecipes1I2O;
+import ru.nordwest.nord.common.tileentity.abstracts.AbstractEnergyMachina;
 
 public class TileEntityFlowing extends AbstractEnergyMachina {
 

@@ -1,15 +1,16 @@
-package ru.nordwest.nord.common.recipe;
+package ru.nordwest.nord.common.recipe.abstracts;
 
 import net.minecraft.item.ItemStack;
+import ru.nordwest.nord.common.recipe.Interfaces.IRecipe1I2O;
 
-public class Recipe1I2O implements  IRecipe1I2O {
+public class Recipe1I2O implements IRecipe1I2O {
 
 	private final ItemStack input;
-	private ItemStack result;
-	private ItemStack secondResult;
-	private int energy;
-	private float expirince;
-	private float percent;
+	private final ItemStack result;
+	private final ItemStack secondResult;
+	private final int energy;
+	private final float expirince;
+	private final float percent;
 	
 	public Recipe1I2O(ItemStack input, ItemStack result,
 			ItemStack secondResult, int energy, float expirince, float exp) {

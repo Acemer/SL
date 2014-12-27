@@ -1,94 +1,43 @@
-package ru.nordwest.nord.common.tileentity;
+package ru.nordwest.nord.common.tileentity.abstracts;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import ru.nordwest.nord.Nord;
-import ru.nordwest.nord.common.recipe.FlowingRecipes;
-import ru.nordwest.nord.common.recipe.*;
+import ru.nordwest.nord.common.recipe.Interfaces.IRecipe1I2O;
+import ru.nordwest.nord.common.recipe.Interfaces.IRecipes1I2O;
+import ru.nordwest.nord.common.tileentity.interfaces.IMachine;
 import ru.nordwest.nord.util.Fuel;
 
 /**
  * @author andrew
  * Абстрактная машина с 1 входом, 2 выходами и энергией
  */
-public abstract class AbstractEnergyMachina extends TileEntity
-		implements IMachine{
+public abstract class AbstractEnergyMachina extends AbstractEnergyBlock
+		implements IMachine {
 	/**
 	 * inv[0] - fuel
 	 * inv[1] - item to work
 	 * inv[2] - result 1
 	 * inv[3] - result 2
 	 */
-    private int fuel_slot = 0;
-    private int input_slot = 1;
-    private int result_slot = 2;
-    private int second_result_slot = 3;
-	protected ItemStack inv[] = new ItemStack[4];
-	private int energy;
+    private final int fuel_slot = 0;
+    private final int input_slot = 1;
+    private final int result_slot = 2;
+    private final int second_result_slot = 3;
+	protected final ItemStack[] inv = new ItemStack[4];
+
     private int burnTime;
     private int fuelBurnTime;
     private int currentItemEnergyProgress;
     private int currentItemEnergyNeed;
-    protected int burnSpeed = 16;
-    protected  int workSpeed = 4;
-
-	@Override
-	public int setEnergy(int energy) {
-		this.energy = energy;
-		return this.energy;
-	}
-
-	@Override
-	public int getEnergy() {
-		return this.energy;
-	}
-
-	@Override
-	public int addEnergy(int energy) {
-		if (hasAddEnergy(energy))
-			this.energy += energy;
-		else
-			this.energy = getMaxEnergy();
-		return this.energy;
-	}
-
-	@Override
-	public int subEnergy(int energy) {
-		if (hasSubEnergy(energy))
-			this.energy -= energy;
-		else
-			this.energy = 0;
-		return this.energy;
-	}
-
-	@Override
-	public boolean isAcepter() {
-		return true;
-	}
-
-	@Override
-	public boolean isDispenser() {
-		return false;
-	}
-
-	@Override
-	public boolean hasSubEnergy(int energy) {
-		return this.energy >= energy;
-	}
-
-	@Override
-	public boolean hasAddEnergy(int energy) {
-		return this.energy + energy <= getMaxEnergy();
-	}
+    protected final int burnSpeed = 16;
+    protected final int workSpeed = 4;
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
@@ -221,10 +170,11 @@ public abstract class AbstractEnergyMachina extends TileEntity
             return false;
         }
 
-        IRecipe1I2O rec = getRecipes().getRecipe(stack);
+        IRecipe1I2O rec = getRecipe(stack);
 
         return rec != null;
     }
+
     public static int getItemBurnTime(ItemStack stack)
     {
        return Fuel.getInstance().getEnergy(stack);
@@ -263,20 +213,18 @@ public abstract class AbstractEnergyMachina extends TileEntity
     }
 
     public boolean canWork() {
-        if (this.getEnergy() >= this.getMaxEnergy() ||
+        return !(this.getEnergy() >= this.getMaxEnergy() ||
                 inv[fuel_slot] == null ||
                 getItemBurnTime(inv[fuel_slot]) == 0 ||
-                burnTime > 0)
-            return false;
+                burnTime > 0);
 
-        return true;
     }
 
     public void burn() {
         if (this.inv[fuel_slot] != null) {
             this.burnTime = getItemBurnTime(inv[fuel_slot]);
             this.fuelBurnTime = this.burnTime;
-            --this.inv[fuel_slot].stackSize;
+            this.inv[fuel_slot]=Fuel.getInstance().burn(this.inv[fuel_slot]);
             if (this.inv[fuel_slot].stackSize == 0) {
                 this.inv[fuel_slot] = null;
             }
@@ -284,7 +232,7 @@ public abstract class AbstractEnergyMachina extends TileEntity
     }
 
     public boolean canWorkResult() {
-        IRecipe1I2O rec = getRecipes().getRecipe(inv[input_slot]);
+        IRecipe1I2O rec = getRecipe(inv[input_slot]);
         if (rec == null) { // нет рецепта
             currentItemEnergyProgress = 0;
             currentItemEnergyNeed = 0;
@@ -300,7 +248,7 @@ public abstract class AbstractEnergyMachina extends TileEntity
     }
 
     public boolean canStartWorking() {
-        IRecipe1I2O rec = getRecipes().getRecipe(inv[input_slot]);
+        IRecipe1I2O rec = getRecipe(inv[input_slot]);
         if (rec == null) {
             currentItemEnergyProgress = 0;
             currentItemEnergyNeed = 0;
@@ -366,7 +314,7 @@ public abstract class AbstractEnergyMachina extends TileEntity
                 work();
             }
         } else if (canStartWorking()) {
-            IRecipe1I2O rec = getRecipes().getRecipe(inv[input_slot]);
+            IRecipe1I2O rec = getRecipe(inv[input_slot]);
             if (rec != null) {
                 currentItemEnergyNeed = rec.getEnergy();
                 updated = true;
@@ -384,7 +332,7 @@ public abstract class AbstractEnergyMachina extends TileEntity
      * Обработать предмет
      */
     public void work() {
-        IRecipe1I2O rec = getRecipes().getRecipe(inv[input_slot]);
+        IRecipe1I2O rec = getRecipe(inv[input_slot]);
         if (rec == null) {
             return; 
         }
@@ -414,7 +362,7 @@ public abstract class AbstractEnergyMachina extends TileEntity
             inv[input_slot] = null;
         }
 
-        IRecipe1I2O recNext = getRecipes().getRecipe(inv[input_slot]);
+        IRecipe1I2O recNext = getRecipe(inv[input_slot]);
         if (recNext != null) {
             currentItemEnergyNeed = recNext.getEnergy();
         } else {
@@ -424,8 +372,13 @@ public abstract class AbstractEnergyMachina extends TileEntity
         currentItemEnergyProgress = 0;
     }
 
+
+    private IRecipe1I2O getRecipe(ItemStack stack){
+        return ((IRecipes1I2O)getRecipes()).getRecipe(stack);
+    }
+
     @Override
-    public int getburnTime() {
+    public int getBurnTime() {
         return burnTime;
     }
 
@@ -440,7 +393,7 @@ public abstract class AbstractEnergyMachina extends TileEntity
     }
 
     @Override
-    public void setburnTime(int val) {
+    public void setBurnTime(int val) {
         burnTime=val;
     }
 
@@ -463,4 +416,5 @@ public abstract class AbstractEnergyMachina extends TileEntity
     public int getFuelBurnTime() {
         return fuelBurnTime;
     }
+
 }

@@ -6,9 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import ru.nordwest.nord.item.ItemMetadataFood;
 
-/**
- * Created by andrew on 09.11.14.
- */
 public class FoodRegister {
     public static Item ifood;
 

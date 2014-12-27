@@ -1,4 +1,4 @@
-package ru.nordwest.nord.common.container;
+package ru.nordwest.nord.common.container.abstracts;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -9,12 +9,12 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
-import ru.nordwest.nord.common.recipe.Recipes1I2O;
-import ru.nordwest.nord.common.tileentity.IMachine;
+import ru.nordwest.nord.common.recipe.Interfaces.IRecipes1I2O;
+import ru.nordwest.nord.common.tileentity.interfaces.IMachine;
 import ru.nordwest.nord.util.Fuel;
 
 abstract public class AbstactMachineConteiner extends Container {
-    protected IMachine tileEntity;
+    private IMachine tileEntity;
 
     private int lastEnergy;
     private int lastBurnTime;
@@ -34,15 +34,17 @@ abstract public class AbstactMachineConteiner extends Container {
         bindPlayerInventory(invPlayer);
     }
 
+    @Override
     public void addCraftingToCrafters(ICrafting icrafter)
     {
         super.addCraftingToCrafters(icrafter);
         icrafter.sendProgressBarUpdate(this, 0, this.tileEntity.getEnergy());
-        icrafter.sendProgressBarUpdate(this, 1, this.tileEntity.getburnTime());
+        icrafter.sendProgressBarUpdate(this, 1, this.tileEntity.getBurnTime());
         icrafter.sendProgressBarUpdate(this, 2, this.tileEntity.getCurrentItemEnergyProgress());
         icrafter.sendProgressBarUpdate(this, 3, this.tileEntity.getCurrentItemEnergyNeed());
     }
 
+    @Override
     public void detectAndSendChanges()
     {
         super.detectAndSendChanges();
@@ -56,9 +58,9 @@ abstract public class AbstactMachineConteiner extends Container {
                 icrafting.sendProgressBarUpdate(this, 0, this.tileEntity.getEnergy());
             }
 
-            if (this.lastBurnTime != this.tileEntity.getburnTime())
+            if (this.lastBurnTime != this.tileEntity.getBurnTime())
             {
-                icrafting.sendProgressBarUpdate(this, 1, this.tileEntity.getburnTime());
+                icrafting.sendProgressBarUpdate(this, 1, this.tileEntity.getBurnTime());
             }
 
             if (this.lastCurrentItemEnergyProgress != this.tileEntity.getCurrentItemEnergyProgress())
@@ -78,11 +80,12 @@ abstract public class AbstactMachineConteiner extends Container {
         }
 
         this.lastEnergy = this.tileEntity.getEnergy();
-        this.lastBurnTime = this.tileEntity.getburnTime();
+        this.lastBurnTime = this.tileEntity.getBurnTime();
         this.lastCurrentItemEnergyProgress = this.tileEntity.getCurrentItemEnergyProgress();
         this.lastCurrentItemEnergyNeed = this.tileEntity.getCurrentItemEnergyNeed();
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int var, int val)
     {
@@ -93,7 +96,7 @@ abstract public class AbstactMachineConteiner extends Container {
                 this.tileEntity.setEnergy(val);
                 break;
             case 1:
-                this.tileEntity.setburnTime(val);
+                this.tileEntity.setBurnTime(val);
                 break;
             case 2:
                 this.tileEntity.setCurrentItemEnergyProgress(val);
@@ -138,7 +141,7 @@ abstract public class AbstactMachineConteiner extends Container {
                 slotObject.onSlotChange(stackInSlot, stack);
             }
             else if(slot != 1 && slot != 0){
-                boolean _check = ((Recipes1I2O)(tileEntity.getRecipes())).INSTANCE().getIndexRecipe(stackInSlot)!=-1;
+                boolean _check = ((IRecipes1I2O)tileEntity.getRecipes()).getIndexRecipe(stackInSlot)!=-1;
                 if (_check){
                     if(!this.mergeItemStack(stackInSlot, 1, 2, false)) {
                         return null;

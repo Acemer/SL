@@ -28,7 +28,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class FlowingBlock extends BlockContainer {
-	public IIcon[] icons = new IIcon[11];
+	public final IIcon[] icons = new IIcon[11];
 	
 	public FlowingBlock() {
 		super(Material.rock);
