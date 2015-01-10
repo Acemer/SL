@@ -51,6 +51,7 @@ public class Nord {
 //	public static Block greatFurnaceMain;
 	public static Block foundryTech;
 	public static Block foundry;
+	public static Block testTreeSapling;
 //	public static int greatFurnaceMainID;
 	//public static Item ifood;
 	public static final int[] colors = new int[]{0x1E1B1B, 0xB3312C, 0x3B511A,
@@ -74,7 +75,7 @@ public class Nord {
 		FoodRegister.init();
 		MachineRegister.init();
         Fuel.init();
-
+        Trees.init();
 	}
 
 	@EventHandler
