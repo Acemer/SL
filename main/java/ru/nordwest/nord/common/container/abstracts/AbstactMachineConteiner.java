@@ -14,7 +14,7 @@ import ru.nordwest.nord.common.tileentity.interfaces.IMachine;
 import ru.nordwest.nord.util.Fuel;
 
 abstract public class AbstactMachineConteiner extends Container {
-    private IMachine tileEntity;
+    protected IMachine tileEntity;
 
     private int lastEnergy;
     private int lastBurnTime;
@@ -22,14 +22,19 @@ abstract public class AbstactMachineConteiner extends Container {
     private int lastCurrentItemEnergyProgress;
     private int lastCurrentItemEnergyNeed;
 
+    protected int slot_fuel     = 0;
+    protected int slot_input    = 1;
+    protected int slot_result1  = 2;
+    protected int slot_result2  = 3;
+
     public void init(InventoryPlayer invPlayer, IMachine ent)
     {
         tileEntity = ent;
 
-        addSlotToContainer(new Slot(tileEntity, 0, 18, 58)); // fuel
-        addSlotToContainer(new Slot(tileEntity, 1, 53, 38)); // item to work
-        addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, 2, 107, 39)); // result1
-        addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, 3, 128, 39)); // result2
+        addSlotToContainer(new Slot(tileEntity, slot_fuel, 18, 58)); // fuel
+        addSlotToContainer(new Slot(tileEntity, slot_input, 53, 38)); // item to work
+        addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, slot_result1, 107, 39)); // result1
+        addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, slot_result2, 128, 39)); // result2
 
         bindPlayerInventory(invPlayer);
     }
@@ -134,13 +139,13 @@ abstract public class AbstactMachineConteiner extends Container {
 
             //boolean check = false;
 
-            if (slot == 2 || slot == 3) {
+            if (slot == slot_result1 || slot == slot_result2) {
                 if (!this.mergeItemStack(stackInSlot, 4, 39, true)) {
                     return null;
                 }
                 slotObject.onSlotChange(stackInSlot, stack);
             }
-            else if(slot != 1 && slot != 0){
+            else if(slot != slot_input && slot != slot_fuel){
                 boolean _check = ((IRecipes1I2O)tileEntity.getRecipes()).getIndexRecipe(stackInSlot)!=-1;
                 if (_check){
                     if(!this.mergeItemStack(stackInSlot, 1, 2, false)) {

@@ -9,6 +9,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import ru.nordwest.nord.block.*;
 import ru.nordwest.nord.common.recipe.FlowingRecipes1I2O;
+import ru.nordwest.nord.common.recipe.SmelterRecipes2I2O;
 import ru.nordwest.nord.common.tileentity.*;
 import ru.nordwest.nord.item.ItemMetallBlock;
 
@@ -20,7 +21,7 @@ public class MachineRegister {
                 .setCreativeTab(Nord.tabMetall).setBlockTextureName("smelter")
                 .setHardness(3.0F).setHardness(5.0F);
         GameRegistry.registerBlock(Nord.smelter, ItemMetallBlock.class, "smelter");
-        GameRegistry.registerTileEntity(TileEntitySmelter.class,
+        GameRegistry.registerTileEntity(TileEntitySmelter2.class,
                 "TileEntitySmelter");
         GameRegistry.addRecipe(new ItemStack(Nord.smelter, 1), "xyx", "y0y", "yyy",
                 'x', new ItemStack(Blocks.furnace, 1), 'y', new ItemStack(
@@ -66,6 +67,11 @@ public class MachineRegister {
                 new ItemStack(Item.getItemFromBlock(Blocks.dirt), 2),
                 new ItemStack(Items.diamond, 5),
                 60, 30, 5);
+        SmelterRecipes2I2O.addRecipe( new ItemStack(Item.getItemFromBlock(Blocks.stone), 1), 
+        		new ItemStack(Item.getItemFromBlock(Blocks.stone), 1), 
+                new ItemStack(Item.getItemFromBlock(Blocks.dirt), 1),
+                new ItemStack(Items.diamond, 5), 
+        		400, 30, 5, true);
     }
 
 }

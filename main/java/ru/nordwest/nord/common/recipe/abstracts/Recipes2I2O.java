@@ -68,7 +68,7 @@ abstract public class Recipes2I2O extends Recipes1I2O implements IRecipes2I2O {
 
     @Override
     public int getIndexRecipe(ItemStack item, ItemStack item2) {
-        if (item == null && item2 == null) {
+        if (item == null || item2 == null) {
             return -1;
         }
 

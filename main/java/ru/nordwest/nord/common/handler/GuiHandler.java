@@ -1,18 +1,9 @@
 package ru.nordwest.nord.common.handler;
 
 import ru.nordwest.nord.Nord;
-import ru.nordwest.nord.client.gui.GuiBrickFurnace;
-import ru.nordwest.nord.client.gui.GuiSmelter;
-import ru.nordwest.nord.client.gui.GuiFlowing;
-import ru.nordwest.nord.client.gui.GuiGreatFurnace;
-import ru.nordwest.nord.common.container.ContainerBrickFurnace;
-import ru.nordwest.nord.common.container.ContainerFlowing;
-import ru.nordwest.nord.common.container.ContainerGreatFurnace;
-import ru.nordwest.nord.common.container.ContainerSmelter;
-import ru.nordwest.nord.common.tileentity.TileEntityBrickFurnace;
-import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
-import ru.nordwest.nord.common.tileentity.TileEntityGreatFurnaceTech;
-import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
+import ru.nordwest.nord.client.gui.*;
+import ru.nordwest.nord.common.container.*;
+import ru.nordwest.nord.common.tileentity.*;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -34,8 +25,8 @@ public class GuiHandler implements IGuiHandler {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		switch (ID) {
 			case Nord.guiIDSmelter :
-				return new ContainerSmelter(player.inventory,
-						(TileEntitySmelter) tileEntity);
+				return new ContainerSmelter2(player.inventory,
+						(TileEntitySmelter2) tileEntity);
 				
 			case Nord.guiIDBrickFurnace :
 				return new ContainerBrickFurnace(player.inventory,
@@ -64,8 +55,8 @@ public class GuiHandler implements IGuiHandler {
 
 		switch (ID) {
 			case Nord.guiIDSmelter :
-				return new GuiSmelter(player.inventory,
-						(TileEntitySmelter) tileEntity, player);
+				return new GuiSmelter2(player.inventory,
+						(TileEntitySmelter2) tileEntity, player);
 				
 			case Nord.guiIDBrickFurnace :
 				return new GuiBrickFurnace(player.inventory,

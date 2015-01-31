@@ -32,10 +32,10 @@ public abstract class AbstractEnergyMachina extends AbstractEnergyBlock
     private final int second_result_slot = 3;
 	protected final ItemStack[] inv = new ItemStack[4];
 
-    private int burnTime;
-    private int fuelBurnTime;
-    private int currentItemEnergyProgress;
-    private int currentItemEnergyNeed;
+	protected int burnTime;
+    protected int fuelBurnTime;
+    protected int currentItemEnergyProgress;
+    protected int currentItemEnergyNeed;
     protected final int burnSpeed = 16;
     protected final int workSpeed = 4;
 
@@ -217,17 +217,18 @@ public abstract class AbstractEnergyMachina extends AbstractEnergyBlock
                 inv[fuel_slot] == null ||
                 getItemBurnTime(inv[fuel_slot]) == 0 ||
                 burnTime > 0);
-
     }
 
     public void burn() {
         if (this.inv[fuel_slot] != null) {
+
             this.burnTime = getItemBurnTime(inv[fuel_slot]);
             this.fuelBurnTime = this.burnTime;
             this.inv[fuel_slot]=Fuel.getInstance().burn(this.inv[fuel_slot]);
-            if (this.inv[fuel_slot].stackSize == 0) {
-                this.inv[fuel_slot] = null;
-            }
+            //if (this.inv[fuel_slot].stackSize == 0) {
+            //    this.inv[fuel_slot] = null;
+//
+ //           }
         }
     }
 
@@ -373,7 +374,7 @@ public abstract class AbstractEnergyMachina extends AbstractEnergyBlock
     }
 
 
-    private IRecipe1I2O getRecipe(ItemStack stack){
+    protected IRecipe1I2O getRecipe(ItemStack stack){
         return ((IRecipes1I2O)getRecipes()).getRecipe(stack);
     }
 

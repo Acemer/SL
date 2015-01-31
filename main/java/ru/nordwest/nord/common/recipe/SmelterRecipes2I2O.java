@@ -21,7 +21,7 @@ public class SmelterRecipes2I2O extends Recipes2I2O {
     private static IRecipes1I2O INSTANCE;
     public static IRecipes1I2O INSTANCE() {
         if (INSTANCE == null) {
-            INSTANCE = new FlowingRecipes1I2O();
+            INSTANCE = new SmelterRecipes2I2O();
         }
         return INSTANCE;
     }

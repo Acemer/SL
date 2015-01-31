@@ -3,7 +3,6 @@ package ru.nordwest.nord.block;
 import java.util.Random;
 
 import ru.nordwest.nord.Nord;
-import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -20,6 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import ru.nordwest.nord.common.tileentity.TileEntitySmelter2;
 
 public class SmelterBlock extends BlockContainer {
 	@SideOnly(Side.CLIENT)
@@ -90,10 +90,12 @@ public class SmelterBlock extends BlockContainer {
 
 	}
 
+    @Override
 	public Item getItemDropped(int i, Random random, int j) {
 		return Item.getItemFromBlock(Nord.smelter);
 	}
 
+    @Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 
@@ -111,9 +113,10 @@ public class SmelterBlock extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int i) {
-		return new TileEntitySmelter();
+		return new TileEntitySmelter2();
 	}
 
+    @Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z,
 			Random random) {
@@ -149,6 +152,7 @@ public class SmelterBlock extends BlockContainer {
 		}
 	}
 
+    @Override
 	public void onBlockPlacedBy(World world, int x, int y, int z,
 			EntityLivingBase entityplayer, ItemStack itemstack) {
 		int l = MathHelper
@@ -201,7 +205,7 @@ public class SmelterBlock extends BlockContainer {
 	public void breakBlock(World world, int x, int y, int z, Block oldblock,
 			int oldMetadata) {
 		if (!keepInventory) {
-			TileEntitySmelter tileentity = (TileEntitySmelter) world
+			TileEntitySmelter2 tileentity = (TileEntitySmelter2) world
 					.getTileEntity(x, y, z);
 
 			if (tileentity != null) {
