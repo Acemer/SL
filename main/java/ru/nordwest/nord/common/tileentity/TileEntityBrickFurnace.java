@@ -206,9 +206,9 @@ public class TileEntityBrickFurnace extends TileEntity
 			}
 
 			if (flag != this.burnTime > 0) {
-				flag1 = true;
-				SmelterBlock.updateBlockState(this.burnTime > 0, this.worldObj,
-						this.xCoord, this.yCoord, this.zCoord);
+//				flag1 = true;
+//				SmelterBlock.updateBlockState(this.burnTime > 0, this.worldObj,
+//						this.xCoord, this.yCoord, this.zCoord);
 			}
 		}
 

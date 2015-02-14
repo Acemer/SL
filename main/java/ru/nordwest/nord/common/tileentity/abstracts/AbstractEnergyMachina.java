@@ -207,8 +207,7 @@ public abstract class AbstractEnergyMachina extends AbstractEnergyBlock
         return burnTime > 0 && this.getEnergy() < this.getMaxEnergy();
     }
 
-    public boolean isWork()
-    {
+    public boolean isWork(){
         return currentItemEnergyNeed > 0 && this.getEnergy() > 0;
     }
 
