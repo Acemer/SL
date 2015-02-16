@@ -6,8 +6,8 @@ import ru.nordwest.nord.Nord;
 
 public class BaseBlock extends Block {
 
-	public BaseBlock(final Material par2Material) {
-		super(par2Material);
-		this.setCreativeTab(Nord.tabBase);
-	}
+        public BaseBlock(final Material par2Material) {
+                super(par2Material);
+                this.setCreativeTab(Nord.generalTab);
+        }
 }

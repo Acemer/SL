@@ -10,40 +10,39 @@ import ru.nordwest.nord.block.avstrct.AbstractMachina;
 import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
 
 public class FlowingBlock extends AbstractMachina {
-	
-	public FlowingBlock() {
-		super(Material.rock);
-		setHardness(2.0F);
-        setResistance(5.0F);
-        setBlockName("Flowing");
-        setCreativeTab(Nord.tabBase);
 
-	}
-
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z,
-                    EntityPlayer player, int metadata, float what, float these, float are) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (tileEntity == null || player.isSneaking()) {
-                return false;
+        public FlowingBlock() {
+                super(Material.rock);
+                setHardness(2.0F);
+                setResistance(5.0F);
+                setBlockName("Flowing");
+                setCreativeTab(Nord.generalTab);
         }
-        player.openGui(Nord.instance, Nord.guiIDFlowing, world, x, y, z);
-        return true;
-	}
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityFlowing();
-	}
+        @Override
+        public boolean onBlockActivated(World world, int x, int y, int z,
+                                        EntityPlayer player, int metadata, float what, float these, float are) {
+                TileEntity tileEntity = world.getTileEntity(x, y, z);
+                if (tileEntity == null || player.isSneaking()) {
+                        return false;
+                }
+                player.openGui(Nord.NordInstance, Nord.guiIDFlowing, world, x, y, z);
+                return true;
+        }
 
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
+        @Override
+        public TileEntity createNewTileEntity(World world, int meta) {
+                return new TileEntityFlowing();
+        }
 
-        this.blockIcon = iconRegister.registerIcon(Nord.MODID + ":flowing/side");
-        this.iconFront = iconRegister.registerIcon(Nord.MODID + ":flowing/front");
-        this.iconFrontWork = iconRegister.registerIcon(Nord.MODID + ":flowing/front_on");
-        this.iconTop   = iconRegister.registerIcon(Nord.MODID + ":flowing/top");
-        this.iconDown   = iconRegister.registerIcon(Nord.MODID + ":flowing/down");
-    }
+        @Override
+        public void registerBlockIcons(IIconRegister iconRegister) {
+
+                this.blockIcon = iconRegister.registerIcon(Nord.MODID + ":flowing/side");
+                this.iconFront = iconRegister.registerIcon(Nord.MODID + ":flowing/front");
+                this.iconFrontWork = iconRegister.registerIcon(Nord.MODID + ":flowing/front_on");
+                this.iconTop = iconRegister.registerIcon(Nord.MODID + ":flowing/top");
+                this.iconDown = iconRegister.registerIcon(Nord.MODID + ":flowing/down");
+        }
 
 }

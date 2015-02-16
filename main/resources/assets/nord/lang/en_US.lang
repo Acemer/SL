@@ -1,9 +1,14 @@
-itemGroup.tabBase=Base creative tab
+itemGroup.generalTab=[N] General Tab
+itemGroup.blocksTab=[N] Decoration Blocks
+itemGroup.lightingTab=[N] Lighting
+itemGroup.metalsTab=[N] Metals
+itemGroup.foodTab=[N] Food
+itemGroup.bagsAndGiftsTab=[N] Bags And Gifts
 
-tile.alluminum_block.dirty.name=Dirty Alluminum Block
-tile.alluminum_block.poor.name=Poor Alluminum Block
-tile.alluminum_block.normal.name=Alluminum Block
-tile.alluminum_block.clear.name=Clear Alluminum Block
+tile.alluminum_block.dirty.name=Dirty Aluminum Block
+tile.alluminum_block.poor.name=Poor Aluminum Block
+tile.alluminum_block.normal.name=Aluminum Block
+tile.alluminum_block.clear.name=Clear Aluminum Block
 
 tile.chrome_block.dirty.name=Dirty Chrome Block
 tile.chrome_block.poor.name=Poor Chrome Block
@@ -90,10 +95,10 @@ item.zing_ingot.poor.name=Poor Zing Ingot
 item.zing_ingot.normal.name=Zing Ingot
 item.zing_ingot.clear.name=Clear Zing Ingot
 
-item.alluminum_ingot.dirty.name=Dirty Alluminum Ingot
-item.alluminum_ingot.poor.name=Poor Alluminum Ingot
-item.alluminum_ingot.normal.name=Alluminum Ingot
-item.alluminum_ingot.clear.name=Clear Alluminum Ingot
+item.alluminum_ingot.dirty.name=Dirty Aluminum Ingot
+item.alluminum_ingot.poor.name=Poor Aluminum Ingot
+item.alluminum_ingot.normal.name=Aluminum Ingot
+item.alluminum_ingot.clear.name=Clear Aluminum Ingot
 
 item.gold_ingot.dirty.name=Dirty Gold Ingot
 item.gold_ingot.poor.name=Poor Gold Ingot

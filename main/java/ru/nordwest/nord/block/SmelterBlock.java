@@ -1,8 +1,5 @@
 package ru.nordwest.nord.block;
 
-import java.util.Random;
-
-import ru.nordwest.nord.Nord;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
@@ -11,49 +8,52 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.block.avstrct.AbstractMachina;
 import ru.nordwest.nord.common.tileentity.TileEntitySmelter2;
 
+import java.util.Random;
+
 public class SmelterBlock extends AbstractMachina {
 
-	public SmelterBlock() {
-		super(Material.rock);
-        setTickRandomly(true);
-	}
+        public SmelterBlock() {
+                super(Material.rock);
+                setTickRandomly(true);
+        }
 
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon(Nord.MODID + ":smelter/side");
-		this.iconFront = iconRegister.registerIcon(Nord.MODID + ":smelter/front_off");
-		this.iconFrontWork = iconRegister.registerIcon(Nord.MODID + ":smelter/front_on");
-		this.iconTop   = iconRegister.registerIcon(Nord.MODID + ":smelter/top");
-		this.iconDown  = iconRegister.registerIcon(Nord.MODID + ":smelter/top");
+        @SideOnly(Side.CLIENT)
+        public void registerBlockIcons(IIconRegister iconRegister) {
+                this.blockIcon = iconRegister.registerIcon(Nord.MODID + ":smelter/side");
+                this.iconFront = iconRegister.registerIcon(Nord.MODID + ":smelter/front_off");
+                this.iconFrontWork = iconRegister.registerIcon(Nord.MODID + ":smelter/front_on");
+                this.iconTop = iconRegister.registerIcon(Nord.MODID + ":smelter/top");
+                this.iconDown = iconRegister.registerIcon(Nord.MODID + ":smelter/top");
 
-	}
+        }
 
 
-    @Override
-	public Item getItemDropped(int i, Random random, int j) {
-		return Item.getItemFromBlock(Nord.smelter);
-	}
+        @Override
+        public Item getItemDropped(int i, Random random, int j) {
+                return Item.getItemFromBlock(Nord.smelter);
+        }
 
-    @Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
-			if (tileentity != null) {
-					player.openGui(Nord.instance, Nord.guiIDSmelter, world, x, y, z);
-					return true;
-			}
-		}
-		return false;
-	}
+        @Override
+        public boolean onBlockActivated(World world, int x, int y, int z,
+                                        EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+                if (!world.isRemote) {
+                        TileEntity tileentity = world.getTileEntity(x, y, z);
+                        if (tileentity != null) {
+                                player.openGui(Nord.NordInstance, Nord.guiIDSmelter, world, x, y, z);
+                                return true;
+                        }
+                }
+                return false;
+        }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int i) {
-		return new TileEntitySmelter2();
-	}
+        @Override
+        public TileEntity createNewTileEntity(World world, int i) {
+                return new TileEntitySmelter2();
+        }
 
 //    @Override
 //	@SideOnly(Side.CLIENT)
@@ -93,7 +93,7 @@ public class SmelterBlock extends AbstractMachina {
 //		}
 //	}
 
-	private static boolean keepInventory;
+        private static boolean keepInventory;
 
 //    @Override
 //	public static void updateBlockState(boolean active,
@@ -119,7 +119,7 @@ public class SmelterBlock extends AbstractMachina {
 //	}
 
 
-	public Item getItem(World world, int x, int y, int z) {
-		return Item.getItemFromBlock(Nord.smelter);
-	}
+        public Item getItem(World world, int x, int y, int z) {
+                return Item.getItemFromBlock(Nord.smelter);
+        }
 }

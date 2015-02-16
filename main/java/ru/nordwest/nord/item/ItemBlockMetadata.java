@@ -1,34 +1,35 @@
 package ru.nordwest.nord.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBlockMetadata extends ItemBlock {
-	private final Block block;
-	public ItemBlockMetadata(final Block block) {
-		super(block);
-		this.block = block;
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
-	}
+        private final Block block;
 
-	@Override
-	public String getUnlocalizedName(final ItemStack itemStack) {
-		return super.getUnlocalizedName() + "." + itemStack.getItemDamage();
-	}
+        public ItemBlockMetadata(final Block block) {
+                super(block);
+                this.block = block;
+                this.setMaxDamage(0);
+                this.setHasSubtypes(true);
+        }
 
-	@Override
-	public int getMetadata(final int meta) {
-		return meta;
-	}
+        @Override
+        public String getUnlocalizedName(final ItemStack itemStack) {
+                return super.getUnlocalizedName() + "." + itemStack.getItemDamage();
+        }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(final int meta) {
-		return this.block.getIcon(0, meta);
-	}
+        @Override
+        public int getMetadata(final int meta) {
+                return meta;
+        }
+
+        @Override
+        @SideOnly(Side.CLIENT)
+        public IIcon getIconFromDamage(final int meta) {
+                return this.block.getIcon(0, meta);
+        }
 }
