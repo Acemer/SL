@@ -1,7 +1,7 @@
 package ru.nordwest.nord.common.recipe.old;
 
 import net.minecraft.item.ItemStack;
-import ru.nordwest.nord.MetallRegister;
+import ru.nordwest.nord.MetalRegister;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +54,10 @@ public class SmelterRecipes {
                                    String input2, int qual2, int quant2, String output1, int oqual1,
                                    int oquant1, String output2, int oqual2, int oquant2,
                                    float percent, float exp) {
-                smeltItemStack(MetallRegister.getMetallIngot(input1, qual1, quant1),
-                        MetallRegister.getMetallIngot(input2, qual2, qual2),
-                        MetallRegister.getMetallIngot(output1, oqual1, oquant1),
-                        MetallRegister.getMetallIngot(output2, oqual2, oquant2),
+                smeltItemStack(MetalRegister.getMetallIngot(input1, qual1, quant1),
+                        MetalRegister.getMetallIngot(input2, qual2, qual2),
+                        MetalRegister.getMetallIngot(output1, oqual1, oquant1),
+                        MetalRegister.getMetallIngot(output2, oqual2, oquant2),
                         percent, exp);
 
         }
@@ -65,9 +65,9 @@ public class SmelterRecipes {
         public void smeltItemStack(String input1, int qual1, int quant1,
                                    String input2, int qual2, int quant2, String output1, int oqual1,
                                    int oquant1, float exp) {
-                smeltItemStack(MetallRegister.getMetallIngot(input1, qual1, quant1),
-                        MetallRegister.getMetallIngot(input2, qual2, qual2),
-                        MetallRegister.getMetallIngot(output1, oqual1, oquant1), exp);
+                smeltItemStack(MetalRegister.getMetallIngot(input1, qual1, quant1),
+                        MetalRegister.getMetallIngot(input2, qual2, qual2),
+                        MetalRegister.getMetallIngot(output1, oqual1, oquant1), exp);
 
         }
 

@@ -1,4 +1,4 @@
-package ru.nordwest.nord.block.avstrct;
+package ru.nordwest.nord.block.abstracts;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -11,14 +11,14 @@ import ru.nordwest.nord.block.*;
 import ru.nordwest.nord.common.recipe.FlowingRecipes1I2O;
 import ru.nordwest.nord.common.recipe.SmelterRecipes2I2O;
 import ru.nordwest.nord.common.tileentity.*;
-import ru.nordwest.nord.item.ItemMetallBlock;
+import ru.nordwest.nord.item.ItemMetalBlock;
 
 public class MachineRegister {
         public static void init() {
                 Nord.smelter = new SmelterBlock().setBlockName("smelter")
                         .setCreativeTab(Nord.metalsTab).setBlockTextureName("smelter")
                         .setHardness(3.0F).setHardness(5.0F);
-                GameRegistry.registerBlock(Nord.smelter, ItemMetallBlock.class, "smelter");
+                GameRegistry.registerBlock(Nord.smelter, ItemMetalBlock.class, "smelter");
                 GameRegistry.registerTileEntity(TileEntitySmelter2.class,
                         "TileEntitySmelter");
                 GameRegistry.addRecipe(new ItemStack(Nord.smelter, 1), "xyx", "y0y", "yyy",
@@ -28,7 +28,7 @@ public class MachineRegister {
                 Nord.brickFurnace = new BrickFurnaceBlock().setBlockName("brickFurnace")
                         .setCreativeTab(Nord.metalsTab).setBlockTextureName("brickFurnace")
                         .setHardness(3.0F).setHardness(5.0F);
-                GameRegistry.registerBlock(Nord.brickFurnace, ItemMetallBlock.class, "brickFurnace");
+                GameRegistry.registerBlock(Nord.brickFurnace, ItemMetalBlock.class, "brickFurnace");
                 GameRegistry.registerTileEntity(TileEntityBrickFurnace.class,
                         "TileEntityBrickFurnace");
                 GameRegistry.addRecipe(new ItemStack(Nord.smelter, 1), "xxx", "x0x", "xxx",

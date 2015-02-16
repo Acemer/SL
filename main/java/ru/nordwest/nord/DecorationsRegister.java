@@ -11,7 +11,7 @@ import ru.nordwest.nord.item.ItemBlockMetadata;
 import ru.nordwest.nord.item.ItemColorMetaDataBlock;
 import ru.nordwest.nord.item.ItemDecoStoneBlock;
 
-public class DecoRegister {
+public class DecorationsRegister {
         static public void init() {
                 // Блоки камня.
                 // Определитесь уже, пишите вы комментарии на русском языке или английском. Английский предпочтительнее - GitHub его любит :)

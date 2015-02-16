@@ -71,9 +71,9 @@ public class Nord {
 
         @EventHandler
         public void preInit(final FMLPreInitializationEvent event) {
-                MetallRegister.preInit();
-                MetallRegister.init();
-                DecoRegister.init();
+                MetalRegister.preInit();
+                MetalRegister.init();
+                DecorationsRegister.init();
                 FoodRegister.init();
                 MachineRegister.init();
                 Fuel.init();
@@ -100,7 +100,7 @@ public class Nord {
                 ((CreativeTabNord) generalTab).setItem(new ItemStack(Items.bed));
                 ((CreativeTabNord) blocksTab).setItem(new ItemStack(Nord.buildingBlocks[6], 1, 1));
                 ((CreativeTabNord) lightingTab).setItem(new ItemStack(Nord.lamps[2], 1, 0));
-                ((CreativeTabNord) metalsTab).setItem(MetallRegister.getMetallIngot("zing", 3, 1));
+                ((CreativeTabNord) metalsTab).setItem(MetalRegister.getMetallIngot("zing", 3, 1));
                 ((CreativeTabNord) foodTab).setItem(ItemMetadataFood.getFood("potatoes_pie"));
                 ((CreativeTabNord) bagsAndGiftsTab).setItem(new ItemStack(Items.leather));
         }

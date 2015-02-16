@@ -12,12 +12,12 @@ import ru.nordwest.nord.Nord;
 
 import java.util.List;
 
-public class ItemMetallIngot extends ItemBase {
+public class ItemMetalIngot extends ItemBase {
         private final String[] subname = new String[]{"dirty", "poor", "normal",
                 "clear", "powder"};
         private IIcon[] texture;
 
-        public ItemMetallIngot() {
+        public ItemMetalIngot() {
                 this.setHasSubtypes(true);
                 this.setMaxDamage(0);
                 this.setCreativeTab(Nord.metalsTab);

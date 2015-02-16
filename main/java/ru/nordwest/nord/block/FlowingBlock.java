@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ru.nordwest.nord.Nord;
-import ru.nordwest.nord.block.avstrct.AbstractMachina;
+import ru.nordwest.nord.block.abstracts.AbstractMachina;
 import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
 
 public class FlowingBlock extends AbstractMachina {

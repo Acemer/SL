@@ -2,13 +2,13 @@ package ru.nordwest.nord.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import ru.nordwest.nord.MetallRegister;
+import ru.nordwest.nord.MetalRegister;
 import ru.nordwest.nord.block.BaseMetalOre;
 
-public class ItemMetallOre extends ItemBlockMetadata {
+public class ItemMetalOre extends ItemBlockMetadata {
         private int shift = 0;
 
-        public ItemMetallOre(final Block block) {
+        public ItemMetalOre(final Block block) {
                 super(block);
                 this.shift = ((BaseMetalOre) block).getShift();
 
@@ -18,7 +18,7 @@ public class ItemMetallOre extends ItemBlockMetadata {
         public String getUnlocalizedName(final ItemStack itemStack) {
                 return super.getUnlocalizedName()
                         + "."
-                        + MetallRegister.ore_list[this.shift
+                        + MetalRegister.ore_list[this.shift
                         + itemStack.getItemDamage()];
         }
 }

@@ -7,16 +7,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import ru.nordwest.nord.block.BaseMetalOre;
 import ru.nordwest.nord.block.BaseMetallBlock;
-import ru.nordwest.nord.item.ItemMetallBlock;
-import ru.nordwest.nord.item.ItemMetallDrop;
-import ru.nordwest.nord.item.ItemMetallIngot;
-import ru.nordwest.nord.item.ItemMetallOre;
+import ru.nordwest.nord.item.ItemMetalBlock;
+import ru.nordwest.nord.item.ItemMetalDrop;
+import ru.nordwest.nord.item.ItemMetalIngot;
+import ru.nordwest.nord.item.ItemMetalOre;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MetallRegister {
+public class MetalRegister {
         public static class Ores {
                 public final String name;
                 public final float hard;
@@ -102,20 +102,20 @@ public class MetallRegister {
 	*/
                 Item item;
                 Block block = null;
-                for (final String metall : MetallRegister.metall_list) {
+                for (final String metall : MetalRegister.metall_list) {
                         block = new BaseMetallBlock(Material.iron)
                                 .setBlockName(metall + "_block")
                                 .setCreativeTab(Nord.metalsTab)
                                 .setBlockTextureName(metall + "_block").setHardness(3.0F)
                                 .setHardness(5.0F);
                         block.setHarvestLevel("pickaxe", 2);
-                        GameRegistry.registerBlock(block, ItemMetallBlock.class, metall
+                        GameRegistry.registerBlock(block, ItemMetalBlock.class, metall
                                 + "_block");
-                        MetallRegister.metall_block.put(metall, block);
-                        item = new ItemMetallIngot().setUnlocalizedName(metall + "_ingot")
+                        MetalRegister.metall_block.put(metall, block);
+                        item = new ItemMetalIngot().setUnlocalizedName(metall + "_ingot")
                                 .setTextureName(metall + "_ingot");
                         GameRegistry.registerItem(item, metall + "_ingot");
-                        MetallRegister.metall_ingot.put(metall, item);
+                        MetalRegister.metall_ingot.put(metall, item);
                         for (int i = 0; i < 4; i++) {
                                 GameRegistry.addRecipe(new ItemStack(block, 1, i), "xxx",
                                         "xxx", "xxx", 'x', new ItemStack(item, 1, i));
@@ -125,32 +125,32 @@ public class MetallRegister {
                 /**
                  * Регестрируем руды, дропу, пыль и чистую пыль
                  */
-                final Item drop = new ItemMetallDrop("drop").setUnlocalizedName("drop");
+                final Item drop = new ItemMetalDrop("drop").setUnlocalizedName("drop");
                 GameRegistry.registerItem(drop, "drop");
 
-                final Item powder = new ItemMetallDrop("powder")
+                final Item powder = new ItemMetalDrop("powder")
                         .setUnlocalizedName("powder");
                 GameRegistry.registerItem(powder, "powder");
 
-                final Item clear_powder = new ItemMetallDrop("clear_powder")
+                final Item clear_powder = new ItemMetalDrop("clear_powder")
                         .setUnlocalizedName("clear_powder");
                 GameRegistry.registerItem(clear_powder, "clear_powder");
 
-                for (int i = 0; i < MetallRegister.ores.size(); i++) {
-                        final String name = MetallRegister.ores.get(i).name;
+                for (int i = 0; i < MetalRegister.ores.size(); i++) {
+                        final String name = MetalRegister.ores.get(i).name;
                         if ((i % 16) == 0) {
                                 block = new BaseMetalOre(Material.rock, i)
                                         .setCreativeTab(Nord.metalsTab).setResistance(5.0F).setBlockName("ore_" + i);
-                                GameRegistry.registerBlock(block, ItemMetallOre.class, "ore_"
+                                GameRegistry.registerBlock(block, ItemMetalOre.class, "ore_"
                                         + i);
                         }
                         if (block != null) {
-                                MetallRegister.metall_ore.put(name, new ItemStack(block, 1,
+                                MetalRegister.metall_ore.put(name, new ItemStack(block, 1,
                                         i % 16));
-                                MetallRegister.metall_drop.put(name, new ItemStack(drop, 1, i));
-                                MetallRegister.metall_powder.put(name, new ItemStack(powder, 1,
+                                MetalRegister.metall_drop.put(name, new ItemStack(drop, 1, i));
+                                MetalRegister.metall_powder.put(name, new ItemStack(powder, 1,
                                         i));
-                                MetallRegister.metall_clear_powder.put(name, new ItemStack(
+                                MetalRegister.metall_clear_powder.put(name, new ItemStack(
                                         clear_powder, 1, i));
                         }
                 }
@@ -158,8 +158,8 @@ public class MetallRegister {
         }
 
         public static ItemStack getMetallBlock(final String name, final int quality, final int quantaty) {
-                if (MetallRegister.metall_block.containsKey(name)) {
-                        return new ItemStack(MetallRegister.metall_block.get(name), quantaty,
+                if (MetalRegister.metall_block.containsKey(name)) {
+                        return new ItemStack(MetalRegister.metall_block.get(name), quantaty,
                                 quality % 4);
                 } else {
                         System.err.println("Can't catch block name. Unknown metall block: " + name);
@@ -169,8 +169,8 @@ public class MetallRegister {
         }
 
         public static ItemStack getMetallIngot(final String name, final int quality, final int quantity) {
-                if (MetallRegister.metall_ingot.containsKey(name)) {
-                        return new ItemStack(MetallRegister.metall_ingot.get(name), quantity,
+                if (MetalRegister.metall_ingot.containsKey(name)) {
+                        return new ItemStack(MetalRegister.metall_ingot.get(name), quantity,
                                 quality % 4);
                 } else {
                         System.err.println("Can't catch ingot name. Unknown metall: " + name);
@@ -180,8 +180,8 @@ public class MetallRegister {
         }
 
         public static ItemStack getMetallPowder(final String name, final int quantaty) {
-                if (MetallRegister.metall_ingot.containsKey(name)) {
-                        return new ItemStack(MetallRegister.metall_block.get(name), quantaty, 5);
+                if (MetalRegister.metall_ingot.containsKey(name)) {
+                        return new ItemStack(MetalRegister.metall_block.get(name), quantaty, 5);
                 } else {
                         System.err.println("Can't catch powder name. Unknown metall: " + name);
                         System.err.println("Game has crashed:)");
@@ -190,8 +190,8 @@ public class MetallRegister {
         }
 
         public static ItemStack getOre(final String name, final int quantaty) {
-                if (MetallRegister.metall_ore.containsKey(name)) {
-                        ItemStack item = MetallRegister.metall_ore.get(name);
+                if (MetalRegister.metall_ore.containsKey(name)) {
+                        ItemStack item = MetalRegister.metall_ore.get(name);
                         item.stackSize = quantaty;
                         return item;
                 } else {
@@ -202,8 +202,8 @@ public class MetallRegister {
         }
 
         public static ItemStack getOreDrop(final String name, final int quantaty) {
-                if (MetallRegister.metall_drop.containsKey(name)) {
-                        ItemStack item = MetallRegister.metall_drop.get(name);
+                if (MetalRegister.metall_drop.containsKey(name)) {
+                        ItemStack item = MetalRegister.metall_drop.get(name);
                         item.stackSize = quantaty;
                         return item;
                 } else {
@@ -214,8 +214,8 @@ public class MetallRegister {
         }
 
         public static ItemStack getOrePowder(final String name, final int quantaty) {
-                if (MetallRegister.metall_powder.containsKey(name)) {
-                        ItemStack item = MetallRegister.metall_powder.get(name);
+                if (MetalRegister.metall_powder.containsKey(name)) {
+                        ItemStack item = MetalRegister.metall_powder.get(name);
                         item.stackSize = quantaty;
                         return item;
                 } else {
@@ -226,8 +226,8 @@ public class MetallRegister {
         }
 
         public static ItemStack getOreClearPowder(final String name, final int quantaty) {
-                if (MetallRegister.metall_clear_powder.containsKey(name)) {
-                        ItemStack item = MetallRegister.metall_clear_powder.get(name);
+                if (MetalRegister.metall_clear_powder.containsKey(name)) {
+                        ItemStack item = MetalRegister.metall_clear_powder.get(name);
                         item.stackSize = quantaty;
                         return item;
                 } else {
