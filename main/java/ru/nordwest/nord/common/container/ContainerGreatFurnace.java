@@ -9,12 +9,12 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
-import ru.nordwest.nord.common.recipe.old.FlowingRecipes;
-import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
-import ru.nordwest.nord.common.tileentity.TileEntityGreatFurnaceTech;
+import ru.nordwest.nord.common.lib.recipes.OUTDATED.FlowingRecipes;
+import ru.nordwest.nord.common.tiles.TileFlowing;
+import ru.nordwest.nord.common.tiles.TileGreatFurnaceTech;
 
 public class ContainerGreatFurnace extends Container {
-        protected final TileEntityGreatFurnaceTech tileEntity;
+        protected final TileGreatFurnaceTech tileEntity;
 
         private int lastEnergy;
         private int lastBurnTime;
@@ -27,7 +27,7 @@ public class ContainerGreatFurnace extends Container {
                 return tileEntity.isUseableByPlayer(player);
         }
 
-        public ContainerGreatFurnace(InventoryPlayer invPlayer, TileEntityGreatFurnaceTech ent) {
+        public ContainerGreatFurnace(InventoryPlayer invPlayer, TileGreatFurnaceTech ent) {
                 tileEntity = ent;
 
                 addSlotToContainer(new Slot(tileEntity, 0, 18, 58)); // fuel
@@ -130,7 +130,7 @@ public class ContainerGreatFurnace extends Container {
                                         if (!this.mergeItemStack(stackInSlot, 1, 2, false)) {
                                                 return null;
                                         }
-                                } else if (TileEntityFlowing.getItemBurnTime(stackInSlot) > 0 && (fuelSlot.getStack() == null || fuelSlot.getStack().stackSize < 64)) {
+                                } else if (TileFlowing.getItemBurnTime(stackInSlot) > 0 && (fuelSlot.getStack() == null || fuelSlot.getStack().stackSize < 64)) {
                                         if (!this.mergeItemStack(stackInSlot, 0, 1, false))
                                                 return null;
                                 } else if (slot >= 4 && slot <= 30) {

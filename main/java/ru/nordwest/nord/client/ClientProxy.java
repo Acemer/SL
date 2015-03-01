@@ -3,9 +3,9 @@ package ru.nordwest.nord.client;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraftforge.common.MinecraftForge;
-import ru.nordwest.nord.client.renders.BlockCandleRenderer;
+import ru.nordwest.nord.client.renders.blocks.BlockCandleRenderer;
 import ru.nordwest.nord.common.CommonProxy;
-import ru.nordwest.nord.common.handler.OverlayHandler;
+import ru.nordwest.nord.common.lib.events.OverlayHandler;
 
 public class ClientProxy extends CommonProxy {
 

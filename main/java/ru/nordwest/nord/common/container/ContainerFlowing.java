@@ -1,13 +1,13 @@
 package ru.nordwest.nord.common.container;
 
 import net.minecraft.entity.player.InventoryPlayer;
-import ru.nordwest.nord.common.container.abstracts.AbstactMachineConteiner;
-import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
+import ru.nordwest.nord.common.container.abstracts.ContainerAbstactMachine;
+import ru.nordwest.nord.common.tiles.TileFlowing;
 
-public class ContainerFlowing extends AbstactMachineConteiner {
+public class ContainerFlowing extends ContainerAbstactMachine {
 
 
-        public ContainerFlowing(InventoryPlayer invPlayer, TileEntityFlowing ent) {
+        public ContainerFlowing(InventoryPlayer invPlayer, TileFlowing ent) {
                 init(invPlayer, ent);
         }
 

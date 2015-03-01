@@ -8,21 +8,19 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.container.ContainerBrickFurnace;
-import ru.nordwest.nord.common.tileentity.TileEntityBrickFurnace;
+import ru.nordwest.nord.common.tiles.TileBrickFurnace;
 
 public class GuiBrickFurnace extends GuiContainer {
         private static final ResourceLocation crusherGuiTextures = new ResourceLocation(
                 Nord.MODID + ":textures/gui/container/brick_furnace.png");
-        private final TileEntityBrickFurnace tileCrusher;
+        private final TileBrickFurnace tileCrusher;
         private final EntityPlayer player;
 
-        public GuiBrickFurnace(InventoryPlayer iPlayer, TileEntityBrickFurnace tileCrusher,
+        public GuiBrickFurnace(InventoryPlayer iPlayer, TileBrickFurnace tileCrusher,
                                EntityPlayer player) {
-
                 super(new ContainerBrickFurnace(iPlayer, tileCrusher));
                 this.tileCrusher = tileCrusher;
                 this.player = player;
-
         }
 
         protected void drawGuiContainerForegroundLayer(int par1, int par2) {

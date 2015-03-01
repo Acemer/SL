@@ -6,12 +6,12 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.container.ContainerFlowing;
-import ru.nordwest.nord.common.tileentity.TileEntityFlowing;
+import ru.nordwest.nord.common.tiles.TileFlowing;
 
 public class GuiFlowing extends GuiMachine {
-        private final TileEntityFlowing tileEntity;
+        private final TileFlowing tileEntity;
 
-        public GuiFlowing(InventoryPlayer iPlayer, TileEntityFlowing tileFlowing, EntityPlayer player) {
+        public GuiFlowing(InventoryPlayer iPlayer, TileFlowing tileFlowing, EntityPlayer player) {
                 super(new ContainerFlowing(iPlayer, tileFlowing));
                 this.tileEntity = tileFlowing;
                 this.player = player;

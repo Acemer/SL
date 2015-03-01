@@ -1,9 +1,30 @@
-itemGroup.generalTab=[N] General Tab
-itemGroup.blocksTab=[N] Decoration Blocks
-itemGroup.lightingTab=[N] Lighting
-itemGroup.metalsTab=[N] Metals
-itemGroup.foodTab=[N] Food
-itemGroup.bagsAndGiftsTab=[N] Bags And Gifts
+itemGroup.tabGeneral=[N] General Tab
+itemGroup.tabBlocks=[N] Decoration Blocks
+itemGroup.tabLighting=[N] Lighting
+itemGroup.tabMetals=[N] Metals
+itemGroup.tabFood=[N] Food
+itemGroup.tabBagsAndGifts=[N] Bags And Gifts
+
+tier.common=Common Item
+tier.uncommon=Uncommon Item
+tier.rare=Rare Item
+tier.unique=Unique Item
+
+bags.tip.closed.0=Ghm, what's inside?
+bags.tip.closed.1=Ghm, what could be inside?
+bags.tip.closed.2=Something makes noise inside.
+
+bags.tip.opened.line1=It's interesting what's inside
+bags.tip.opened.line2=as long as the bag is closed.
+
+gui.bags=Bag Inventory
+
+item.small_bag.name=Small Bag
+item.medium_bag.name=Medium Bag
+item.large_bag.name=Large Bag
+item.veryLarge_bag.name=Very Large Bag
+
+tile.lamp_2.0.name=Simple White Lamp
 
 tile.alluminum_block.dirty.name=Dirty Aluminum Block
 tile.alluminum_block.poor.name=Poor Aluminum Block
@@ -134,3 +155,5 @@ item.tin_ingot.dirty.name=Dirty Tin Ingot
 item.tin_ingot.poor.name=Poor Tin Ingot
 item.tin_ingot.normal.name=Tin Ingot
 item.tin_ingot.clear.name=Clear Tin Ingot
+
+gui.inventory.brickfurnace=Brick Furnace

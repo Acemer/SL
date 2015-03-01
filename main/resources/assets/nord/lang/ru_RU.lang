@@ -1,0 +1,25 @@
+itemGroup.tabGeneral=[N] Основная вкладка
+itemGroup.tabBlocks=[N] Декоративные блоки
+itemGroup.tabLighting=[N] Освещение
+itemGroup.tabMetals=[N] Металлы
+itemGroup.tabFood=[N] Продукты питания
+itemGroup.tabBagsAndGifts=[N] Сумки и Подарки
+
+tier.common=Обычный предмет
+tier.uncommon=Необычный предмет
+tier.rare=Редкий предмет
+tier.unique=Уникальный предмет
+
+bags.tip.closed.0=Хм, что же внутри?
+bags.tip.closed.1=Хм, что же может быть внутри?
+bags.tip.closed.2=Кажется, внутри что-то звенит.
+
+bags.tip.opened.line1=Что внутри интересно лишь
+bags.tip.opened.line2=до тех пор, пока сумка закрыта.
+
+gui.bags=Содержимое сумки
+
+item.small_bag.name=Маленькая сумка
+item.medium_bag.name=Средняя сумка
+item.large_bag.name=Большая сумка
+item.veryLarge_bag.name=Огромная сумка

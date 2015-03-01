@@ -8,15 +8,15 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.container.ContainerSmelter;
-import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
+import ru.nordwest.nord.common.tiles.TileSmelter;
 
 public class GuiSmelter extends GuiContainer {
         private static final ResourceLocation crusherGuiTextures = new ResourceLocation(
                 Nord.MODID + ":textures/gui/container/stone_smelter.png");
-        private final TileEntitySmelter tileCrusher;
+        private final TileSmelter tileCrusher;
         private final EntityPlayer player;
 
-        public GuiSmelter(InventoryPlayer iPlayer, TileEntitySmelter tileCrusher,
+        public GuiSmelter(InventoryPlayer iPlayer, TileSmelter tileCrusher,
                           EntityPlayer player) {
 
                 super(new ContainerSmelter(iPlayer, tileCrusher));

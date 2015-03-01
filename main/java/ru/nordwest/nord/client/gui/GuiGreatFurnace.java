@@ -8,16 +8,16 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.container.ContainerGreatFurnace;
-import ru.nordwest.nord.common.tileentity.TileEntityGreatFurnaceTech;
+import ru.nordwest.nord.common.tiles.TileGreatFurnaceTech;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class GuiGreatFurnace extends GuiContainer {
-        private final TileEntityGreatFurnaceTech tileEntity;
+        private final TileGreatFurnaceTech tileEntity;
         private final EntityPlayer player;
 
-        public GuiGreatFurnace(InventoryPlayer iPlayer, TileEntityGreatFurnaceTech tileGreat, EntityPlayer player) {
+        public GuiGreatFurnace(InventoryPlayer iPlayer, TileGreatFurnaceTech tileGreat, EntityPlayer player) {
                 super(new ContainerGreatFurnace(iPlayer, tileGreat));
                 this.tileEntity = tileGreat;
                 this.player = player;
@@ -33,7 +33,7 @@ public class GuiGreatFurnace extends GuiContainer {
                         : I18n.format(this.tileEntity.getInventoryName());
 
                 int energy = this.tileEntity.energy / 16;
-                int maxEnergy = TileEntityGreatFurnaceTech.maxEnergy / 16;
+                int maxEnergy = TileGreatFurnaceTech.maxEnergy / 16;
                 this.fontRendererObj.drawString(name, 16, 6, 4210752);
 
                 if (xAxis > 9 && xAxis < 13 && yAxis > 20 && yAxis < 74) {

@@ -6,12 +6,12 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.container.ContainerSmelter2;
-import ru.nordwest.nord.common.tileentity.TileEntitySmelter2;
+import ru.nordwest.nord.common.tiles.TileSmelter2;
 
 public class GuiSmelter2 extends GuiMachine {
-        private final TileEntitySmelter2 tileEntity;
+        private final TileSmelter2 tileEntity;
 
-        public GuiSmelter2(InventoryPlayer iPlayer, TileEntitySmelter2 tileFlowing, EntityPlayer player) {
+        public GuiSmelter2(InventoryPlayer iPlayer, TileSmelter2 tileFlowing, EntityPlayer player) {
                 super(new ContainerSmelter2(iPlayer, tileFlowing));
                 this.tileEntity = tileFlowing;
                 this.player = player;

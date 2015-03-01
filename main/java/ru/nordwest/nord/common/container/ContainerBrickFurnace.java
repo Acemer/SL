@@ -9,18 +9,18 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
-import ru.nordwest.nord.common.recipe.old.SmelterRecipes;
-import ru.nordwest.nord.common.tileentity.TileEntityBrickFurnace;
-import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
+import ru.nordwest.nord.common.lib.recipes.OUTDATED.SmelterRecipes;
+import ru.nordwest.nord.common.tiles.TileBrickFurnace;
+import ru.nordwest.nord.common.tiles.TileSmelter;
 
 public class ContainerBrickFurnace extends Container {
-        private final TileEntityBrickFurnace tileCrusher;
+        private final TileBrickFurnace tileCrusher;
         private int lastWorkTime;
         private int lastCrushTime;
         private int lastItemCrushTime;
         private int lastIEnerge;
 
-        public ContainerBrickFurnace(InventoryPlayer iPlayer, TileEntityBrickFurnace tileEntityCrusher) {
+        public ContainerBrickFurnace(InventoryPlayer iPlayer, TileBrickFurnace tileEntityCrusher) {
                 this.tileCrusher = tileEntityCrusher;
                 this.addSlotToContainer(new Slot(tileEntityCrusher, 0, 35, 23));//input 1
                 this.addSlotToContainer(new Slot(tileEntityCrusher, 1, 46, 59)); //fuel
@@ -110,7 +110,7 @@ public class ContainerBrickFurnace extends Container {
                                 if (index > -1) {
                                         if (!this.mergeItemStack(iStack1, 0, 2, false))
                                                 return null;
-                                } else if (TileEntitySmelter.isItemFuel(iStack1) && (fuelSlot.getStack() == null || fuelSlot.getStack().stackSize < 64)) {
+                                } else if (TileSmelter.isItemFuel(iStack1) && (fuelSlot.getStack() == null || fuelSlot.getStack().stackSize < 64)) {
                                         System.out.println(true);
                                         if (!this.mergeItemStack(iStack1, 2, 3, false))
                                                 return null;

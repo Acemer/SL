@@ -9,16 +9,16 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
-import ru.nordwest.nord.common.recipe.old.SmelterRecipes;
-import ru.nordwest.nord.common.tileentity.TileEntitySmelter;
+import ru.nordwest.nord.common.lib.recipes.OUTDATED.SmelterRecipes;
+import ru.nordwest.nord.common.tiles.TileSmelter;
 
 public class ContainerSmelter extends Container {
-        private final TileEntitySmelter tileCrusher;
+        private final TileSmelter tileCrusher;
         private int lastWorkTime;
         private int lastCrushTime;
         private int lastItemCrushTime;
 
-        public ContainerSmelter(InventoryPlayer iPlayer, TileEntitySmelter tileEntityCrusher) {
+        public ContainerSmelter(InventoryPlayer iPlayer, TileSmelter tileEntityCrusher) {
                 this.tileCrusher = tileEntityCrusher;
                 this.addSlotToContainer(new Slot(tileEntityCrusher, 0, 35, 23));//input 1
                 this.addSlotToContainer(new Slot(tileEntityCrusher, 1, 56, 23));//input 2
@@ -101,7 +101,7 @@ public class ContainerSmelter extends Container {
                                 if (index > -1) {
                                         if (!this.mergeItemStack(iStack1, 0, 2, false))
                                                 return null;
-                                } else if (TileEntitySmelter.isItemFuel(iStack1) && (fuelSlot.getStack() == null || fuelSlot.getStack().stackSize < 64)) {
+                                } else if (TileSmelter.isItemFuel(iStack1) && (fuelSlot.getStack() == null || fuelSlot.getStack().stackSize < 64)) {
                                         if (!this.mergeItemStack(iStack1, 2, 3, false))
                                                 return null;
                                 } else if (parSlot >= 5 && parSlot <= 31) {

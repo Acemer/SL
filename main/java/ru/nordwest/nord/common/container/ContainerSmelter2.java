@@ -5,13 +5,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
-import ru.nordwest.nord.common.container.abstracts.AbstactMachineConteiner;
-import ru.nordwest.nord.common.recipe.Interfaces.IRecipes1I2O;
-import ru.nordwest.nord.common.tileentity.TileEntitySmelter2;
-import ru.nordwest.nord.common.tileentity.interfaces.IMachine;
-import ru.nordwest.nord.util.Fuel;
+import ru.nordwest.nord.common.container.abstracts.ContainerAbstactMachine;
+import ru.nordwest.nord.common.lib.recipes.Interfaces.IRecipes1I2O;
+import ru.nordwest.nord.common.lib.utils.Fuel;
+import ru.nordwest.nord.common.tiles.TileSmelter2;
+import ru.nordwest.nord.common.tiles.interfaces.IMachine;
 
-public class ContainerSmelter2 extends AbstactMachineConteiner {
+public class ContainerSmelter2 extends ContainerAbstactMachine {
 
 
         protected int slot_fuel = 0;
@@ -20,7 +20,7 @@ public class ContainerSmelter2 extends AbstactMachineConteiner {
         protected int slot_result1 = 3;
         protected int slot_result2 = 4;
 
-        public ContainerSmelter2(InventoryPlayer invPlayer, TileEntitySmelter2 ent) {
+        public ContainerSmelter2(InventoryPlayer invPlayer, TileSmelter2 ent) {
                 init(invPlayer, ent);
         }
 
