@@ -26,9 +26,8 @@ public class BagContent {
                 for (i = 0; i < 2; i++) {
                         for (k = 0; k < 4; k++)
                                 common.add(new ItemStack(Blocks.log, stackSize[3 + i], k));
-                        for (k = 0; k < 2; k++) {
+                        for (k = 0; k < 2; k++)
                                 common.add(new ItemStack(Blocks.sand, stackSize[3 + i], k));
-                        }
                         common.add(new ItemStack(Blocks.log2, stackSize[3 + i]));
                         common.add(new ItemStack(Blocks.wool, stackSize[2 + i]));
                         common.add(new ItemStack(Blocks.cactus, stackSize[1 + i]));
