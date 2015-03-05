@@ -2,6 +2,7 @@ package ru.nordwest.nord.common.lib.utils;
 
 /**
  * Простой класс для хранения координат блока
+ *
  * @author Dark32
  */
 public class BlockCoordinates {

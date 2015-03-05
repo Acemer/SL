@@ -5,9 +5,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.client.lib.tabs.TabsNord;
-import ru.nordwest.nord.common.items.ItemBlockMetadata;
-import ru.nordwest.nord.common.items.ItemColorMetaDataBlock;
 import ru.nordwest.nord.common.items.ItemDecoStoneBlock;
+import ru.nordwest.nord.common.items.ItemMetadataBlock;
+import ru.nordwest.nord.common.items.ItemMetadataColorBlock;
 
 public class RegisterDecorations {
         static public void init() {
@@ -31,7 +31,7 @@ public class RegisterDecorations {
                                 .setStepSound(Block.soundTypeSnow)
                                 .setLightLevel(0.9375F);
                         GameRegistry.registerBlock(Nord.lamps[i],
-                                ItemColorMetaDataBlock.class, "lamp_" + i);
+                                ItemMetadataColorBlock.class, "lamp_" + i);
                 }
 
                 // Масляная лампа
@@ -41,7 +41,7 @@ public class RegisterDecorations {
                         .setBlockTextureName("oil_lamp")
                         .setStepSound(Block.soundTypeGlass)
                         .setLightLevel(0.9375F);
-                GameRegistry.registerBlock(Nord.oil_lamp, ItemBlockMetadata.class,
+                GameRegistry.registerBlock(Nord.oil_lamp, ItemMetadataBlock.class,
                         "oil_lamp");
 
                 // Свечи
@@ -50,7 +50,7 @@ public class RegisterDecorations {
                         .setBlockTextureName("candle")
                         .setStepSound(Block.soundTypeSnow)
                         .setLightLevel(0.9375F);
-                GameRegistry.registerBlock(Nord.candle, ItemColorMetaDataBlock.class,
+                GameRegistry.registerBlock(Nord.candle, ItemMetadataColorBlock.class,
                         "candle");
 
         }

@@ -5,10 +5,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-public class ItemColorMetaDataBlock extends ItemBlockMetadata {
+public class ItemMetadataColorBlock extends ItemMetadataBlock {
         private final Block block;
 
-        public ItemColorMetaDataBlock(final Block block) {
+        public ItemMetadataColorBlock(final Block block) {
                 super(block);
                 this.block = block;
 

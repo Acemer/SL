@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import ru.nordwest.nord.common.blocks.BlockMetalOre;
 import ru.nordwest.nord.common.blocks.RegisterMetal;
 
-public class ItemMetalOre extends ItemBlockMetadata {
+public class ItemMetalOre extends ItemMetadataBlock {
         private int shift = 0;
 
         public ItemMetalOre(final Block block) {

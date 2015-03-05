@@ -3,7 +3,7 @@ package ru.nordwest.nord.common.items;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-public class ItemMetalBlock extends ItemBlockMetadata {
+public class ItemMetalBlock extends ItemMetadataBlock {
         private final String[] subname = new String[]{"dirty", "poor", "normal",
                 "clear"};
 

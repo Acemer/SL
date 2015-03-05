@@ -10,150 +10,46 @@ tier.uncommon=Uncommon Item
 tier.rare=Rare Item
 tier.unique=Unique Item
 
-bags.tip.closed.0=Ghm, what's inside?
-bags.tip.closed.1=Ghm, what could be inside?
-bags.tip.closed.2=Something makes noise inside.
-
-bags.tip.opened.line1=It's interesting what's inside
-bags.tip.opened.line2=as long as the bag is closed.
-
-gui.bags=Bag Inventory
-
 item.small_bag.name=Small Bag
 item.medium_bag.name=Medium Bag
 item.large_bag.name=Large Bag
 item.veryLarge_bag.name=Very Large Bag
 
-tile.lamp_2.0.name=Simple White Lamp
+item.bomber_bagSpecial.name=Bomber Bag
 
-tile.alluminum_block.dirty.name=Dirty Aluminum Block
-tile.alluminum_block.poor.name=Poor Aluminum Block
-tile.alluminum_block.normal.name=Aluminum Block
-tile.alluminum_block.clear.name=Clear Aluminum Block
+bags.tip.closed.0=Ghm, what's inside?
+bags.tip.closed.1=Ghm, what could be inside?
+bags.tip.closed.2=Something makes noise inside.
 
-tile.chrome_block.dirty.name=Dirty Chrome Block
-tile.chrome_block.poor.name=Poor Chrome Block
-tile.chrome_block.normal.name=Chrome Block
-tile.chrome_block.clear.name=Clear Chrome Block
+bags.tip.closed.bomber=WARNING! This may explode!
 
-tile.iron_block.dirty.name=Dirty Iron Block
-tile.iron_block.poor.name=Poor Iron Block
-tile.iron_block.normal.name=Iron Block
-tile.iron_block.clear.name=Clear Iron Block
+bags.tip.opened.line1=It's interesting what's inside
+bags.tip.opened.line2=as long as the bag is closed.
 
-tile.titan_block.dirty.name=Dirty Titan Block
-tile.titan_block.poor.name=Poor Titan Block
-tile.titan_block.normal.name=Titan Block
-tile.titan_block.clear.name=Clear Titan Block
+bags.tip.opened.bomber.line1=Signed: Turb.
+bags.tip.opened.bomber.line2=Who could it be?
 
-tile.tungsten_block.dirty.name=Dirty Tungsten Block
-tile.tungsten_block.poor.name=Poor Tungsten Block
-tile.tungsten_block.normal.name=Tungsten Block
-tile.tungsten_block.clear.name=Clear Tungsten Block
-
-tile.zing_block.dirty.name=Dirty Zing Block
-tile.zing_block.poor.name=Poor Zing Block
-tile.zing_block.normal.name=Zing Block
-tile.zing_block.clear.name=Clear Zing Block
-
-tile.gold_block.dirty.name=Dirty Gold Block
-tile.gold_block.poor.name=Poor Gold Block
-tile.gold_block.normal.name=Gold Block
-tile.gold_block.clear.name=Clear Gold Block
-
-tile.cobalt_block.dirty.name=Dirty Cobalt Block
-tile.cobalt_block.poor.name=Poor Cobalt Block
-tile.cobalt_block.normal.name=Cobalt Block
-tile.cobalt_block.clear.name=Clear Cobalt Block
-
-tile.copper_block.dirty.name=Dirty Copper Block
-tile.copper_block.poor.name=Poor Copper Block
-tile.copper_block.normal.name=Copper Block
-tile.copper_block.clear.name=Clear Copper Block
-
-tile.tin_block.dirty.name=Dirty Tin Block
-tile.tin_block.poor.name=Poor Tin Block
-tile.tin_block.normal.name=Tin Block
-tile.tin_block.clear.name=Clear Tin Block
-
-tile.platinum_block.dirty.name=Dirty Platinum Block
-tile.platinum_block.poor.name=Poor Platinum Block
-tile.platinum_block.normal.name=Platinum Block
-tile.platinum_block.clear.name=Clear Platinum Block
-
-tile.plumbum_block.dirty.name=Dirty Plumbum Block
-tile.plumbum_block.poor.name=Poor Plumbum Block
-tile.plumbum_block.normal.name=Plumbum Block
-tile.plumbum_block.clear.name=Clear Plumbum Block
-
-tile.nickel_block.dirty.name=Dirty Nickel Block
-tile.nickel_block.poor.name=Poor Nickel Block
-tile.anickel_block.normal.name=Nickel Block
-tile.nickel_block.clear.name=Clear Nickel Block
-
-item.chrome_ingot.dirty.name=Dirty Chrome Ingot
-item.chrome_ingot.poor.name=Poor Chrome Ingot
-item.chrome_ingot.normal.name=Chrome Ingot
-item.chrome_ingot.clear.name=Clear Chrome Ingot
-
-item.iron_ingot.dirty.name=Dirty Iron Ingot
-item.iron_ingot.poor.name=Poor Iron Ingot
-item.iron_ingot.normal.name=Iron Ingot
-item.iron_ingot.clear.name=Clear Iron Ingot
-
-item.titan_ingot.dirty.name=Dirty Titan Ingot
-item.titan_ingot.poor.name=Poor Titan Ingot
-item.titan_ingot.normal.name=Titan Ingot
-item.titan_ingot.clear.name=Clear Titan Ingot
-
-item.tungsten_ingot.dirty.name=Dirty Tungsten Ingot
-item.tungsten_ingot.poor.name=Poor Tungsten Ingot
-item.tungsten_ingot.normal.name=Tungsten Ingot
-item.tungsten_ingot.clear.name=Clear Tungsten Ingot
-
-item.zing_ingot.dirty.name=Dirty Zing Ingot
-item.zing_ingot.poor.name=Poor Zing Ingot
-item.zing_ingot.normal.name=Zing Ingot
-item.zing_ingot.clear.name=Clear Zing Ingot
-
-item.alluminum_ingot.dirty.name=Dirty Aluminum Ingot
-item.alluminum_ingot.poor.name=Poor Aluminum Ingot
-item.alluminum_ingot.normal.name=Aluminum Ingot
-item.alluminum_ingot.clear.name=Clear Aluminum Ingot
-
-item.gold_ingot.dirty.name=Dirty Gold Ingot
-item.gold_ingot.poor.name=Poor Gold Ingot
-item.gold_ingot.normal.name=Gold Ingot
-item.gold_ingot.clear.name=Clear Gold Ingot
-
-item.cobalt_ingot.dirty.name=Dirty Cobalt Ingot
-item.cobalt_ingot.poor.name=Poor Cobalt Ingot
-item.cobalt_ingot.normal.name=Cobalt Ingot
-item.cobalt_ingot.clear.name=Clear Cobalt Ingot
-
-item.copper_ingot.dirty.name=Dirty Copper Ingot
-item.copper_ingot.poor.name=Poor Copper Ingot
-item.copper_ingot.normal.name=Copper Ingot
-item.copper_ingot.clear.name=Clear Copper Ingot
-
-item.nickel_ingot.dirty.name=Dirty Nickel Ingot
-item.nickel_ingot.poor.name=Poor Nickel Ingot
-item.nickel_ingot.normal.name=Nickel Ingot
-item.nickel_ingot.clear.name=Clear Nickel Ingot
-
-item.platinum_ingot.dirty.name=Dirty Platinum Ingot
-item.platinum_ingot.poor.name=Poor Platinum Ingot
-item.platinum_ingot.normal.name=Platinum Ingot
-item.platinum_ingot.clear.name=Clear Platinum Ingot
-
-item.plumbum_ingot.dirty.name=Dirty Plumbum Ingot
-item.plumbum_ingot.poor.name=Poor Plumbum Ingot
-item.plumbum_ingot.normal.name=Plumbum Ingot
-item.plumbum_ingot.clear.name=Clear Plumbum Ingot
-
-item.tin_ingot.dirty.name=Dirty Tin Ingot
-item.tin_ingot.poor.name=Poor Tin Ingot
-item.tin_ingot.normal.name=Tin Ingot
-item.tin_ingot.clear.name=Clear Tin Ingot
-
-gui.inventory.brickfurnace=Brick Furnace
+item.food.fish_pie.name=Fish Pie
+item.food.jam_pie.name=Jam Pie
+item.food.meat_pie.name=Meat Pie
+item.food.potatoes_pie.name=Potatoes Pie
+item.food.onion_pie.name=Onion Pie
+item.food.sorrel_pie.name=Sorrel Pie
+item.food.dough.name=Dough
+item.food.dough_pitcher.name=Pitcher of Dough
+item.food.bun.name=Bun
+item.food.jam_bun.name=Jam Bun
+item.food.big_jam_bun.name=Big Jam Bun
+item.food.curd.name=Curd
+item.food.fritters.name=Fritters
+item.food.sorrel.name=Sorrel
+item.food.onion.name=Onion
+item.food.pancake.name=Pancake
+item.food.pancake_with_cottage_cheese.name=Pancake with cheese
+item.food.pancake_with_curd.name=Pancake with curd
+item.food.pancake_with_fish.name=Pancake with fish
+item.food.pancake_with_jam.name=Pancake with jam
+item.food.pancake_with_meat.name=Pancake with meat
+item.food.pancake_with_onions_and_eggs.name=Pancake with onion
+item.food.pancake_with_potatoes.name=Pancake with potatoes
+item.food.pancake_with_sorrel.name=Pancake with sorrel

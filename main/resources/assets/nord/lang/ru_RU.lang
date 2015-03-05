@@ -10,6 +10,13 @@ tier.uncommon=Необычный предмет
 tier.rare=Редкий предмет
 tier.unique=Уникальный предмет
 
+item.small_bag.name=Маленькая сумка
+item.medium_bag.name=Средняя сумка
+item.large_bag.name=Большая сумка
+item.veryLarge_bag.name=Огромная сумка
+
+item.bomber_bagSpecial.name=Сумка гренадера
+
 bags.tip.closed.0=Хм, что же внутри?
 bags.tip.closed.1=Хм, что же может быть внутри?
 bags.tip.closed.2=Кажется, внутри что-то звенит.
@@ -17,9 +24,28 @@ bags.tip.closed.2=Кажется, внутри что-то звенит.
 bags.tip.opened.line1=Что внутри интересно лишь
 bags.tip.opened.line2=до тех пор, пока сумка закрыта.
 
-gui.bags=Содержимое сумки
 
-item.small_bag.name=Маленькая сумка
-item.medium_bag.name=Средняя сумка
-item.large_bag.name=Большая сумка
-item.veryLarge_bag.name=Огромная сумка
+item.food.fish_pie.name=Рыбный пирог
+item.food.jam_pie.name=Пирог с вареньем
+item.food.meat_pie.name=Мясной пирог
+item.food.potatoes_pie.name=Картофельный пирог
+item.food.onion_pie.name=Луковый пирог
+item.food.sorrel_pie.name=Пирог с щавелем
+item.food.dough.name=Тесто
+item.food.dough_pitcher.name=Кувшин с тестом
+item.food.bun.name=Булочка
+item.food.jam_bun.name=Булочка с вареньем
+item.food.big_jam_bun.name=Пирожок с вареньем
+item.food.curd.name=Творог
+item.food.fritters.name=Выпечка
+item.food.sorrel.name=Щавель
+item.food.onion.name=Лук
+item.food.pancake.name=Блинчики
+item.food.pancake_with_cottage_cheese.name=Блинчики с сыром
+item.food.pancake_with_curd.name=Блинчики с творогом
+item.food.pancake_with_fish.name=Блинчики с рыбой
+item.food.pancake_with_jam.name=Блинчики с вареньем
+item.food.pancake_with_meat.name=Блинчики с мясом
+item.food.pancake_with_onions_and_eggs.name=Блинчики с луком
+item.food.pancake_with_potatoes.name=Блинчики с картошкой
+item.food.pancake_with_sorrel.name=Блинчики с щавелем

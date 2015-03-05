@@ -8,7 +8,8 @@ import ru.nordwest.nord.common.container.ContainerBag;
 import ru.nordwest.nord.common.container.InventoryBag;
 
 public class GuiBag extends GuiContainer {
-        private static final ResourceLocation textureLocation = new ResourceLocation(Nord.MODID + ":textures/gui/container/guiBag.png");
+        private static final ResourceLocation textureLocation =
+                new ResourceLocation(Nord.MODID + ":textures/gui/container/guiBag.png");
 
         private final InventoryBag inventory;
 

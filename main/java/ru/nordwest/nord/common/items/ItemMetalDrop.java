@@ -14,7 +14,7 @@ import ru.nordwest.nord.common.blocks.RegisterMetal;
 
 import java.util.List;
 
-public class ItemMetalDrop extends ItemBase {
+public class ItemMetalDrop extends Item {
         private IIcon[] texture;
         private final String suffix;
 

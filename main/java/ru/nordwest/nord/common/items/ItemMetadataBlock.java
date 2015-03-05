@@ -7,10 +7,10 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class ItemBlockMetadata extends ItemBlock {
+public class ItemMetadataBlock extends ItemBlock {
         private final Block block;
 
-        public ItemBlockMetadata(final Block block) {
+        public ItemMetadataBlock(final Block block) {
                 super(block);
                 this.block = block;
                 this.setMaxDamage(0);

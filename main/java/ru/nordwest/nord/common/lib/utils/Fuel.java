@@ -33,6 +33,7 @@ public class Fuel {
 
         /**
          * Получаем экземпляр Словаря, лениво.
+         *
          * @return Fuel
          */
         public static Fuel getInstance() {

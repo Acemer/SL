@@ -4,7 +4,7 @@ import cpw.mods.fml.common.FMLLog;
 import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.Level;
 import ru.nordwest.nord.common.items.BagContent;
-import ru.nordwest.nord.common.items.ItemMetadataFood;
+import ru.nordwest.nord.common.items.ItemFood;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +15,7 @@ public class BagContentApi extends BagContent {
         /**
          * Simple API that provides you with two simple methods you can use for
          * adding your own items or even item collections to bag content lists.
-         * <p/>
+         *
          * Use this method for adding new Items (as ItemStacks) to bag content lists.
          * Tier is an integer which should be 0-3:
          * 0 - Common tier;
@@ -91,11 +91,11 @@ public class BagContentApi extends BagContent {
 
         public static void registerNordItems() {
                 for (int i = 0; i < 2; i++) {
-                        commonNord.add(ItemMetadataFood.getFood("fish_pie", stackSize[i]));
-                        commonNord.add(ItemMetadataFood.getFood("jam_pie", stackSize[i]));
-                        commonNord.add(ItemMetadataFood.getFood("meat_pie", stackSize[i]));
-                        commonNord.add(ItemMetadataFood.getFood("potatoes_pie", stackSize[i]));
-                        commonNord.add(ItemMetadataFood.getFood("sorrel_pie", stackSize[i]));
+                        commonNord.add(ItemFood.getFood("fish_pie", stackSize[i]));
+                        commonNord.add(ItemFood.getFood("jam_pie", stackSize[i]));
+                        commonNord.add(ItemFood.getFood("meat_pie", stackSize[i]));
+                        commonNord.add(ItemFood.getFood("potatoes_pie", stackSize[i]));
+                        commonNord.add(ItemFood.getFood("sorrel_pie", stackSize[i]));
                 }
                 addCollectionToContentList(commonNord, 0);
         }

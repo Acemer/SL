@@ -21,7 +21,7 @@ public class RegisterMetal {
                 public final float hard;
                 /**
                  * Sets or removes the tool and level required to harvest this block.
-                 * <p/>
+                 *
                  * param toolClass Class
                  * param level Harvest level:
                  * Wood:    0

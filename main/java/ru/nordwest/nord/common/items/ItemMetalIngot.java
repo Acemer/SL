@@ -13,7 +13,7 @@ import ru.nordwest.nord.client.lib.tabs.TabsNord;
 
 import java.util.List;
 
-public class ItemMetalIngot extends ItemBase {
+public class ItemMetalIngot extends Item {
         private final String[] subname = new String[]{"dirty", "poor", "normal",
                 "clear", "powder"};
         private IIcon[] texture;

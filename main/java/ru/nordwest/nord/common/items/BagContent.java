@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.Level;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.container.InventoryBag;
+import ru.nordwest.nord.common.lib.utils.GetTaggedItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,8 @@ public class BagContent {
         protected static List<ItemStack> uncommon = new ArrayList<ItemStack>();
         protected static List<ItemStack> rare = new ArrayList<ItemStack>();
         protected static List<ItemStack> unique = new ArrayList<ItemStack>();
+
+        protected static List<ItemStack> bomber = new ArrayList<ItemStack>();
 
         private static int[] stackSize = {1, 2, 4, 8, 16, 24, 32, 48, 64};
 
@@ -236,11 +239,19 @@ public class BagContent {
                 unique.add(new ItemStack(Items.potionitem, 1, 16457));
                 unique.add(RegisterBags.getBag(2, 2));
                 FMLLog.log(Level.INFO, "[N - Bags] " + unique.size() + " items added to Unique content list.");
+
+                /* Bomber List */
+                for (i = 0; i < 3; i++) {
+                        bomber.add(new ItemStack(Blocks.tnt, stackSize[2 + i]));
+                        bomber.add(new ItemStack(Items.gunpowder, stackSize[3 + i]));
+                }
+                bomber.add(new ItemStack(Items.tnt_minecart, 1));
+                bomber.add(new ItemStack(Items.lava_bucket, 1));
         }
 
         private static void addItemToInventory(ItemStack itemStack, int quality, int slot) {
                 if (quality < 0) quality = 0;
-                else if (quality > 3) quality = 3;
+                else if (quality > 4) quality = 4;
                 switch (quality) {
                         case 0:
                                 new InventoryBag(itemStack).setInventorySlotContents(slot, common.get(Nord.rand.nextInt(common.size())));
@@ -254,12 +265,19 @@ public class BagContent {
                         case 3:
                                 new InventoryBag(itemStack).setInventorySlotContents(slot, unique.get(Nord.rand.nextInt(unique.size())));
                                 break;
-                        default:
+                        case 4:
+                                if (Nord.rand.nextInt(100) < 50)
+                                        new InventoryBag(itemStack).setInventorySlotContents(slot, bomber.get(Nord.rand.nextInt(bomber.size())));
+                                else {
+                                        ItemStack fireworks = GetTaggedItem.getRandomFirework();
+                                        fireworks.stackSize = stackSize[3 + Nord.rand.nextInt(3)];
+                                        new InventoryBag(itemStack).setInventorySlotContents(slot, fireworks);
+                                }
                                 break;
                 }
         }
 
-        public static void generateInventory(ItemStack itemStack) {
+        public static void generateNormalInventory(ItemStack itemStack) {
                 int s = itemStack.getItemDamage() % 10;
                 int q = itemStack.getItemDamage() / 10;
                 int slot = 0;
@@ -270,15 +288,50 @@ public class BagContent {
                 /* Third Slot */
                 /* Has 100% chance to get item for medium+ bags and 10% for small one */
                 if (s != 0) addItemToInventory(itemStack, q, slot++);
-                else if (Nord.rand.nextInt(100) < 10) addItemToInventory(itemStack, q, slot++);
+                else if (Nord.rand.nextInt(100) < 10)
+                        addItemToInventory(itemStack, q, slot++);
                 /* Fourth Slot */
                 /* Has 100% chance to get item for large+ bags and 10% for medium one */
-                if (s > 1) addItemToInventory(itemStack, q - 1, slot++);
-                else if (s == 1 && Nord.rand.nextInt(100) < 10) addItemToInventory(itemStack, q, slot++);
+                if (s > 1)
+                        addItemToInventory(itemStack, q - 1, slot++);
+                else if (s == 1 && Nord.rand.nextInt(100) < 10)
+                        addItemToInventory(itemStack, q, slot++);
                 /* Fifth Slot */
                 /* Has 100% chance to get item for very large bag and 10% for large one */
-                if (s > 2) addItemToInventory(itemStack, q + 1, slot);
-                else if (s == 2 && Nord.rand.nextInt(100) < 10) addItemToInventory(itemStack, q, slot++);
+                if (s > 2)
+                        addItemToInventory(itemStack, q + 1, slot);
+                else if (s == 2 && Nord.rand.nextInt(100) < 10)
+                        addItemToInventory(itemStack, q, slot++);
+        }
+
+        public static void generateSpecialInventory(ItemStack itemStack) {
+                int slot = 0;
+                /* First and Second Slots */
+                /* Always have 100% chance to get items in them */
+                addItemToInventory(itemStack, 4, slot++);
+                addItemToInventory(itemStack, 4, slot++);
+                /* Additional Slots */
+                /* Have 80%, 60% and 30% chance to get items in them */
+                if (Nord.rand.nextInt(100) < 80)
+                        addItemToInventory(itemStack, 4, slot++);
+                if (Nord.rand.nextInt(100) < 60)
+                        addItemToInventory(itemStack, 4, slot++);
+                if (Nord.rand.nextInt(100) < 30)
+                        addItemToInventory(itemStack, 4, slot);
+        }
+
+        public static void generateConchInventory(ItemStack itemStack) {
+
+        }
+
+        public static void generateInventory(ItemStack itemStack) {
+                int inventorySize = new InventoryBag(itemStack).getSizeInventory();
+                if (itemStack.getItem() instanceof ItemBag && inventorySize == InventoryBag.INV_SIZE)
+                        generateNormalInventory(itemStack);
+                else if (itemStack.getItem() instanceof ItemBagSpecial && inventorySize == InventoryBag.INV_SIZE)
+                        generateSpecialInventory(itemStack);
+                /*else if(itemStack.getItemDamage() < 110 && inventorySize == 3)
+                        generateConchInventory(itemStack);*/
         }
 
         public static boolean validateInventory(ItemStack itemStack) {

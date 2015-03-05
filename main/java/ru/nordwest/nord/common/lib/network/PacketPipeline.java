@@ -146,7 +146,7 @@ public class PacketPipeline
 
         /**
          * Отправить пакет всем.
-         * <p/>
+         *
          * По материалам когда cpw's из
          * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper.
          *
@@ -160,7 +160,7 @@ public class PacketPipeline
 
         /**
          * Отправить пакет определенному игроку
-         * <p/>
+         *
          * По материалам когда cpw's из
          * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
          *
@@ -177,7 +177,7 @@ public class PacketPipeline
 
         /**
          * Отправить пакет всем в определенном диапазоне точки
-         * <p/>
+         *
          * По материалам когда cpw's из
          * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
          *
@@ -197,7 +197,7 @@ public class PacketPipeline
 
         /**
          * Отправить пакет в определенном измерении
-         * <p/>
+         *
          * По материалам когда cpw's из
          * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
          *
@@ -215,7 +215,7 @@ public class PacketPipeline
 
         /**
          * Отправить пакет на сервер.
-         * <p/>
+         *
          * По материалам когда cpw's из
          * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
          *

@@ -3,7 +3,7 @@ package ru.nordwest.nord.common.items;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-public class ItemDecoStoneBlock extends ItemBlockMetadata {
+public class ItemDecoStoneBlock extends ItemMetadataBlock {
         public ItemDecoStoneBlock(final Block block) {
                 super(block);
 

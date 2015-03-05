@@ -15,42 +15,44 @@ public class DropHandler {
 
                 if (event.entityLiving instanceof EntityZombie) {
                         /* Bags Drop */
-                        if (dropChance < 315) {
-                                if (dropChance < 200)
+                        if (dropChance < 320) {
+                                if (dropChance < 135)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(0, Nord.rand.nextInt(3)), 0);
-                                else if (dropChance < 300)
+                                else if (dropChance < 230)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2), Nord.rand.nextInt(3)), 0);
-                                else if (dropChance < 310)
+                                else if (dropChance < 260)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2) + 1, Nord.rand.nextInt(3)), 0);
-                                else if (dropChance < 315)
+                                else if (dropChance < 270)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2) + 2, Nord.rand.nextInt(3)), 0);
+                                else if (dropChance < 320)
+                                        event.entityLiving.entityDropItem(RegisterBags.getSpecialBag(0), 0);
                         }
                 }
 
                 if (event.entityLiving instanceof EntitySkeleton) {
                         /* Bags Drop */
-                        if (dropChance < 380) {
+                        if (dropChance < 375) {
                                 if (dropChance < 200)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(0, Nord.rand.nextInt(4)), 0);
-                                else if (dropChance < 350)
+                                else if (dropChance < 330)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2), Nord.rand.nextInt(4)), 0);
-                                else if (dropChance < 370)
+                                else if (dropChance < 365)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2) + 1, Nord.rand.nextInt(3)), 0);
-                                else if (dropChance < 380)
+                                else if (dropChance < 375)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2) + 2, Nord.rand.nextInt(3)), 0);
                         }
                 }
 
                 if (event.entityLiving instanceof EntityPigZombie) {
                         /* Bags Drop */
-                        if (dropChance < 490) {
-                                if (dropChance < 250)
+                        if (dropChance < 450) {
+                                if (dropChance < 225)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(0, Nord.rand.nextInt(4)), 0);
-                                else if (dropChance < 450)
+                                else if (dropChance < 380)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2), Nord.rand.nextInt(4)), 0);
-                                else if (dropChance < 480)
+                                else if (dropChance < 440)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2) + 1, Nord.rand.nextInt(4)), 0);
-                                else if (dropChance < 490)
+                                else if (dropChance < 450)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2) + 2, Nord.rand.nextInt(4)), 0);
                         }
                 }
@@ -72,15 +74,20 @@ public class DropHandler {
                 if (event.entityLiving instanceof EntityWitch) {
                         /* Bags Drop */
                         if (dropChance < 1100) {
-                                if (dropChance < 750)
+                                if (dropChance < 650)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(0, Nord.rand.nextInt(4)), 0);
-                                else if (dropChance < 975)
+                                else if (dropChance < 875)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2), Nord.rand.nextInt(4)), 0);
-                                else if (dropChance < 1075)
+                                else if (dropChance < 1055)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2) + 1, Nord.rand.nextInt(4)), 0);
                                 else if (dropChance < 1100)
                                         event.entityLiving.entityDropItem(RegisterBags.getBag(Nord.rand.nextInt(2) + 2, Nord.rand.nextInt(4)), 0);
                         }
+                }
+
+                if (event.entityLiving instanceof EntityCreeper) {
+                        if (dropChance < 100)
+                                event.entityLiving.entityDropItem(RegisterBags.getSpecialBag(0), 0);
                 }
         }
 

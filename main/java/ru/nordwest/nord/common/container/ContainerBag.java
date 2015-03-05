@@ -9,11 +9,8 @@ import ru.nordwest.nord.common.items.BagContent;
 
 public class ContainerBag extends Container {
 
-        /**
-         * The Item Inventory for this Container
-         */
         public final InventoryBag inventory;
-        private int inventorySlot;
+        private int currentSlot;
 
         private static final int INV_START = InventoryBag.INV_SIZE,
                 INV_END = INV_START + 26,
@@ -22,7 +19,7 @@ public class ContainerBag extends Container {
 
         public ContainerBag(EntityPlayer par1Player, InventoryPlayer inventoryPlayer, InventoryBag inventory) {
                 this.inventory = inventory;
-                this.inventorySlot = inventoryPlayer.currentItem;
+                this.currentSlot = inventoryPlayer.currentItem;
 
                 int i;
 
@@ -38,7 +35,7 @@ public class ContainerBag extends Container {
                         }
                 }
 
-                /* Player HotBar */
+                /* Player Hotbar */
                 for (i = 0; i < 9; ++i) {
                         this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 113));
                 }
@@ -101,8 +98,8 @@ public class ContainerBag extends Container {
         @Override
         public void onContainerClosed(EntityPlayer player) {
                 if (!player.worldObj.isRemote) {
-                        if (player.inventory.mainInventory[inventorySlot] != null && !BagContent.validateInventory(player.inventory.mainInventory[inventorySlot])) {
-                                player.inventory.setInventorySlotContents(inventorySlot, null);
+                        if (player.inventory.mainInventory[currentSlot] != null && !BagContent.validateInventory(player.inventory.mainInventory[currentSlot])) {
+                                player.inventory.setInventorySlotContents(currentSlot, null);
                         }
                 }
                 super.onContainerClosed(player);
@@ -114,11 +111,10 @@ public class ContainerBag extends Container {
          */
         @Override
         public ItemStack slotClick(int slot, int button, int flag, EntityPlayer player) {
-                // this will prevent the player from interacting with the item that opened the inventory:
+                // This will prevent the player from interacting with the item that opened the inventory:
                 if (slot >= 0 && getSlot(slot) != null && getSlot(slot).getStack() == player.getHeldItem()) {
                         return null;
                 }
-                //TODO Make condition to remove item from custom slot and return this itemstack.
                 return super.slotClick(slot, button, flag, player);
         }
 }

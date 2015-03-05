@@ -12,12 +12,12 @@ import ru.nordwest.nord.Nord;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemMetaDataSimple extends Item {
+public class ItemMetadataSimple extends Item {
         private static IIcon[] textures;
         private static final List<String> names = new ArrayList<String>(80);
         private static final List<String> texture_name = new ArrayList<String>(80);
 
-        public ItemMetaDataSimple() {
+        public ItemMetadataSimple() {
                 maxStackSize = 64;
         }
 
@@ -63,9 +63,9 @@ public class ItemMetaDataSimple extends Item {
         }
 
         public static ItemStack getItem(final String name) {
-                if (ItemMetaDataSimple.names.contains(name)) {
+                if (ItemMetadataSimple.names.contains(name)) {
                         return new ItemStack(Nord.item, 1,
-                                ItemMetaDataSimple.names.indexOf(name));
+                                ItemMetadataSimple.names.indexOf(name));
                 } else {
                         System.err.println("Unknow item: " + name);
                         System.err.println("Game has crashed:)");
