@@ -10,7 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.common.blocks.abstracts.BlockAbstractMachina;
-import ru.nordwest.nord.common.tiles.TileSmelter2;
+import ru.nordwest.nord.common.tiles.TileSmelter;
 
 import java.util.Random;
 
@@ -52,7 +52,7 @@ public class BlockSmelter extends BlockAbstractMachina {
 
         @Override
         public TileEntity createNewTileEntity(World world, int i) {
-                return new TileSmelter2();
+                return new TileSmelter();
         }
 
 //    @Override

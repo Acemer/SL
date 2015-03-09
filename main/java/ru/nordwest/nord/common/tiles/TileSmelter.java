@@ -1,366 +1,270 @@
 package ru.nordwest.nord.common.tiles;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.Constants;
 import ru.nordwest.nord.Nord;
-import ru.nordwest.nord.common.lib.recipes.OUTDATED.SmelterRecipes;
+import ru.nordwest.nord.common.lib.recipes.Interfaces.IAbstractRecipes;
+import ru.nordwest.nord.common.lib.recipes.Interfaces.IRecipe2I2O;
+import ru.nordwest.nord.common.lib.recipes.Interfaces.IRecipes2I2O;
+import ru.nordwest.nord.common.lib.recipes.SmelterRecipes2I2O;
+import ru.nordwest.nord.common.lib.utils.Fuel;
+import ru.nordwest.nord.common.tiles.abstracts.TileAbstractEnergyMachina;
 
-public class TileSmelter extends TileEntity implements ISidedInventory {
+public class TileSmelter extends TileAbstractEnergyMachina {
         private static final int[] slotsTop = new int[]{0, 1};
         private static final int[] slotsBottom = new int[]{3, 4};
         private static final int[] slotsSide = new int[]{2};
-        private final int input1 = 0;
-        private final int input2 = 1;
-        private final int fuel = 2;
-        private final int output1 = 3;
-        private final int output2 = 4;
-        private ItemStack[] smelterItemStacks = new ItemStack[5];
+
+        private int fuel_slot = 0;
+        private int input_slot = 1;
+        private int input2_slot = 2;
+        private int result_slot = 3;
+        private int second_result_slot = 4;
+        //	private ItemStack[] smelterItemStacks = new ItemStack[5];
+        protected final ItemStack[] inv = new ItemStack[5];
 
         public int smelterSmeltTime;
         public int smelterCurSmeltTime;
         public int smelterWorkedTime;
         private String name;
 
-        // public void getName(String displayName) {
-        // }
-
-        public int getSizeInventory() {
-                return this.smelterItemStacks.length;
-        }
-
-        public ItemStack getStackInSlot(int slot) {
-                return this.smelterItemStacks[slot];
+        @Override
+        public IAbstractRecipes getRecipes() {
+                return SmelterRecipes2I2O.INSTANCE();
         }
 
         @Override
-        public ItemStack decrStackSize(int par1, int par2) {
-                if (this.smelterItemStacks[par1] != null) {
-                        ItemStack iStack;
-
-                        if (this.smelterItemStacks[par1].stackSize <= par2) {
-                                iStack = this.smelterItemStacks[par1];
-                                this.smelterItemStacks[par1] = null;
-                                return iStack;
-                        } else {
-                                iStack = this.smelterItemStacks[par1].splitStack(par2);
-
-                                if (this.smelterItemStacks[par1].stackSize == 0) {
-                                        this.smelterItemStacks[par1] = null;
-                                }
-
-                                return iStack;
-                        }
-                } else
-                        return null;
-        }
-
-        @Override
-        public ItemStack getStackInSlotOnClosing(int par1) {
-                if (this.smelterItemStacks[par1] != null) {
-                        ItemStack iStack = this.smelterItemStacks[par1];
-                        this.smelterItemStacks[par1] = null;
-                        return iStack;
-                } else
-                        return null;
-        }
-
-        @Override
-        public void setInventorySlotContents(int par1, ItemStack par2) {
-                this.smelterItemStacks[par1] = par2;
-                if (par2 != null && par2.stackSize > this.getInventoryStackLimit())
-                        par2.stackSize = this.getInventoryStackLimit();
+        public int getMaxEnergy() {
+                return 12800;
         }
 
         @Override
         public String getInventoryName() {
-                return this.hasCustomInventoryName() ? this.name : "Smelter";
+                return "Smelter";
         }
 
         @Override
-        public boolean hasCustomInventoryName() {
-                return this.name != null && this.name.length() > 0;
+        public ItemStack getStackInSlot(int slotID) {
+                return inv[slotID];
         }
 
         @Override
-        public int getInventoryStackLimit() {
-                return 64;
+        public void setInventorySlotContents(int slot, ItemStack stack) {
+                inv[slot] = stack;
         }
 
-        public void readFromNBT(NBTTagCompound par1) {
-                super.readFromNBT(par1);
-                NBTTagList nbtTagList = par1.getTagList("Items", 10);
-                this.smelterItemStacks = new ItemStack[this.getSizeInventory()];
+        @Override
+        public boolean canWork() {
 
-                for (int i = 0; i < nbtTagList.tagCount(); ++i) {
-                        NBTTagCompound nbtTagCompound = nbtTagList.getCompoundTagAt(i);
-                        byte b0 = nbtTagCompound.getByte("Slot");
+                return !(this.getEnergy() >= this.getMaxEnergy() ||
+                        inv[fuel_slot] == null ||
+                        getItemBurnTime(inv[fuel_slot]) == 0 ||
+                        burnTime > 0);
 
-                        if (b0 >= 0 && b0 < this.smelterItemStacks.length) {
-                                this.smelterItemStacks[b0] = ItemStack
-                                        .loadItemStackFromNBT(nbtTagCompound);
-                        }
-                }
+        }
 
-                this.smelterSmeltTime = par1.getShort("SmeltTime");
-                this.smelterWorkedTime = par1.getShort("WorkedTime");
-                this.smelterCurSmeltTime = getItemCrushTime(this.smelterItemStacks[1]);
-
-                if (par1.hasKey("CustomName", 8)) {
-                        this.name = par1.getString("CustomName");
+        @Override
+        public void burn() {
+                if (this.inv[fuel_slot] != null) {
+                        this.burnTime = getItemBurnTime(inv[fuel_slot]);
+                        this.fuelBurnTime = this.burnTime;
+                        this.inv[fuel_slot] = Fuel.getInstance().burn(this.inv[fuel_slot]);
                 }
         }
 
-        public void writeToNBT(NBTTagCompound par1) {
-                super.writeToNBT(par1);
-                par1.setShort("SmeltTime", (short) this.smelterSmeltTime);
-                par1.setShort("WorkedTime", (short) this.smelterWorkedTime);
-                NBTTagList nbtTagList = new NBTTagList();
-
-                for (int i = 0; i < this.smelterItemStacks.length; ++i) {
-                        if (this.smelterItemStacks[i] != null) {
-                                NBTTagCompound nbtTagCompound = new NBTTagCompound();
-                                nbtTagCompound.setByte("Slot", (byte) i);
-                                this.smelterItemStacks[i].writeToNBT(nbtTagCompound);
-                                nbtTagList.appendTag(nbtTagCompound);
-                        }
-                }
-
-                par1.setTag("Items", nbtTagList);
-
-                if (this.hasCustomInventoryName()) {
-                        par1.setString("CustomName", this.name);
-                }
+        protected IRecipe2I2O getRecipe(ItemStack stack, ItemStack stack2) {
+                return ((IRecipes2I2O) this.getRecipes()).getRecipe(stack, stack2);
         }
 
-        public int getWorkedProgressScaled(int par1) {
-                return this.smelterWorkedTime * par1 / 400;
-        }
-
-        public int getCrushTimeRemainingScaled(int par1) {
-                if (this.smelterCurSmeltTime == 0) {
-                        this.smelterCurSmeltTime = 400;
-                }
-
-                return this.smelterSmeltTime * par1 / this.smelterCurSmeltTime;
-        }
-
-        public boolean isActive() {
-                return this.smelterSmeltTime > 0;
-        }
-
+        @Override
         public void updateEntity() {
-                boolean flag = this.smelterSmeltTime > 0;
-                boolean flag1 = false;
-
-                if (this.smelterSmeltTime > 0) {
-                        --this.smelterSmeltTime;
-                }
-
-                if (!this.worldObj.isRemote) {
-                        if (this.smelterSmeltTime != 0
-                                || this.smelterItemStacks[1] != null
-                                && (this.smelterItemStacks[input1] != null || this.smelterItemStacks[input2] != null)) {
-                                if (this.smelterSmeltTime == 0 && this.canSmelt()) {
-                                        this.smelterCurSmeltTime = this.smelterSmeltTime = getItemCrushTime(this.smelterItemStacks[fuel]);
-
-                                        if (this.smelterSmeltTime > 0) {
-                                                flag1 = true;
-
-                                                if (this.smelterItemStacks[fuel] != null) {
-                                                        --this.smelterItemStacks[fuel].stackSize;
-                                                        if (this.smelterItemStacks[fuel].stackSize == 0) {
-                                                                this.smelterItemStacks[fuel] = smelterItemStacks[fuel]
-                                                                        .getItem().getContainerItem(
-                                                                                smelterItemStacks[fuel]);
-                                                        }
-                                                }
-                                        }
-                                }
-
-                                if (this.isActive() && this.canSmelt()) {
-                                        ++this.smelterWorkedTime;
-
-                                        if (this.smelterWorkedTime == 400) {
-                                                this.smelterWorkedTime = 0;
-                                                this.crushItem();
-                                                flag1 = true;
-                                        }
-                                } else {
-                                        this.smelterWorkedTime = 0;
+                boolean updated = false;
+                if (isBurning()) {
+                        burnTime -= burnSpeed;
+                        this.addEnergy(burnSpeed);
+                        updated = true;
+                        if (burnTime == 0) {
+                                if (canWork()) {
+                                        burn();
                                 }
                         }
-
-                        if (flag != this.smelterSmeltTime > 0) {
-//				flag1 = true;
-//				SmelterBlock.updateBlockState(this.smelterSmeltTime > 0,
-//						this.worldObj, this.xCoord, this.yCoord, this.zCoord);
-                        }
-                }
-
-                if (flag1)
-                        this.markDirty();
-
-        }
-
-        private boolean canSmelt() {
-                if (this.smelterItemStacks[input1] == null
-                        && this.smelterItemStacks[input2] == null)
-                        return false;
-                else {
-                        ItemStack iStack = SmelterRecipes.crushing().getSmeltResult(
-                                this.smelterItemStacks[input1],
-                                this.smelterItemStacks[input2]);
-                        // boolean second = Nord.instance.rand.nextFloat() < SmelterRecipes
-                        // .crushing().getSmeltResultSecondPercent(
-                        // this.smelterItemStacks[input1],
-                        // this.smelterItemStacks[input2]);
-                        ItemStack iStack2 = SmelterRecipes.crushing().getSmeltResultSecond(
-                                this.smelterItemStacks[input1],
-                                this.smelterItemStacks[input2]);
-
-                        if (iStack == null)
-                                return false;
-
-                        if (this.smelterItemStacks[output1] == null
-                                && this.smelterItemStacks[output2] == null)
-                                return true;
-
-                        if (this.smelterItemStacks[output1] != null
-                                && !this.smelterItemStacks[output1].isItemEqual(iStack)
-                                && this.smelterItemStacks[output2] != null
-                                && !this.smelterItemStacks[output2].isItemEqual(iStack2))
-                                return false;
-
-                        int result = -1;
-                        if (this.smelterItemStacks[output1] != null) {
-                                result = smelterItemStacks[output1].stackSize
-                                        + 7;
-                        }
-
-                        int result2 = -1;
-                        if (this.smelterItemStacks[output2] != null) {
-                                result2 = smelterItemStacks[output2].stackSize
-                                        + iStack2.stackSize;
-                        }
-
-                        boolean size1 = result <= getInventoryStackLimit()
-                                && (result == -1 || result <= this.smelterItemStacks[output1]
-                                .getMaxStackSize());
-
-                        boolean size2 = result2 <= getInventoryStackLimit()
-                                && (result2 == -1 || result2 <= this.smelterItemStacks[output2]
-                                .getMaxStackSize());
-
-                        return size1 && size2;
-                }
-        }
-
-        public void crushItem() {
-                if (this.canSmelt()) {
-                        int index = SmelterRecipes.crushing().getIndexResult(
-                                this.smelterItemStacks[input1],
-                                this.smelterItemStacks[input2]);
-                        ItemStack iStack1 = SmelterRecipes.crushing().getSmeltResult(index);
-                        ItemStack iStack2 = SmelterRecipes.crushing().getSmeltResultSecond(
-                                index);
-                        boolean second = Nord.instance.rand.nextFloat() < SmelterRecipes
-                                .crushing().getSmeltResultSecondPercent(index);
-
-                        if (this.smelterItemStacks[output1] == null)
-                                this.smelterItemStacks[output1] = iStack1.copy();
-                        else if (this.smelterItemStacks[output1].getItem() == iStack1
-                                .getItem())
-                                this.smelterItemStacks[output1].stackSize += iStack1.stackSize;
-
-                        if (iStack2 != null && second) {
-                                if (this.smelterItemStacks[output2] == null)
-                                        this.smelterItemStacks[output2] = iStack2.copy();
-                                else if (this.smelterItemStacks[output2].getItem() == iStack2
-                                        .getItem()) {
-                                        this.smelterItemStacks[output2].stackSize += iStack2.stackSize;
-                                }
-                        }
-
-                        int quant1 = SmelterRecipes.crushing().getQuantaty(index, 1);
-                        int quant2 = SmelterRecipes.crushing().getQuantaty(index, 2);
-                        if (this.smelterItemStacks[input1] != null) {
-                                this.smelterItemStacks[input1].stackSize -= quant1;
-                                if (this.smelterItemStacks[input1].stackSize <= 0)
-                                        this.smelterItemStacks[input1] = null;
-                        }
-                        if (this.smelterItemStacks[input2] != null) {
-                                this.smelterItemStacks[input2].stackSize -= quant2;
-                                if (this.smelterItemStacks[input2].stackSize <= 0)
-                                        this.smelterItemStacks[input2] = null;
-                        }
-                }
-        }
-
-        public static int getItemCrushTime(ItemStack iStack) {
-                if (iStack == null) {
-                        return 0;
                 } else {
-                        Item item = iStack.getItem();
-                        if (item instanceof ItemBlock
-                                && Block.getBlockFromItem(item) != Blocks.air) {
-                                Block block = Block.getBlockFromItem(item);
-                                // add specific blocks to crusher fuel line
+                        fuelBurnTime = 0;
+                        if (canWork()) {
+                                updated = true;
+                                burn();
                         }
+                }
 
-                        // add blocks/Items to crusher fuel lineiStack2
-                        if (item == Items.coal)
-                                return 1600;
-                        return GameRegistry.getFuelValue(iStack);
+                if (isWork() && canStartWorking()) {
+                        currentItemEnergyProgress += workSpeed;
+                        this.subEnergy(workSpeed);
+                        updated = true;
+                        if (canWorkResult()) {
+                                work();
+                        }
+                } else if (canStartWorking()) {
+                        IRecipe2I2O rec = getRecipe(inv[input_slot], inv[input2_slot]);
+
+                        if (rec != null) {
+                                currentItemEnergyNeed = rec.getEnergy();
+                                updated = true;
+                        } else {
+                                currentItemEnergyNeed = 0;
+                        }
+                }
+
+                if (updated) {
+                        this.markDirty();
                 }
         }
 
-        public static boolean isItemFuel(ItemStack iStack) {
-                return getItemCrushTime(iStack) > 0;
+        public boolean canStartWorking() {
+                IRecipe2I2O rec = getRecipe(inv[input_slot], inv[input2_slot]);
+                if (rec == null) {
+                        currentItemEnergyProgress = 0;
+                        currentItemEnergyNeed = 0;
+                        return false;
+                }
+
+                ItemStack out1 = rec.getResult();
+                ItemStack out2 = rec.getSecondResult();
+
+                if (inv[input_slot].stackSize < rec.getInput().stackSize) { // не достаточно входных вещей
+                        return false;
+                }
+                if (inv[input2_slot].stackSize < rec.getSecondInput().stackSize) { // не достаточно входных вещей
+                        return false;
+                }
+                if (inv[result_slot] == null && inv[second_result_slot] == null) { // выходные слоты пусты
+                        return true;
+                }
+
+// в выходном слоте не наша вещь
+                if ((inv[result_slot] != null && out1 != null && !out1.isItemEqual(inv[result_slot])) ||
+                        (inv[second_result_slot] != null && out2 != null && !out2.isItemEqual(inv[second_result_slot]))) {
+                        return false;
+                }
+// хватает ли места
+                int result = (inv[result_slot] != null ? inv[result_slot].stackSize : 0) + (out1 != null ? out1.stackSize : 0);
+                int result2 = (inv[second_result_slot] != null ? inv[second_result_slot].stackSize : 0) + (out2 != null ? out2.stackSize : 0);
+
+                boolean ret = result <= getInventoryStackLimit() &&
+                        result2 <= getInventoryStackLimit();
+
+                if (!ret) {
+                        currentItemEnergyProgress = 0;
+                        currentItemEnergyNeed = 0;
+                }
+
+                return ret;
+        }
+
+        /**
+         * Обработать предмет
+         */
+        public void work() {
+                IRecipe2I2O rec = getRecipe(inv[input_slot], inv[input2_slot]);
+                ;
+                if (rec == null) {
+                        return;
+                }
+
+                ItemStack out1 = rec.getResult();
+                ItemStack out2 = rec.getSecondResult();
+                boolean second = Nord.instance.rand.nextFloat() * 100 < rec.getPercent();
+                if (out1 != null) {
+                        if (inv[result_slot] != null) {
+                                inv[result_slot].stackSize += out1.stackSize;
+                        } else {
+                                inv[result_slot] = out1.copy();
+                        }
+                }
+
+                if (out2 != null && second) {
+                        if (inv[second_result_slot] != null) {
+                                inv[second_result_slot].stackSize += out2.stackSize;
+                        } else {
+                                inv[second_result_slot] = out2.copy();
+                        }
+                }
+
+                inv[input_slot].stackSize -= rec.getInput().stackSize;
+                inv[input2_slot].stackSize -= rec.getSecondInput().stackSize;
+
+                if (inv[input_slot].stackSize == 0) {
+                        inv[input_slot] = null;
+                }
+                if (inv[input2_slot].stackSize == 0) {
+                        inv[input2_slot] = null;
+                }
+
+                IRecipe2I2O recNext = getRecipe(inv[input_slot], inv[input2_slot]);
+                if (recNext != null) {
+                        currentItemEnergyNeed = recNext.getEnergy();
+                } else {
+                        currentItemEnergyNeed = 0;
+                }
+
+                currentItemEnergyProgress = 0;
+        }
+
+        public boolean canWorkResult() {
+                IRecipe2I2O rec = getRecipe(inv[input_slot], inv[input2_slot]);
+                if (rec == null) { // нет рецепта
+                        currentItemEnergyProgress = 0;
+                        currentItemEnergyNeed = 0;
+                        return false;
+                }
+
+                if (currentItemEnergyProgress < rec.getEnergy()) { // нет энергии
+                        return false;
+                } else {
+                        return canStartWorking();
+                }
+
+        }
+
+
+        @Override
+        public void readFromNBT(NBTTagCompound tagCompound) {
+                super.readFromNBT(tagCompound);
+
+                NBTTagList tagList = tagCompound.getTagList("Inventory", Constants.NBT.TAG_COMPOUND);
+
+                for (int i = 0; i < tagList.tagCount(); i++) {
+                        NBTTagCompound tag = tagList.getCompoundTagAt(i);
+                        byte slot = tag.getByte("Slot");
+                        inv[slot] = ItemStack.loadItemStackFromNBT(tag);
+                }
+
+                this.setEnergy(tagCompound.getShort("energy"));
+                burnTime = tagCompound.getShort("burnTime");
+                currentItemEnergyProgress = tagCompound.getShort("curEnergyProg");
+                currentItemEnergyNeed = tagCompound.getShort("curEnergyNeed");
         }
 
         @Override
-        public boolean isUseableByPlayer(EntityPlayer par1) {
-                return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
-                        this.zCoord) == this && par1.getDistanceSq(
-                        (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
-                        (double) this.zCoord + 0.5D) <= 64.0D;
-        }
+        public void writeToNBT(NBTTagCompound tagCompound) {
+                super.writeToNBT(tagCompound);
+                tagCompound.setShort("energy", (short) this.getEnergy());
+                tagCompound.setShort("burnTime", (short) burnTime);
+                tagCompound.setShort("curBurnTime", (short) currentItemEnergyProgress);
+                tagCompound.setShort("curCookTime", (short) currentItemEnergyNeed);
 
-        @Override
-        public void openInventory() {
-        }
+                NBTTagList itemList = new NBTTagList();
+                for (int i = 0; i < inv.length; i++) {
+                        ItemStack stack = inv[i];
+                        if (stack != null) {
+                                NBTTagCompound tag = new NBTTagCompound();
+                                tag.setByte("Slot", (byte) i);
+                                stack.writeToNBT(tag);
+                                itemList.appendTag(tag);
+                        }
+                }
 
-        @Override
-        public void closeInventory() {
-        }
-
-        @Override
-        public boolean isItemValidForSlot(int slot, ItemStack iStack) {
-                return slot != 2 && (slot != 1 || isItemFuel(iStack));
-        }
-
-        @Override
-        public int[] getAccessibleSlotsFromSide(int side) {
-                return side == 0 ? slotsBottom : (side == 1 ? slotsTop : slotsSide);
-        }
-
-        @Override
-        public boolean canInsertItem(int slot, ItemStack iStack, int par3) {
-                return this.isItemValidForSlot(slot, iStack);
-        }
-
-        @Override
-        public boolean canExtractItem(int slot, ItemStack iStack, int par3) {
-                return par3 != 0 || slot != 1;
+                tagCompound.setTag("Inventory", itemList);
         }
 }

@@ -1,9 +1,12 @@
-package ru.nordwest.nord.client.gui;
+package ru.nordwest.nord.client.gui.abstracts;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import ru.nordwest.nord.common.tiles.abstracts.TileAbstractEnergyMachina;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,8 +18,9 @@ public abstract class GuiMachine extends GuiContainer {
         }
 
         protected EntityPlayer player;
+        protected TileAbstractEnergyMachina tileEntity;
 
-        @Override
+    @Override
         protected void drawCreativeTabHoveringText(String text, int x, int y) {
                 func_146283_a(Arrays.asList(new String[]{text}), x, y);
         }
@@ -34,4 +38,6 @@ public abstract class GuiMachine extends GuiContainer {
                         this.drawCreativeTabHoveringText(text, posX, posY);
                 }
         }
+
+
 }

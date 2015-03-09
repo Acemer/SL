@@ -9,6 +9,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import ru.nordwest.nord.Nord;
 import ru.nordwest.nord.client.lib.tabs.TabsNord;
+import ru.nordwest.nord.common.items.ItemMetadataBlock;
 import ru.nordwest.nord.common.items.ItemMetalBlock;
 import ru.nordwest.nord.common.lib.recipes.FlowingRecipes1I2O;
 import ru.nordwest.nord.common.lib.recipes.SmelterRecipes2I2O;
@@ -19,8 +20,8 @@ public class RegisterMachine {
                 Nord.smelter = new BlockSmelter().setBlockName("smelter")
                         .setCreativeTab(TabsNord.tabMetals).setBlockTextureName("smelter")
                         .setHardness(3.0F).setHardness(5.0F);
-                GameRegistry.registerBlock(Nord.smelter, ItemMetalBlock.class, "smelter");
-                GameRegistry.registerTileEntity(TileSmelter2.class,
+                GameRegistry.registerBlock(Nord.smelter, ItemBlock.class, "smelter");
+                GameRegistry.registerTileEntity(TileSmelter.class,
                         "TileEntitySmelter");
                 GameRegistry.addRecipe(new ItemStack(Nord.smelter, 1), "xyx", "y0y", "yyy",
                         'x', new ItemStack(Blocks.furnace, 1), 'y', new ItemStack(
@@ -29,7 +30,7 @@ public class RegisterMachine {
                 Nord.brickFurnace = new BlockBrickFurnace().setBlockName("brickFurnace")
                         .setCreativeTab(TabsNord.tabMetals).setBlockTextureName("brickFurnace")
                         .setHardness(3.0F).setHardness(5.0F);
-                GameRegistry.registerBlock(Nord.brickFurnace, ItemMetalBlock.class, "brickFurnace");
+                GameRegistry.registerBlock(Nord.brickFurnace, ItemBlock.class, "brickFurnace");
                 GameRegistry.registerTileEntity(TileBrickFurnace.class,
                         "TileEntityBrickFurnace");
                 GameRegistry.addRecipe(new ItemStack(Nord.smelter, 1), "xxx", "x0x", "xxx",

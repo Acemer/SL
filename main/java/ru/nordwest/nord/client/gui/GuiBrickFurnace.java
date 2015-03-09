@@ -1,50 +1,57 @@
 package ru.nordwest.nord.client.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 import ru.nordwest.nord.Nord;
+import ru.nordwest.nord.client.gui.abstracts.GuiMachine;
 import ru.nordwest.nord.common.container.ContainerBrickFurnace;
+import ru.nordwest.nord.common.container.ContainerFlowing;
 import ru.nordwest.nord.common.tiles.TileBrickFurnace;
+import ru.nordwest.nord.common.tiles.TileFlowing;
 
-public class GuiBrickFurnace extends GuiContainer {
-        private static final ResourceLocation crusherGuiTextures = new ResourceLocation(
-                Nord.MODID + ":textures/gui/container/brick_furnace.png");
-        private final TileBrickFurnace tileCrusher;
-        private final EntityPlayer player;
+public class GuiBrickFurnace extends GuiMachine {
+    private final TileBrickFurnace tileEntity;
 
-        public GuiBrickFurnace(InventoryPlayer iPlayer, TileBrickFurnace tileCrusher,
-                               EntityPlayer player) {
-                super(new ContainerBrickFurnace(iPlayer, tileCrusher));
-                this.tileCrusher = tileCrusher;
-                this.player = player;
-        }
+    public GuiBrickFurnace(InventoryPlayer iPlayer, TileBrickFurnace tileFlowing, EntityPlayer player) {
+        super(new ContainerBrickFurnace(iPlayer, tileFlowing));
+        this.tileEntity = tileFlowing;
+        this.player = player;
+    }
 
-        protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-                String name = this.tileCrusher.hasCustomInventoryName()
-                        ? this.tileCrusher.getInventoryName()
-                        : I18n.format(this.tileCrusher.getInventoryName(),
-                        new Object[0]);
-                this.fontRendererObj.drawString(name, 16, 6, 4210752);
-        }
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        int xAxis = (mouseX - (width - xSize) / 2);
+        int yAxis = (mouseY - (height - ySize) / 2);
+        String name = this.tileEntity.hasCustomInventoryName()
+                ? this.tileEntity.getInventoryName()
+                : I18n.format(this.tileEntity.getInventoryName());
 
-        protected void drawGuiContainerBackgroundLayer(float par1, int par2,
-                                                       int par3) {
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-                this.mc.getTextureManager().bindTexture(crusherGuiTextures);
-                int k = (this.width - this.xSize) / 2;
-                int l = (this.height - this.ySize) / 2;
-                this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+        int energy = this.tileEntity.getEnergy() / 16;
+        int maxEnergy = this.tileEntity.getMaxEnergy() / 16;
+        this.fontRendererObj.drawString(name, 16, 6, 4210752);
+        drawOverText(9, 20, 4, 54, xAxis, yAxis, String.valueOf(energy) + "/" + String.valueOf(maxEnergy) + " share" + (energy > 1 ? "s" : ""));
+    }
 
-                if (this.tileCrusher.isActive()) {
-                        int i1 = this.tileCrusher.getCrushTimeRemainingScaled(13);
-                        this.drawTexturedModalRect(k + 46, l + 42 + 12 - i1, 176, 12 - i1,
-                                14, i1 + 1);
-                        i1 = this.tileCrusher.getWorkedProgressScaled(24);
-                        this.drawTexturedModalRect(k + 80, l + 19, 176, 16, i1 + 1, 20);
-                }
-        }
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Nord.MODID + ":textures/gui/container/flowing.png"));
+        int x = (width - xSize) / 2;
+        int y = (height - ySize) / 2;
+        int k = (this.width - this.xSize) / 2;
+        int l = (this.height - this.ySize) / 2;
+        this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+
+        int progress = this.tileEntity.getProgressScaled(24);
+        this.drawTexturedModalRect(k + 78, l + 35, 180, 16, progress, 21);
+
+        progress = this.tileEntity.getEnergyProgressScaled(52);
+        this.drawTexturedModalRect(k + 11, l + 22, 183, 37, 3, 52); // Отрисовать полную текстуру огня
+        this.drawTexturedModalRect(k + 11, l + 22, 11, 22, 3, 52 - progress); // А поверх нее рисовать обычную текстуру (без огня)
+
+        progress = this.tileEntity.getBurnTimeRemainingScaled(14);
+        this.drawTexturedModalRect(k + 19, l + 41, 176, 2, 14, 14);
+        this.drawTexturedModalRect(k + 19, l + 41, 19, 41, 14, 14 - progress);
+    }
 }

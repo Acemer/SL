@@ -68,7 +68,7 @@ public class Nord {
         public static Block foundryTech;
         public static Block foundry;
         public static Block testTreeSapling;
-        public static Random rand = new Random();
+        public static Random rand = new Random();//todo this.worldObj.rand
 
         @EventHandler
         public void preInit(final FMLPreInitializationEvent event) {

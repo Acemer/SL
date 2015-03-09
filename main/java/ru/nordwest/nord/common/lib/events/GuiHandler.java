@@ -12,7 +12,7 @@ import ru.nordwest.nord.common.container.*;
 import ru.nordwest.nord.common.tiles.TileBrickFurnace;
 import ru.nordwest.nord.common.tiles.TileFlowing;
 import ru.nordwest.nord.common.tiles.TileGreatFurnaceTech;
-import ru.nordwest.nord.common.tiles.TileSmelter2;
+import ru.nordwest.nord.common.tiles.TileSmelter;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -28,8 +28,8 @@ public class GuiHandler implements IGuiHandler {
                 TileEntity tileEntity = world.getTileEntity(x, y, z);
                 switch (ID) {
                         case Nord.guiIDSmelter:
-                                return new ContainerSmelter2(player.inventory,
-                                        (TileSmelter2) tileEntity);
+                                return new ContainerSmelter(player.inventory,
+                                        (TileSmelter) tileEntity);
 
                         case Nord.guiIDBrickFurnace:
                                 return new ContainerBrickFurnace(player.inventory,
@@ -60,8 +60,8 @@ public class GuiHandler implements IGuiHandler {
 
                 switch (ID) {
                         case Nord.guiIDSmelter:
-                                return new GuiSmelter2(player.inventory,
-                                        (TileSmelter2) tileEntity, player);
+                                return new GuiSmelter(player.inventory,
+                                        (TileSmelter) tileEntity, player);
 
                         case Nord.guiIDBrickFurnace:
                                 return new GuiBrickFurnace(player.inventory,

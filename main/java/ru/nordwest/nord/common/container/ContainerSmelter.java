@@ -1,127 +1,89 @@
 package ru.nordwest.nord.common.container;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
-import ru.nordwest.nord.common.lib.recipes.OUTDATED.SmelterRecipes;
+import ru.nordwest.nord.common.container.abstracts.ContainerAbstactMachine;
+import ru.nordwest.nord.common.lib.recipes.Interfaces.IRecipes1I2O;
+import ru.nordwest.nord.common.lib.utils.Fuel;
 import ru.nordwest.nord.common.tiles.TileSmelter;
+import ru.nordwest.nord.common.tiles.interfaces.IMachine;
 
-public class ContainerSmelter extends Container {
-        private final TileSmelter tileCrusher;
-        private int lastWorkTime;
-        private int lastCrushTime;
-        private int lastItemCrushTime;
+public class ContainerSmelter extends ContainerAbstactMachine {
 
-        public ContainerSmelter(InventoryPlayer iPlayer, TileSmelter tileEntityCrusher) {
-                this.tileCrusher = tileEntityCrusher;
-                this.addSlotToContainer(new Slot(tileEntityCrusher, 0, 35, 23));//input 1
-                this.addSlotToContainer(new Slot(tileEntityCrusher, 1, 56, 23));//input 2
-                this.addSlotToContainer(new Slot(tileEntityCrusher, 2, 46, 59)); //fuel
-                this.addSlotToContainer(new SlotFurnace(iPlayer.player, tileEntityCrusher, 3, 114, 23));// output 1
-                this.addSlotToContainer(new SlotFurnace(iPlayer.player, tileEntityCrusher, 4, 135, 23));// output 2
-                int i;
 
-                for (i = 0; i < 3; ++i) {
-                        for (int j = 0; j < 9; ++j) {
-                                this.addSlotToContainer(new Slot(iPlayer, j + i * 9 + 9, 8 + j * 18, 87 + i * 18));
-                        }
-                }
+        protected int slot_fuel = 0;
+        protected int slot_input = 1;
+        protected int slot_input2 = 2;
+        protected int slot_result1 = 3;
+        protected int slot_result2 = 4;
 
-                for (i = 0; i < 9; ++i) {
-                        this.addSlotToContainer(new Slot(iPlayer, i, 8 + i * 18, 145));
-                }
-        }
-
-        public void addCraftingToCrafters(ICrafting iCrafting) {
-                super.addCraftingToCrafters(iCrafting);
-                iCrafting.sendProgressBarUpdate(this, 0, this.tileCrusher.smelterWorkedTime);
-                iCrafting.sendProgressBarUpdate(this, 1, this.tileCrusher.smelterSmeltTime);
-                iCrafting.sendProgressBarUpdate(this, 2, this.tileCrusher.smelterCurSmeltTime);
-        }
-
-        public void detectAndSendChanges() {
-                super.detectAndSendChanges();
-
-                for (int i = 0; i < this.crafters.size(); ++i) {
-                        ICrafting iCrafting = (ICrafting) this.crafters.get(i);
-
-                        if (this.lastWorkTime != this.tileCrusher.smelterWorkedTime) {
-                                iCrafting.sendProgressBarUpdate(this, 0, this.tileCrusher.smelterWorkedTime);
-                        }
-                        if (this.lastCrushTime != this.tileCrusher.smelterSmeltTime) {
-                                iCrafting.sendProgressBarUpdate(this, 1, this.tileCrusher.smelterSmeltTime);
-                        }
-                        if (this.lastItemCrushTime != this.tileCrusher.smelterCurSmeltTime) {
-                                iCrafting.sendProgressBarUpdate(this, 2, this.tileCrusher.smelterCurSmeltTime);
-                        }
-                }
-
-                this.lastWorkTime = this.tileCrusher.smelterWorkedTime;
-                this.lastCrushTime = this.tileCrusher.smelterSmeltTime;
-                this.lastItemCrushTime = this.tileCrusher.smelterCurSmeltTime;
-        }
-
-        @SideOnly(Side.CLIENT)
-        public void updateProgressBar(int par1, int par2) {
-                if (par1 == 0)
-                        this.tileCrusher.smelterWorkedTime = par2;
-                if (par1 == 1)
-                        this.tileCrusher.smelterSmeltTime = par2;
-                if (par1 == 2)
-                        this.tileCrusher.smelterCurSmeltTime = par2;
+        public ContainerSmelter(InventoryPlayer invPlayer, TileSmelter ent) {
+                init(invPlayer, ent);
         }
 
         @Override
-        public boolean canInteractWith(EntityPlayer par1) {
-                return this.tileCrusher.isUseableByPlayer(par1);
+        public void init(InventoryPlayer invPlayer, IMachine ent) {
+                tileEntity = ent;
+
+                addSlotToContainer(new Slot(tileEntity, slot_fuel, 18, 58)); // fuel
+                addSlotToContainer(new Slot(tileEntity, slot_input, 45, 38)); // item to work
+                addSlotToContainer(new Slot(tileEntity, slot_input2, 66, 38)); // item to work
+                addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, slot_result1, 124, 38)); // result1
+                addSlotToContainer(new SlotFurnace(invPlayer.player, tileEntity, slot_result2, 145, 38)); // result2
+
+                bindPlayerInventory(invPlayer);
         }
 
-        public ItemStack transferStackInSlot(EntityPlayer e, int parSlot) {
-                ItemStack iStack = null;
-                Slot slot = (Slot) this.inventorySlots.get(parSlot);
-                Slot fuelSlot = (Slot) this.inventorySlots.get(2);
-                if (slot != null && slot.getHasStack()) {
-                        ItemStack iStack1 = slot.getStack();
-                        iStack = iStack1.copy();
+        @Override
+        public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+                System.err.println(slot);
+                ItemStack stack = null;
+                Slot slotObject = (Slot) inventorySlots.get(slot);
+                Slot fuelSlot = (Slot) this.inventorySlots.get(0);
 
-                        if (parSlot == 3 || parSlot == 4 || parSlot == 2) {
-                                if (!this.mergeItemStack(iStack1, 5, 40, true)) {
+                if (slotObject != null && slotObject.getHasStack()) {
+                        ItemStack stackInSlot = slotObject.getStack();
+                        stack = stackInSlot.copy();
+
+                        //boolean check = false;
+
+                        if (slot == slot_result1 || slot == slot_result2) {
+                                if (!this.mergeItemStack(stackInSlot, 4, 39, true)) {
                                         return null;
                                 }
-
-                                slot.onSlotChange(iStack1, iStack);
-                        } else if (parSlot != 1 && parSlot != 0) {
-                                int index = SmelterRecipes.crushing().getIndexPartResult(iStack1);
-                                if (index > -1) {
-                                        if (!this.mergeItemStack(iStack1, 0, 2, false))
+                                slotObject.onSlotChange(stackInSlot, stack);
+                        } else if (slot != slot_input && slot != slot_input2 && slot != slot_fuel) {
+                                boolean _check = ((IRecipes1I2O) tileEntity.getRecipes()).getIndexRecipe(stackInSlot) != -1;
+                                if (_check) {
+                                        if (!this.mergeItemStack(stackInSlot, 1, 3, false)) {
                                                 return null;
-                                } else if (TileSmelter.isItemFuel(iStack1) && (fuelSlot.getStack() == null || fuelSlot.getStack().stackSize < 64)) {
-                                        if (!this.mergeItemStack(iStack1, 2, 3, false))
+                                        }
+                                } else if (Fuel.getInstance().getEnergy(stackInSlot) > 0 && (fuelSlot.getStack() == null || fuelSlot.getStack().stackSize < 64)) {
+                                        if (!this.mergeItemStack(stackInSlot, 0, 1, false))
                                                 return null;
-                                } else if (parSlot >= 5 && parSlot <= 31) {
-                                        if (!this.mergeItemStack(iStack1, 32, 41, false))
+                                } else if (slot >= 5 && slot <= 31) {
+                                        if (!this.mergeItemStack(stackInSlot, 32, 41, false))
                                                 return null;
-                                } else if (parSlot >= 32 && parSlot < 41 && !this.mergeItemStack(iStack1, 5, 32, false))
+                                } else if (slot >= 32 && slot < 41 && !this.mergeItemStack(stackInSlot, 5, 32, false))
                                         return null;
-                        } else if (!this.mergeItemStack(iStack1, 5, 41, false))
+
+                        } else if (!this.mergeItemStack(stackInSlot, 5, 41, false))
                                 return null;
 
-                        if (iStack1.stackSize == 0)
-                                slot.putStack((ItemStack) null);
-                        else
-                                slot.onSlotChanged();
+                        if (stackInSlot.stackSize == 0) {
+                                slotObject.putStack(null);
+                        } else {
+                                slotObject.onSlotChanged();
+                        }
 
-                        if (iStack1.stackSize == iStack.stackSize)
+                        if (stackInSlot.stackSize == stack.stackSize) {
                                 return null;
-
-                        slot.onPickupFromSlot(e, iStack1);
+                        }
+                        slotObject.onPickupFromSlot(player, stackInSlot);
                 }
-                return iStack;
+                return null;
         }
 }
